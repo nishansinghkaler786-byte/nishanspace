@@ -97,13 +97,13 @@ export default function Footer() {
             <Link href="/#work">Work</Link>
             <Link href="/#approach">Approach</Link>
             <Link href="/#reviews">Reviews</Link>
-            <a href="https://www.linkedin.com/in/nishansingh" target="_blank" rel="noopener noreferrer">UX Profile ↗</a>
+            <a href="https://www.linkedin.com/in/ux-specialist-nishan/" target="_blank" rel="noopener noreferrer">UX Profile ↗</a>
           </div>
           <div className="ft__col">
             <h4>Social</h4>
-            <a href="https://dribbble.com/nishanspace" target="_blank" rel="noopener noreferrer">Dribbble</a>
-            <a href="https://behance.net/nishanspace" target="_blank" rel="noopener noreferrer">Behance</a>
-            <a href="https://linkedin.com/in/nishansingh" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://dribbble.com/nishan_UX_Design" target="_blank" rel="noopener noreferrer">Dribbble</a>
+            <a href="https://www.behance.net/nishansing21ef" target="_blank" rel="noopener noreferrer">Behance</a>
+            <a href="https://www.linkedin.com/in/ux-specialist-nishan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
           <div className="ft__col">
             <h4>Status</h4>

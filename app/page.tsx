@@ -398,8 +398,8 @@ function ReviewsCarousel() {
 
   return (
     <section className="rev" id="reviews">
-      <div className="inner rv" style={{ marginBottom: 32 }}>
-        <span className="ey">What collaborators say</span>
+      <div className="inner" style={{ marginBottom: 32 }}>
+        <span className="ey rv">What collaborators say</span>
         <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
           Six perspectives, thirteen years.
         </h2>
@@ -631,8 +631,8 @@ export default function HomePage() {
           </p>
 
           {/* Research */}
-          <div className="feat rv">
-            <div className="feat__txt">
+          <div className="feat">
+            <div className="feat__txt rv">
               <p className="feat__n">01 — Research</p>
               <h3 className="feat__h">Start with real users.</h3>
               <p className="feat__b">I watch people use the product before I touch a pixel. Their constraints shape the design — not my assumptions.</p>
@@ -640,8 +640,8 @@ export default function HomePage() {
                 {['Interviews','Journey mapping','Synthesis'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media">
-              <div className="amini scl">
+            <div className="feat__media scl">
+              <div className="amini">
                 <div className="amini__bar">
                   <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
                   Research Session
@@ -664,8 +664,8 @@ export default function HomePage() {
           </div>
 
           {/* Wireframing */}
-          <div className="feat rv" style={{ transitionDelay: '0.1s' }}>
-            <div className="feat__txt">
+          <div className="feat">
+            <div className="feat__txt rv">
               <p className="feat__n">02 — Wireframing</p>
               <h3 className="feat__h">Cut the complexity.</h3>
               <p className="feat__b">If it needs a manual, I haven&apos;t finished. The best interfaces feel obvious the first time you see them.</p>
@@ -673,8 +673,8 @@ export default function HomePage() {
                 {['Flows','Low-fi','IA'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media">
-              <div className="amini scl" style={{ transitionDelay: '0.15s' }}>
+            <div className="feat__media scl">
+              <div className="amini">
                 <div className="amini__bar">
                   <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
                   Wireframe · Dashboard v3
@@ -695,8 +695,8 @@ export default function HomePage() {
           </div>
 
           {/* Visual Design */}
-          <div className="feat rv" style={{ transitionDelay: '0.1s' }}>
-            <div className="feat__txt">
+          <div className="feat">
+            <div className="feat__txt rv">
               <p className="feat__n">03 — Visual Design</p>
               <h3 className="feat__h">Design to scale.</h3>
               <p className="feat__b">Systems, not screens. Every decision has to hold up across products, platforms, and the next hundred edge cases.</p>
@@ -704,8 +704,8 @@ export default function HomePage() {
                 {['Design systems','Components','Tokens'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media">
-              <div className="amini scl" style={{ transitionDelay: '0.15s' }}>
+            <div className="feat__media scl">
+              <div className="amini">
                 <div className="amini__bar">
                   <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
                   Design System · Tokens
@@ -725,8 +725,8 @@ export default function HomePage() {
           </div>
 
           {/* Prototyping */}
-          <div className="feat rv" style={{ transitionDelay: '0.1s' }}>
-            <div className="feat__txt">
+          <div className="feat">
+            <div className="feat__txt rv">
               <p className="feat__n">04 — Prototyping</p>
               <h3 className="feat__h">Prove it worked.</h3>
               <p className="feat__b">Completion rates, time-on-task, support load, revenue. I ship outcomes I can measure — not opinions.</p>
@@ -734,8 +734,8 @@ export default function HomePage() {
                 {['Prototypes','Usability testing','Metrics'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media">
-              <div className="amini scl" style={{ transitionDelay: '0.15s' }}>
+            <div className="feat__media scl">
+              <div className="amini">
                 <div className="amini__bar">
                   <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
                   Prototype · Mobile Flow
@@ -765,8 +765,9 @@ export default function HomePage() {
       {/* ── CTA ──────────────────────────────────────── */}
       <section className="cta">
         <div className="cta__glow" aria-hidden="true" />
-        <h2 className="cta__h rv">
-          Quality matters.<br />Let&apos;s talk.
+        <span className="ey rv">— Quality matters</span>
+        <h2 className="cta__h rv" style={{ marginTop: 24 }}>
+          Quality matters.<br /><em style={{ fontStyle: 'italic' }}>Let&apos;s talk.</em>
         </h2>
         <div className="cta__act rv" style={{ transitionDelay: '0.15s' }}>
           <Link href="/contact" className="pill">
