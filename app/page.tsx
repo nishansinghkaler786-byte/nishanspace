@@ -16,6 +16,16 @@ const AI_STEPS = [
   'Ship & hand off',
 ];
 
+const PROC_CAPS = [
+  'Capturing requirements',
+  'Live user interview',
+  'Low-fi wireframes',
+  'Hi-fi visual design',
+  'Prototype the flow',
+  'Usability testing',
+  'Ship & hand off',
+];
+
 /* ─── Reviews data ─────────────────────────────────── */
 const REVIEWS = [
   {
@@ -63,6 +73,108 @@ const COVERS: Record<string, string> = {
   pocial: '/assets/pocial-home.png',
   ebinaa: '/assets/ds-00-homepage.png',
 };
+
+/* ─── Lo layout component ──────────────────────────── */
+function Lo({ cls }: { cls: string }) {
+  return (
+    <div className={`lo ${cls}`}>
+      <div className="lo__top lo__b" style={{ '--d': 0 } as React.CSSProperties} />
+      <div className="lo__side lo__b" style={{ '--d': 1 } as React.CSSProperties}><i /><i /><i /><i /></div>
+      <div className="lo__main">
+        <div className="lo__cards">
+          <div className="lo__card lo__b" style={{ '--d': 2 } as React.CSSProperties} />
+          <div className="lo__card lo__b" style={{ '--d': 3 } as React.CSSProperties} />
+          <div className="lo__card lo__b" style={{ '--d': 4 } as React.CSSProperties} />
+        </div>
+        <div className="lo__rows lo__b" style={{ '--d': 5 } as React.CSSProperties}><span /><span /><span /></div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── HeroNet canvas ───────────────────────────────── */
+function HeroNet() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const cv = canvasRef.current;
+    if (!cv) return;
+    const rawCtx = cv.getContext('2d');
+    if (!rawCtx) return;
+    const ctx: CanvasRenderingContext2D = rawCtx;
+    const canvas: HTMLCanvasElement = cv;
+    const host = cv.parentElement!;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    let W = 0, H = 0;
+    type Node = { bx: number; by: number; x: number; y: number; r: number; hub: boolean; ph: number; amp: number };
+    type Edge = [number, number];
+    type Pulse = { e: Edge; t: number; sp: number };
+    let nodes: Node[] = [], edges: Edge[] = [], pulses: Pulse[] = [];
+    const mouse = { x: -9999, y: -9999 };
+    const rand = (a: number, b: number) => a + Math.random() * (b - a);
+
+    function build() {
+      W = host.clientWidth; H = host.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      nodes = []; edges = []; pulses = [];
+      const hubCount = 5, hubs: number[] = [];
+      for (let h = 0; h < hubCount; h++) {
+        const hx = W * (0.12 + 0.76 * ((h + 0.5) / hubCount)) + rand(-W * 0.04, W * 0.04);
+        const hy = rand(H * 0.16, H * 0.82);
+        nodes.push({ bx: hx, by: hy, x: hx, y: hy, r: rand(2.4, 3.4), hub: true, ph: rand(0, 6.28), amp: rand(8, 15) });
+        hubs.push(nodes.length - 1);
+      }
+      const leaves = Math.round(Math.min(46, Math.max(20, W * H / 24000)));
+      for (let i = 0; i < leaves; i++) {
+        const x = rand(W * 0.04, W * 0.96), y = rand(H * 0.08, H * 0.92);
+        nodes.push({ bx: x, by: y, x, y, r: rand(1, 2), hub: false, ph: rand(0, 6.28), amp: rand(5, 11) });
+        const idx = nodes.length - 1;
+        let best = hubs[0], bd = 1e9;
+        for (const k of hubs) { const hh = nodes[k]; const dx = hh.bx - x, dy = hh.by - y, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = k; } }
+        edges.push([idx, best]);
+        if (Math.random() < 0.22) { const b2 = hubs[Math.floor(Math.random() * hubs.length)]; if (b2 !== best) edges.push([idx, b2]); }
+      }
+      for (let h = 0; h < hubs.length - 1; h++) edges.push([hubs[h], hubs[h + 1]]);
+    }
+
+    const spawnPulse = () => { if (edges.length) pulses.push({ e: edges[Math.floor(Math.random() * edges.length)], t: 0, sp: rand(0.004, 0.011) }); };
+    const onMove = (ev: MouseEvent) => { const r = host.getBoundingClientRect(); mouse.x = ev.clientX - r.left; mouse.y = ev.clientY - r.top; };
+    const onLeave = () => { mouse.x = -9999; mouse.y = -9999; };
+    host.addEventListener('mousemove', onMove, { passive: true });
+    host.addEventListener('mouseleave', onLeave);
+
+    let t = 0, pt = 0, raf = 0;
+    function frame() {
+      t += 0.016; ctx.clearRect(0, 0, W, H);
+      for (const n of nodes) { n.x = n.bx + Math.cos(t * 0.4 + n.ph) * n.amp; n.y = n.by + Math.sin(t * 0.33 + n.ph) * n.amp; }
+      ctx.lineWidth = 1;
+      for (const [ai, bi] of edges) { const a = nodes[ai], b = nodes[bi]; ctx.strokeStyle = 'rgba(245,243,239,0.10)'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      pt++; if (pt > 24) { pt = 0; if (pulses.length < 14) spawnPulse(); }
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i]; p.t += p.sp; if (p.t >= 1) { pulses.splice(i, 1); continue; }
+        const a = nodes[p.e[0]], b = nodes[p.e[1]], px = a.x + (b.x - a.x) * p.t, py = a.y + (b.y - a.y) * p.t, g = Math.sin(p.t * Math.PI);
+        ctx.beginPath(); ctx.arc(px, py, 1.9, 0, 6.283); ctx.fillStyle = `rgba(245,243,239,${(0.75 * g).toFixed(3)})`; ctx.fill();
+      }
+      for (const n of nodes) {
+        const dx = n.x - mouse.x, dy = n.y - mouse.y, md = Math.sqrt(dx * dx + dy * dy), lit = md < 160;
+        if (lit) { ctx.strokeStyle = `rgba(245,243,239,${((1 - md / 160) * 0.4).toFixed(3)})`; ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke(); }
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.283);
+        ctx.fillStyle = n.hub ? `rgba(245,243,239,${lit ? 0.95 : 0.6})` : `rgba(245,243,239,${lit ? 0.85 : 0.4})`; ctx.fill();
+        if (n.hub) { ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 3.5, 0, 6.283); ctx.strokeStyle = 'rgba(245,243,239,0.16)'; ctx.stroke(); }
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    build(); frame();
+    let rt = 0;
+    const onResize = () => { clearTimeout(rt); rt = window.setTimeout(build, 200); };
+    window.addEventListener('resize', onResize);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); host.removeEventListener('mousemove', onMove); host.removeEventListener('mouseleave', onLeave); };
+  }, []);
+
+  return <canvas ref={canvasRef} className="hero__net" aria-hidden="true" />;
+}
 
 /* ─── useReveal ────────────────────────────────────── */
 function useReveal() {
@@ -147,6 +259,10 @@ function useFlowrail() {
 }
 
 /* ─── AiWidget ─────────────────────────────────────── */
+const CURSOR_SVG = (
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M5 3l14 7-6 1.5L9 18 5 3z"/></svg>
+);
+
 function AiWidget() {
   const [active, setActive] = useState(0);
 
@@ -158,15 +274,15 @@ function AiWidget() {
   const screens = ['rq', 'iv', 'wf', 'dz', 'pt', 'ts', 'sh'] as const;
 
   return (
-    <div className="hero__session rv">
+    <div className="aiproc hero__session rv">
       <div className="agent__frame">
         <div className="agent__bar">
           <div className="agent__dots"><i /><i /><i /></div>
           <span className="agent__title">
-            <span className="n">nishan</span> space — design session
+            nishan<span className="n">space</span> — design session
           </span>
           <span className="agent__live">
-            <span className="d" /> Active
+            <span className="d" /> Live
           </span>
         </div>
         <div className="agent__body">
@@ -188,7 +304,7 @@ function AiWidget() {
                   ].join(' ').trim()}
                 >
                   <span className="ic" />
-                  {step}
+                  <span>{step}</span>
                 </div>
               ))}
             </div>
@@ -199,7 +315,7 @@ function AiWidget() {
             <div className="proc">
               <div className="proc__bar">
                 <span className="proc__hint">
-                  <span className="sx">●</span> {AI_STEPS[active]}
+                  <span className="sx">✦</span> {PROC_CAPS[active]}
                 </span>
                 <span className="proc__dots">
                   {AI_STEPS.map((_, i) => (
@@ -211,10 +327,16 @@ function AiWidget() {
                 {screens[active] === 'rq' && (
                   <div className="proc__screen">
                     <div className="rq">
-                      <p className="rq__h">Project Requirements</p>
-                      {['10+ user roles defined','3-month delivery timeline','Complex data visualisation','Accessibility AA compliant','Mobile responsive'].map((t, i) => (
+                      <div className="rq__h">Project brief</div>
+                      {[
+                        'Multi-tenant SaaS dashboard',
+                        'Role-based access · 4 user types',
+                        'Cut time-to-task by 40%',
+                        'WCAG AA accessible',
+                        'Ship in six weeks',
+                      ].map((t, i) => (
                         <div key={t} className="rq__l" style={{ '--d': i } as React.CSSProperties}>
-                          <span className="ck" />{t}
+                          <span className="ck" /> {t}
                         </div>
                       ))}
                     </div>
@@ -223,72 +345,68 @@ function AiWidget() {
                 {screens[active] === 'iv' && (
                   <div className="proc__screen">
                     <div className="iv">
-                      <div className="iv__b iv__b--them" style={{ '--d': 0 } as React.CSSProperties}>What's your biggest pain point with the current workflow?</div>
-                      <div className="iv__b iv__b--me" style={{ '--d': 1 } as React.CSSProperties}>I lose hours just finding the right report.</div>
-                      <div className="iv__b iv__b--them" style={{ '--d': 2 } as React.CSSProperties}>How often does that happen in a typical week?</div>
-                      <div className="iv__b iv__b--me" style={{ '--d': 3 } as React.CSSProperties}>Every single day, at least 3-4 times.</div>
+                      <div className="iv__b iv__b--them" style={{ '--d': 0 } as React.CSSProperties}>&ldquo;What slows the team down most?&rdquo;</div>
+                      <div className="iv__b iv__b--me" style={{ '--d': 1 } as React.CSSProperties}>&ldquo;Too many clicks just to publish.&rdquo;</div>
+                      <div className="iv__b iv__b--them" style={{ '--d': 2 } as React.CSSProperties}>&ldquo;And digging up past reports.&rdquo;</div>
+                      <div className="iv__b iv__b--me" style={{ '--d': 3 } as React.CSSProperties}>&ldquo;Got it — one-click, with history.&rdquo;</div>
                       <div className="iv__wave">
-                        {Array.from({ length: 20 }).map((_, i) => (
-                          <i key={i} style={{ animationDelay: `${i * 0.08}s` }} />
+                        {Array.from({ length: 16 }).map((_, i) => (
+                          <i key={i} style={{ animationDelay: `${(Math.random() * 0.9).toFixed(2)}s` }} />
                         ))}
                       </div>
                     </div>
                   </div>
                 )}
                 {(screens[active] === 'wf' || screens[active] === 'dz') && (
-                  <div className="proc__screen" style={{ position: 'relative', height: '100%' }}>
-                    <div className={`lo ${screens[active] === 'wf' ? 'wf' : 'dz'}`}>
-                      <div className="lo__b lo__top" style={{ '--d': 0 } as React.CSSProperties} />
-                      <div className="lo__b lo__side" style={{ '--d': 1 } as React.CSSProperties}>
-                        <i /><i /><i /><i />
-                      </div>
-                      <div className="lo__b lo__main" style={{ '--d': 2 } as React.CSSProperties}>
-                        <div className="lo__cards">
-                          <div className="lo__card" /><div className="lo__card" /><div className="lo__card" />
-                        </div>
-                        <div className="lo__rows">
-                          <span /><span /><span />
-                        </div>
-                      </div>
-                    </div>
+                  <div className="proc__screen">
+                    <Lo cls={screens[active] === 'wf' ? 'wf' : 'dz'} />
                   </div>
                 )}
                 {screens[active] === 'pt' && (
                   <div className="proc__screen">
                     <div className="pt">
-                      {[0,1,2].map((i) => (
-                        <div key={i} className={`pt__b pt__f${i === 1 ? ' pt__f--hi' : ''}`} style={{ '--d': i } as React.CSSProperties}>
-                          <i /><i />
-                        </div>
-                      ))}
-                      <div className="pt__a" style={{ position: 'static' }} />
+                      <div className="pt__f pt__b" style={{ '--d': 0 } as React.CSSProperties}><i /><i /></div>
+                      <div className="pt__a pt__b" style={{ '--d': 1 } as React.CSSProperties} />
+                      <div className="pt__f pt__b" style={{ '--d': 2 } as React.CSSProperties}><i /><i /></div>
+                      <div className="pt__a pt__b" style={{ '--d': 3 } as React.CSSProperties} />
+                      <div className="pt__f pt__f--hi pt__b" style={{ '--d': 4 } as React.CSSProperties}><i /><i /></div>
+                      <div className="pt__cursor">{CURSOR_SVG}</div>
                     </div>
                   </div>
                 )}
                 {screens[active] === 'ts' && (
                   <div className="proc__screen">
-                    <div className="ts" style={{ position: 'relative', height: 280 }}>
-                      <div style={{ position: 'absolute', inset: 0, background: 'var(--bg-3)' }} />
-                      <div className="ts__cursor">
-                        <svg viewBox="0 0 18 18" fill="none"><path d="M2 2l14 6-6 2-2 6L2 2z" fill="white" stroke="rgba(0,0,0,.3)" strokeWidth=".5"/></svg>
-                      </div>
+                    <div className="ts">
+                      <Lo cls="dz" />
+                      <div className="ts__dot" style={{ left: '30%', top: '46%' }} />
+                      <div className="ts__dot" style={{ left: '62%', top: '36%' }} />
+                      <div className="ts__dot" style={{ left: '48%', top: '64%' }} />
                       <div className="ts__ring" />
-                      <div className="ts__metric"><b>Task completion</b> 94%</div>
+                      <div className="ts__cursor">{CURSOR_SVG}</div>
+                      <div className="ts__metric"><b>98%</b> success · <b>&#8722;42%</b> time-on-task</div>
                     </div>
                   </div>
                 )}
                 {screens[active] === 'sh' && (
                   <div className="proc__screen">
                     <div className="sh">
-                      <div className="sh__b" style={{ '--d': 0 } as React.CSSProperties}><div className="sh__badge">v1.0 Shipped ✓</div></div>
+                      <div className="sh__badge sh__b" style={{ '--d': 0 } as React.CSSProperties}>
+                        <span className="sh__tick">✓</span> Shipped to production
+                      </div>
                       <div className="sh__b" style={{ '--d': 1 } as React.CSSProperties}>
-                        <p className="sh__h">Design Handoff</p>
-                        <div className="sh__sw"><span /><span /><span /><span /></div>
+                        <div className="sh__h">Design tokens</div>
+                        <div className="sh__sw">
+                          <span style={{ background: '#ecebe6' }} />
+                          <span style={{ background: '#9b9893' }} />
+                          <span style={{ background: '#171717' }} />
+                          <span style={{ background: '#5c5a55' }} />
+                          <span style={{ background: '#3ddc84' }} />
+                        </div>
                       </div>
                       <div className="sh__b" style={{ '--d': 2 } as React.CSSProperties}>
-                        <p className="sh__h">Delivery Package</p>
+                        <div className="sh__h">Components handed off</div>
                         <div className="sh__chips">
-                          {['Figma source','Design tokens','Component docs','Motion spec'].map((c) => (
+                          {['Button','Table','Modal','Nav','Form','Toast'].map((c) => (
                             <span key={c}>{c}</span>
                           ))}
                         </div>
@@ -442,12 +560,7 @@ export default function HomePage() {
       {/* ── HERO ──────────────────────────────────────── */}
       <section className="hero" id="top">
         <div className="hero__halo" aria-hidden="true" />
-        <div className="hero__ring hero__ring--1" aria-hidden="true" />
-        <div className="hero__ring hero__ring--2" aria-hidden="true" />
-
-        <p className="ey rv" style={{ transitionDelay: '0s' }}>
-          Senior UX Designer · Dubai, UAE
-        </p>
+        <HeroNet />
 
         <h1 className="hero__h hero__h--punch rv" style={{ transitionDelay: '0.1s' }}>
           Most enterprise software fails because users can&apos;t figure out how to use it.{' '}
@@ -648,25 +761,28 @@ export default function HomePage() {
                 {['Interviews','Journey mapping','Synthesis'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media scl">
-              <div className="amini">
-                <div className="amini__bar">
-                  <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
-                  Research Session
-                  <span className="amini__live">Recording</span>
-                </div>
-                <div className="amini__stage" style={{ minHeight: 240 }}>
-                  <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="20" y="20" width="280" height="40" fill="rgba(245,243,239,.03)" stroke="rgba(245,243,239,.08)" strokeWidth="1"/>
-                    <text x="30" y="46" fontFamily="monospace" fontSize="11" fill="rgba(245,243,239,.35)">User Interview · Session 3</text>
-                    {[0,1,2,3,4].map((i) => (
-                      <rect key={i} x="20" y={74 + i * 28} width={160 + (i % 3) * 40} height="14" rx="0" fill="rgba(245,243,239,.06)" className="rjblink" style={{ '--d': `${i * 0.3}s` } as React.CSSProperties}/>
-                    ))}
-                    <circle cx="260" cy="150" r="40" fill="none" stroke="rgba(74,86,246,.25)" strokeWidth="1" className="rjping" style={{ '--ox': '260px', '--oy': '150px' } as React.CSSProperties}/>
-                    <circle cx="260" cy="150" r="8" fill="#4a56f6" />
-                    <text x="238" y="154" fontFamily="monospace" fontSize="9" fill="white">Finding</text>
-                  </svg>
-                </div>
+            <div className="feat__media scl amini">
+              <div className="amini__bar">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="amini__n" src="/assets/icon.svg" alt="" />
+                <span>Observing users</span>
+                <span className="amini__live">Live</span>
+              </div>
+              <div className="amini__stage rj">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="40" y="56" width="150" height="184" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/>
+                  <rect x="54" y="70" width="100" height="14" fill="rgba(245,243,239,.28)"/><rect x="54" y="94" width="70" height="9" fill="rgba(245,243,239,.16)"/><rect x="54" y="112" width="120" height="9" fill="rgba(245,243,239,.12)"/><rect x="54" y="150" width="62" height="34" fill="rgba(74,86,246,.25)"/>
+                  <circle className="rjheat" cx="86" cy="166" r="22" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjheat" cx="142" cy="108" r="16" style={{'--d':'.7s'} as React.CSSProperties}/>
+                  <circle cx="72" cy="266" r="16" fill="#0f0e0c" stroke="rgba(245,243,239,.3)"/><circle cx="72" cy="260" r="6" fill="rgba(245,243,239,.5)"/><path d="M60 274 q12 -13 24 0" fill="rgba(245,243,239,.3)"/>
+                  <circle cx="302" cy="78" r="22" fill="#0f0e0c" stroke="rgba(245,243,239,.2)"/><circle cx="302" cy="78" r="10" fill="#4a56f6" opacity=".7"/>
+                  <line x1="282" y1="92" x2="160" y2="150" strokeDasharray="3 5"/>
+                  <line className="rjwire" x1="296" y1="98" x2="244" y2="140"/><line className="rjwire" x1="244" y1="140" x2="244" y2="241"/>
+                  <circle className="rjax rjblink" cx="244" cy="149" r="3.6" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjax rjblink" cx="244" cy="195" r="3.6" style={{'--d':'.35s'} as React.CSSProperties}/><circle className="rjax rjblink" cx="244" cy="241" r="3.6" style={{'--d':'.7s'} as React.CSSProperties}/>
+                  <g className="rjpop" style={{'--d':'.3s'} as React.CSSProperties}><rect x="248" y="132" width="116" height="34" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="256" y="142" width="58" height="6" fill="#4a56f6"/><rect x="256" y="154" width="84" height="5" fill="rgba(245,243,239,.2)"/></g>
+                  <g className="rjpop" style={{'--d':'1.2s'} as React.CSSProperties}><rect x="248" y="178" width="116" height="34" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="256" y="188" width="48" height="6" fill="#4a56f6"/><rect x="256" y="200" width="90" height="5" fill="rgba(245,243,239,.2)"/></g>
+                  <g className="rjpop" style={{'--d':'2.1s'} as React.CSSProperties}><rect x="248" y="224" width="116" height="34" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="256" y="234" width="66" height="6" fill="#4a56f6"/><rect x="256" y="246" width="74" height="5" fill="rgba(245,243,239,.2)"/></g>
+                  <circle className="rjfloat" cx="216" cy="58" r="5" style={{'--d':'.5s'} as React.CSSProperties}/><circle className="rjfloat" cx="210" cy="256" r="4" style={{'--d':'1.5s'} as React.CSSProperties}/>
+                </svg>
               </div>
             </div>
           </div>
@@ -681,23 +797,25 @@ export default function HomePage() {
                 {['Flows','Low-fi','IA'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media scl">
-              <div className="amini">
-                <div className="amini__bar">
-                  <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
-                  Wireframe · Dashboard v3
-                  <span className="amini__live">Live</span>
-                </div>
-                <div className="amini__stage" style={{ minHeight: 240 }}>
-                  <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="20" y="20" width="280" height="24" fill="rgba(245,243,239,.04)" stroke="rgba(245,243,239,.08)" strokeWidth="1"/>
-                    <rect x="20" y="56" width="60" height="164" fill="rgba(245,243,239,.03)" stroke="rgba(245,243,239,.06)" strokeWidth="1"/>
-                    {[0,1,2,3,4].map((i) => <rect key={i} x="28" y={68+i*24} width="44" height="14" rx="0" fill={i===0?"rgba(74,86,246,.35)":"rgba(245,243,239,.05)"} className="rjblink" style={{ '--d': `${i*0.2}s` } as React.CSSProperties}/>)}
-                    <rect x="90" y="56" width="210" height="74" fill="rgba(245,243,239,.02)" stroke="rgba(245,243,239,.07)" strokeWidth="1"/>
-                    <rect x="90" y="140" width="100" height="80" fill="rgba(245,243,239,.02)" stroke="rgba(245,243,239,.07)" strokeWidth="1"/>
-                    <rect x="200" y="140" width="100" height="80" fill="rgba(245,243,239,.02)" stroke="rgba(245,243,239,.07)" strokeWidth="1"/>
-                  </svg>
-                </div>
+            <div className="feat__media scl amini">
+              <div className="amini__bar">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="amini__n" src="/assets/icon.svg" alt="" />
+                <span>Simplifying</span>
+                <span className="amini__live">Live</span>
+              </div>
+              <div className="amini__stage rj">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <g opacity="0.5">
+                    <line x1="50" y1="80" x2="150" y2="220"/><line x1="150" y1="70" x2="46" y2="226"/><line x1="40" y1="150" x2="160" y2="150"/><line x1="92" y1="56" x2="116" y2="244"/><line x1="36" y1="200" x2="166" y2="96"/><line x1="60" y1="100" x2="158" y2="200"/>
+                    <circle className="rjnode rjblink" cx="50" cy="80" r="8" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="150" cy="70" r="8" style={{'--d':'.2s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="160" cy="150" r="8" style={{'--d':'.4s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="46" cy="226" r="8" style={{'--d':'.6s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="116" cy="244" r="8" style={{'--d':'.3s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="40" cy="150" r="8" style={{'--d':'.5s'} as React.CSSProperties}/>
+                  </g>
+                  <path d="M186 150 l34 0 m-9 -8 l9 8 l-9 8" stroke="#4a56f6" strokeWidth="2.5" fill="none"/>
+                  <line x1="248" y1="150" x2="312" y2="150"/><line x1="312" y1="150" x2="360" y2="96"/><line x1="312" y1="150" x2="360" y2="204"/>
+                  <circle className="rjnode" cx="248" cy="150" r="10"/><circle className="rjax" cx="312" cy="150" r="11"/><circle className="rjnode" cx="360" cy="96" r="10"/><circle className="rjnode" cx="360" cy="204" r="10"/>
+                  <circle className="rjpulse" style={{'--tx':'64px'} as React.CSSProperties} cx="248" cy="150" r="4.5"/>
+                  <circle className="rjfloat" cx="290" cy="70" r="5" style={{'--d':'.6s'} as React.CSSProperties}/><circle className="rjfloat" cx="300" cy="240" r="4" style={{'--d':'1.4s'} as React.CSSProperties}/>
+                </svg>
               </div>
             </div>
           </div>
@@ -712,22 +830,24 @@ export default function HomePage() {
                 {['Design systems','Components','Tokens'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media scl">
-              <div className="amini">
-                <div className="amini__bar">
-                  <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
-                  Design System · Tokens
-                  <span className="amini__live">v4.2</span>
-                </div>
-                <div className="amini__stage" style={{ minHeight: 240 }}>
-                  <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-                    {[0,1,2,3,4,5,6,7].map((i) => {
-                      const col = i % 4; const row = Math.floor(i / 4);
-                      return <rect key={i} x={20+col*76} y={20+row*100} width="64" height="86" rx="0" fill={i===5?"rgba(74,86,246,.2)":"rgba(245,243,239,.03)"} stroke="rgba(245,243,239,.09)" strokeWidth="1" className="rjtile" style={{ '--d': `${i*0.2}s` } as React.CSSProperties}/>;
-                    })}
-                    <rect x="96" y="120" width="64" height="86" className="rjtileax" style={{ '--d': '1s' } as React.CSSProperties}/>
-                  </svg>
-                </div>
+            <div className="feat__media scl amini">
+              <div className="amini__bar">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="amini__n" src="/assets/icon.svg" alt="" />
+                <span>Scaling design</span>
+                <span className="amini__live">Live</span>
+              </div>
+              <div className="amini__stage rj">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <line className="rjwire" x1="106" y1="150" x2="180" y2="72"/><line className="rjwire" x1="106" y1="150" x2="180" y2="152"/><line className="rjwire" x1="106" y1="150" x2="180" y2="247"/>
+                  <rect className="rjtileax" x="34" y="118" width="72" height="64"/>
+                  <text x="44" y="206" fontFamily="Geist Mono, monospace" fontSize="11" fill="rgba(245,243,239,.4)">SOURCE</text>
+                  <circle className="rjax rjblink" cx="180" cy="72" r="4" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjax rjblink" cx="180" cy="152" r="4" style={{'--d':'.3s'} as React.CSSProperties}/><circle className="rjax rjblink" cx="180" cy="247" r="4" style={{'--d':'.6s'} as React.CSSProperties}/>
+                  <g className="rjpop" style={{'--d':'.4s'} as React.CSSProperties}><rect x="180" y="40" width="182" height="64" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="190" y="50" width="40" height="8" fill="#4a56f6"/><rect x="190" y="64" width="120" height="6" fill="rgba(245,243,239,.16)"/><rect x="190" y="76" width="90" height="6" fill="rgba(245,243,239,.12)"/></g>
+                  <g className="rjpop" style={{'--d':'.9s'} as React.CSSProperties}><rect x="180" y="124" width="120" height="56" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="190" y="132" width="30" height="7" fill="#4a56f6"/><rect x="190" y="146" width="70" height="5" fill="rgba(245,243,239,.16)"/></g>
+                  <g className="rjpop" style={{'--d':'1.4s'} as React.CSSProperties}><rect x="180" y="210" width="52" height="74" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="188" y="218" width="22" height="6" fill="#4a56f6"/><rect x="188" y="230" width="34" height="5" fill="rgba(245,243,239,.16)"/></g>
+                  <circle className="rjfloat" cx="330" cy="190" r="5" style={{'--d':'.7s'} as React.CSSProperties}/>
+                </svg>
               </div>
             </div>
           </div>
@@ -742,25 +862,26 @@ export default function HomePage() {
                 {['Prototypes','Usability testing','Metrics'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
-            <div className="feat__media scl">
-              <div className="amini">
-                <div className="amini__bar">
-                  <svg className="amini__n" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2" stroke="rgba(245,243,239,.3)" strokeWidth="1"/></svg>
-                  Prototype · Mobile Flow
-                  <span className="amini__live">Testing</span>
-                </div>
-                <div className="amini__stage" style={{ minHeight: 240 }}>
-                  <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
-                    {[0,1,2].map((i) => (
-                      <rect key={i} x={60+i*76} y="30" width="60" height="108" rx="8" fill="rgba(245,243,239,.04)" stroke={i===1?"rgba(74,86,246,.6)":"rgba(245,243,239,.1)"} strokeWidth="1.5"/>
-                    ))}
-                    <line x1="120" y1="84" x2="136" y2="84" stroke="rgba(74,86,246,.7)" strokeWidth="1.5" markerEnd="url(#arr)"/>
-                    <line x1="196" y1="84" x2="212" y2="84" stroke="rgba(74,86,246,.7)" strokeWidth="1.5"/>
-                    <circle cx="160" cy="168" r="18" fill="none" stroke="rgba(74,86,246,.4)" strokeWidth="1.5" className="rjtap" style={{ '--d': '0.2s' } as React.CSSProperties}/>
-                    <circle cx="160" cy="168" r="5" fill="#4a56f6" />
-                    <text x="136" y="210" fontFamily="monospace" fontSize="9" fill="rgba(245,243,239,.3)">Tap to advance</text>
-                  </svg>
-                </div>
+            <div className="feat__media scl amini">
+              <div className="amini__bar">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="amini__n" src="/assets/icon.svg" alt="" />
+                <span>Measuring impact</span>
+                <span className="amini__live">Live</span>
+              </div>
+              <div className="amini__stage rj">
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="34" y="36" width="332" height="228" fill="#1c1a16" stroke="rgba(245,243,239,.18)"/>
+                  <rect x="50" y="50" width="92" height="11" fill="rgba(245,243,239,.3)"/>
+                  <polyline className="rjdraw" pathLength={1} points="54,206 110,186 168,156 226,120 322,76" fill="none" stroke="#4a56f6" strokeWidth="2.5" style={{'--d':'.3s'} as React.CSSProperties}/>
+                  <circle className="rjax" cx="322" cy="76" r="4.5"/>
+                  <circle cx="318" cy="96" r="18" fill="none" stroke="rgba(245,243,239,.16)"/><path className="rjcheck" pathLength={1} d="M307 96 l7 8 l15 -18"/>
+                  <rect x="50" y="222" width="130" height="9" fill="rgba(245,243,239,.1)"/><rect className="rjfill" x="50" y="222" width="118" height="9" style={{'--d':'.5s'} as React.CSSProperties}/>
+                  <rect x="50" y="240" width="130" height="9" fill="rgba(245,243,239,.1)"/><rect className="rjfill" x="50" y="240" width="86" height="9" style={{'--d':'.9s'} as React.CSSProperties}/>
+                  <rect x="200" y="222" width="150" height="9" fill="rgba(245,243,239,.1)"/><rect className="rjfill" x="200" y="222" width="120" height="9" style={{'--d':'.7s'} as React.CSSProperties}/>
+                  <rect x="200" y="240" width="150" height="9" fill="rgba(245,243,239,.1)"/><rect className="rjfill" x="200" y="240" width="96" height="9" style={{'--d':'1.1s'} as React.CSSProperties}/>
+                  <circle className="rjfloat" cx="200" cy="60" r="5" style={{'--d':'.6s'} as React.CSSProperties}/>
+                </svg>
               </div>
             </div>
           </div>
