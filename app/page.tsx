@@ -89,6 +89,63 @@ function useReveal() {
   }, []);
 }
 
+/* ─── useFlowrail ──────────────────────────────────── */
+function useFlowrail() {
+  useEffect(() => {
+    const railEl = document.getElementById('flowrail');
+    const fill = document.getElementById('flowFill');
+    if (!railEl || !fill) return;
+    const rail: HTMLElement = railEl;
+
+    const defs: [string, string][] = [
+      ['#top', 'Start'],
+      ['#services', 'Services'],
+      ['#work', 'Work'],
+      ['#approach', 'Approach'],
+      ['#reviews', 'Reviews'],
+      ['.cta', 'Connect'],
+    ];
+
+    const nodes: { el: HTMLElement; top: number; target: Element }[] = [];
+
+    defs.forEach(([sel, label], idx) => {
+      const target = document.querySelector(sel);
+      if (!target) return;
+      const nd = document.createElement('div');
+      nd.className = 'flownode';
+      nd.innerHTML = `<span class="flownode__lbl"><span class="flownode__n">0${idx + 1}</span>${label}</span>`;
+      rail.appendChild(nd);
+      nodes.push({ el: nd, top: 0, target });
+    });
+
+    function layout() {
+      rail.style.height = document.documentElement.scrollHeight + 'px';
+      nodes.forEach((n) => {
+        n.top = n.target.getBoundingClientRect().top + window.scrollY;
+        n.el.style.top = n.top + 'px';
+      });
+    }
+
+    function upd() {
+      const marker = window.scrollY + window.innerHeight * 0.5;
+      (fill as HTMLElement).style.height = marker + 'px';
+      nodes.forEach((n) => {
+        n.el.classList.toggle('on', marker >= n.top - 4);
+      });
+    }
+
+    layout(); upd();
+    window.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', () => { layout(); upd(); });
+    setTimeout(() => { layout(); upd(); }, 1200);
+
+    return () => {
+      window.removeEventListener('scroll', upd);
+      nodes.forEach((n) => n.el.remove());
+    };
+  }, []);
+}
+
 /* ─── AiWidget ─────────────────────────────────────── */
 function AiWidget() {
   const [active, setActive] = useState(0);
@@ -372,11 +429,18 @@ function ReviewsCarousel() {
 /* ─── Page ─────────────────────────────────────────── */
 export default function HomePage() {
   useReveal();
+  useFlowrail();
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
+      {/* Flowrail */}
+      <div id="flowrail" className="flowrail" aria-hidden="true">
+        <div className="flowrail__line" />
+        <div id="flowFill" className="flowrail__fill" />
+      </div>
+
       {/* ── HERO ──────────────────────────────────────── */}
-      <section className="hero">
+      <section className="hero" id="top">
         <div className="hero__halo" aria-hidden="true" />
         <div className="hero__ring hero__ring--1" aria-hidden="true" />
         <div className="hero__ring hero__ring--2" aria-hidden="true" />
@@ -419,6 +483,9 @@ export default function HomePage() {
           <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
             How I can help.
           </h2>
+          <p className="sec__lead rv" style={{ transitionDelay: '0.15s' }}>
+            I take on a small number of engagements at a time. Here are the four ways we usually work together.
+          </p>
 
           <div className="svc rv-s" style={{ transitionDelay: '0.1s' }}>
             {/* Card 1 — UX Consulting */}
@@ -512,6 +579,9 @@ export default function HomePage() {
           <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
             Selected case studies.
           </h2>
+          <p className="sec__lead rv" style={{ transitionDelay: '0.15s' }}>
+            Thirteen years across psychometrics, healthcare and Web3 — complex systems made obvious.
+          </p>
 
           <div className="cs rv-s" style={{ marginTop: 54, transitionDelay: '0.15s' }}>
             {cases.map((c) => (
@@ -707,6 +777,6 @@ export default function HomePage() {
           </a>
         </div>
       </section>
-    </>
+    </div>
   );
 }

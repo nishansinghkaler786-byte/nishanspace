@@ -807,3 +807,281 @@ button { cursor: pointer; }
 .svc__c, .rev__c, .cs__card, .cs__tag,
 .submit, .field input, .field select, .field textarea,
 .upload, .chip { border-radius: 0; }
+
+/* ============================================================
+   Flowrail — homepage left scroll progress rail
+   ============================================================ */
+.flowrail { position: absolute; top: 0; left: 10px; width: 2px; z-index: 6; pointer-events: none; }
+.flowrail__line { position: absolute; inset: 0; background: var(--line); }
+.flowrail__fill { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: linear-gradient(var(--ink), var(--ink-dim)); box-shadow: 0 0 10px rgba(245,243,239,0.25); }
+.flowrail__fill::after { content: ""; position: absolute; bottom: 0; left: 50%; width: 11px; height: 11px; border-radius: 50%; background: var(--ink); transform: translate(-50%, 50%); box-shadow: 0 0 20px 4px rgba(245,243,239,0.55); }
+.flownode { position: absolute; left: 1px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--line-2); transform: translate(-50%, -50%); }
+.flownode.on { border-color: var(--ink); background: var(--ink); box-shadow: 0 0 16px 2px rgba(245,243,239,0.45); }
+.flownode__lbl { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); opacity: 0; transition: opacity .3s ease; }
+.flownode.on .flownode__lbl { opacity: 1; color: var(--ink); }
+.flownode__n { margin-right: 6px; }
+@media(max-width: 1040px) { .flowrail { display: none; } }
+
+/* ============================================================
+   Crail — case study left scroll rail
+   ============================================================ */
+.crail { position: absolute; top: 0; left: 10px; width: 2px; background: var(--line); z-index: 40; pointer-events: none; }
+.crail__fill { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: linear-gradient(var(--ink), var(--ink-dim)); box-shadow: 0 0 10px rgba(245,243,239,.2); }
+.crail__fill::after { content: ""; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 9px; height: 9px; border-radius: 50%; background: #4a56f6; box-shadow: 0 0 14px 2px rgba(74,86,246,.55); }
+.cnode { position: absolute; left: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg-2); border: 1.5px solid var(--line-2); transform: translate(-50%, -50%); transition: border-color .4s var(--ease), background-color .4s var(--ease), box-shadow .4s var(--ease); }
+.cnode.on { border-color: #4a56f6; background: #4a56f6; box-shadow: 0 0 12px 1px rgba(74,86,246,.45); }
+@media(max-width: 1180px) { .crail { display: none; } }
+
+/* ============================================================
+   Case study — overrides & additions
+   ============================================================ */
+/* Impact section (full-width dark block) */
+.cimpact { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(56px,8vw,104px) 0; }
+.cimpact__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 30px; margin-top: 40px; }
+@media(max-width: 760px) { .cimpact__grid { grid-template-columns: 1fr 1fr; gap: 34px; } }
+.cnum { font-family: var(--f-sans); font-weight: 600; font-size: clamp(44px,5vw,76px); letter-spacing: -.03em; line-height: 1; }
+.cnum__l { margin-top: 12px; font-size: 13.5px; color: var(--ink-dim); line-height: 1.5; }
+/* Pull quote (large editorial) */
+.cpull { font-family: var(--f-sans); font-weight: 500; font-size: clamp(24px,3.2vw,42px); line-height: 1.28; letter-spacing: -.02em; text-wrap: balance; border-left: none; padding: 0; margin: 0; }
+.cpull .ax { font-weight: 500; }
+.cpull__a { margin-top: 26px; font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-dim); }
+/* Gallery — masonry */
+.cgal { column-count: 2; column-gap: 18px; margin-top: 36px; display: block; }
+@media(max-width: 760px) { .cgal { column-count: 1; } }
+.cshot { break-inside: avoid; margin: 0 0 18px; border: 1px solid var(--line); background: var(--bg-3); overflow: hidden; display: block; }
+.cshot__bar { display: flex; align-items: center; gap: 6px; padding: 10px 13px; border-bottom: 1px solid var(--line); background: var(--bg-2); }
+.cshot__bar span { width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); }
+.cshot__bar i { margin-left: 8px; font-family: var(--f-mono); font-size: 10px; color: var(--ink-faint); font-style: normal; }
+.cshot img { width: 100%; height: auto; display: block; filter: grayscale(.08); transition: filter .5s var(--ease); }
+.cshot:hover img { filter: none; }
+/* Mobile screens */
+.cmob { display: grid; grid-template-columns: repeat(5,1fr); gap: 26px 18px; margin-top: 36px; }
+@media(max-width: 860px) { .cmob { grid-template-columns: repeat(3,1fr); } }
+@media(max-width: 520px) { .cmob { grid-template-columns: repeat(2,1fr); } }
+.cmob__item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.cmob__cap { font-family: var(--f-mono); font-size: 10px; letter-spacing: .03em; color: var(--ink-dim); text-align: center; line-height: 1.4; }
+.cmob__cap b { color: var(--ink); font-weight: 500; }
+.cphone { width: 100%; border: 5px solid #1c1a16; border-radius: 13px; overflow: hidden; background: #000; box-shadow: 0 24px 50px -28px rgba(0,0,0,.8); }
+.cphone img { width: 100%; display: block; }
+/* Wide sections */
+.csec--wide .cwrap { max-width: 1560px; }
+.csec--wide .csplit { grid-template-columns: 1fr; gap: 0; }
+.csec--wide .csplit__aside { position: static; margin-bottom: 14px; }
+.csec--wide .csec__prose { max-width: 70ch; }
+.csec--wide .cgal { column-count: 2; column-gap: 24px; margin-top: 44px; }
+@media(max-width: 760px) { .csec--wide .cgal { column-count: 1; } }
+.csec--wide .cmob { grid-template-columns: repeat(6,1fr); gap: 30px 22px; }
+@media(max-width: 1100px) { .csec--wide .cmob { grid-template-columns: repeat(4,1fr); } }
+@media(max-width: 680px) { .csec--wide .cmob { grid-template-columns: repeat(2,1fr); } }
+
+/* ============================================================
+   Case study — personas
+   ============================================================ */
+.cpersonas { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+@media(max-width: 760px) { .cpersonas { grid-template-columns: 1fr; } }
+.cpersona { background: var(--bg-3); border: 1px solid var(--line); padding: 26px; }
+.cpersona__h { display: flex; align-items: center; gap: 13px; margin-bottom: 16px; }
+.cpersona__av { width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-weight: 600; font-size: 14px; flex: none; }
+.cpersona__n { font-family: var(--f-sans); font-weight: 600; font-size: 18px; letter-spacing: -.01em; }
+.cpersona__r { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-dim); }
+.cpersona__q { font-style: italic; color: var(--ink-soft); font-size: 15px; line-height: 1.55; margin-bottom: 16px; }
+.cpersona__list { display: flex; flex-direction: column; gap: 8px; }
+.cpersona__list div { font-size: 13.5px; color: var(--ink-dim); display: flex; gap: 9px; }
+.cpersona__list div::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #4a56f6; margin-top: 7px; flex: none; }
+/* Detailed persona grid */
+.cpgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 32px; }
+@media(max-width: 760px) { .cpgrid { grid-template-columns: 1fr; } }
+.cper { background: var(--bg-3); border: 1px solid var(--line); padding: 26px; }
+.cper__head { display: flex; align-items: center; gap: 13px; margin-bottom: 18px; }
+.cper__av { width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-weight: 600; font-size: 14px; flex: none; }
+.cper__name { font-family: var(--f-sans); font-weight: 600; font-size: 18px; letter-spacing: -.01em; }
+.cper__role { font-size: 13.5px; color: var(--ink-soft); }
+.cper__ctx { font-family: var(--f-mono); font-size: 11px; color: var(--ink-dim); margin-top: 2px; }
+.cper__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cper__cols h5 { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); margin-bottom: 9px; }
+.cper__cols ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.cper__cols li { font-size: 13px; color: var(--ink-soft); line-height: 1.4; padding-left: 13px; position: relative; }
+.cper__cols li::before { content: ""; position: absolute; left: 0; top: 7px; width: 4px; height: 4px; border-radius: 50%; background: var(--ink-dim); }
+.cper__col--pain li::before { background: #4a56f6; }
+.cper__quote { font-style: italic; color: var(--ink-soft); font-size: 14.5px; line-height: 1.5; border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* ============================================================
+   Case study — design principles
+   ============================================================ */
+.cprins { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 34px; }
+@media(max-width: 760px) { .cprins { grid-template-columns: 1fr; } }
+.cprin { background: var(--bg-3); border: 1px solid var(--line); padding: 24px; }
+.cprin__n { font-family: var(--f-mono); font-size: 11px; color: #4a56f6; letter-spacing: .06em; margin-bottom: 13px; }
+.cprin__t { font-family: var(--f-sans); font-weight: 600; font-size: 19px; letter-spacing: -.01em; margin-bottom: 9px; }
+.cprin__d { font-size: 13.5px; color: var(--ink-dim); line-height: 1.55; }
+
+/* ============================================================
+   Case study — HMW callout
+   ============================================================ */
+.chmw { margin-top: 30px; border-left: 2px solid #4a56f6; padding: 6px 0 6px 22px; font-family: var(--f-sans); font-size: clamp(18px,2vw,26px); font-weight: 500; line-height: 1.4; letter-spacing: -.01em; color: var(--ink); }
+.chmw .lead { display: block; font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-dim); margin-bottom: 10px; font-weight: 400; }
+
+/* ============================================================
+   Case study — process cards (3-col)
+   ============================================================ */
+.cproc__cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 46px; }
+@media(max-width: 860px) { .cproc__cards { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 560px) { .cproc__cards { grid-template-columns: 1fr; } }
+.ccard { background: var(--card); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; }
+.ccard__body { padding: 18px 20px 20px; }
+.ccard__n { font-family: var(--f-mono); font-size: 11px; color: #4a56f6; letter-spacing: .1em; margin-bottom: 8px; text-transform: uppercase; }
+.ccard__h { font-family: var(--f-sans); font-weight: 600; font-size: 18px; letter-spacing: -.01em; margin-bottom: 7px; }
+.ccard__d { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+
+/* ============================================================
+   Case study — dual path
+   ============================================================ */
+.cpaths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+@media(max-width: 760px) { .cpaths { grid-template-columns: 1fr; } }
+.cpath { background: var(--bg-3); border: 1px solid var(--line); padding: 30px; }
+.cpath__tag { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #4a56f6; margin-bottom: 14px; }
+.cpath__t { font-family: var(--f-sans); font-weight: 600; font-size: clamp(20px,2vw,26px); letter-spacing: -.015em; line-height: 1.15; margin-bottom: 13px; }
+.cpath__b { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 18px; }
+.cpath__list { display: flex; flex-direction: column; gap: 9px; }
+.cpath__list div { font-size: 13.5px; color: var(--ink-dim); display: flex; gap: 9px; }
+.cpath__list div::before { content: "→"; color: #4a56f6; flex: none; }
+
+/* ============================================================
+   Case study — color hubs
+   ============================================================ */
+.chubs { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 36px; }
+@media(max-width: 760px) { .chubs { grid-template-columns: 1fr 1fr; } }
+.chub { border: 1px solid var(--line); border-top: 2px solid var(--hc,#4a56f6); background: var(--bg-3); padding: 22px; }
+.chub__t { display: flex; align-items: center; gap: 8px; font-family: var(--f-sans); font-weight: 600; font-size: 16px; margin-bottom: 7px; }
+.chub__t::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--hc,#4a56f6); flex: none; }
+.chub__d { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+
+/* ============================================================
+   Case study — loop/flow steps
+   ============================================================ */
+.cloop { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 34px; }
+@media(max-width: 860px) { .cloop { grid-template-columns: repeat(2,1fr); } }
+@media(max-width: 480px) { .cloop { grid-template-columns: 1fr; } }
+.cloopstep { border: 1px solid var(--line); background: var(--bg-3); padding: 18px; }
+.cloopstep__n { font-family: var(--f-mono); font-size: 12px; color: #4a56f6; margin-bottom: 10px; }
+.cloopstep__t { font-family: var(--f-sans); font-weight: 600; font-size: 14.5px; margin-bottom: 6px; letter-spacing: -.01em; }
+.cloopstep__d { font-size: 12.5px; color: var(--ink-dim); line-height: 1.45; }
+.cloop__kicker { margin-top: 24px; font-family: var(--f-sans); font-weight: 500; font-size: clamp(18px,2vw,26px); letter-spacing: -.01em; text-align: center; color: var(--ink-soft); }
+.cloop__kicker .ax { font-style: normal; }
+
+/* ============================================================
+   Case study — wireframe boxes
+   ============================================================ */
+.cwires { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 34px; }
+@media(max-width: 760px) { .cwires { grid-template-columns: 1fr; } }
+.cwire { border: 1px solid var(--line); background: var(--bg-3); padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.cwire__tag { font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); margin-bottom: 4px; }
+.cwire__h { font-size: 13px; color: var(--ink-soft); font-weight: 500; margin-bottom: 6px; }
+.cwb { background: #26241f; border-radius: 3px; }
+.cwb--bar { height: 14px; }
+.cwb--line { height: 8px; width: 80%; }
+.cwb--line.s { width: 50%; }
+.cwb--block { height: 42px; }
+.cwb--btn { height: 16px; width: 40%; background: #4a56f6; }
+.cwire__row { display: flex; gap: 10px; }
+.cwire__row .cwb { flex: 1; }
+
+/* ============================================================
+   Case study — design system
+   ============================================================ */
+.cds { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+@media(max-width: 760px) { .cds { grid-template-columns: 1fr; } }
+.cds__card { border: 1px solid var(--line); background: var(--bg-3); padding: 26px; }
+.cds__h { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); margin-bottom: 10px; }
+.cds__swatches { display: flex; gap: 10px; margin-top: 18px; }
+.cds__swatches span { flex: 1; height: 54px; }
+.cds__type .serif { font-weight: 600; font-size: 30px; letter-spacing: -.02em; }
+.cds__type .mono { font-family: var(--f-mono); font-size: 13px; color: var(--ink-dim); margin-top: 8px; text-transform: uppercase; letter-spacing: .08em; }
+.cds__principle { margin-top: 16px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; font-style: italic; border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* ============================================================
+   Case study — reflection
+   ============================================================ */
+.cref { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 8px; }
+@media(max-width: 760px) { .cref { grid-template-columns: 1fr; } }
+.cref__item { border-top: 1px solid var(--line-2); padding-top: 18px; }
+.cref__n { font-family: var(--f-mono); font-size: 11px; color: #4a56f6; letter-spacing: .06em; margin-bottom: 11px; }
+.cref__item h4 { font-family: var(--f-sans); font-weight: 600; font-size: 17px; letter-spacing: -.01em; margin-bottom: 8px; }
+.cref__item p { font-size: 13.5px; color: var(--ink-dim); line-height: 1.55; }
+
+/* ============================================================
+   Case study — IA map
+   ============================================================ */
+.cmap { border: 1px solid var(--line); background: var(--bg-3); padding: 24px; margin-top: 30px; }
+.cmap__root { font-family: var(--f-mono); font-size: 12px; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+.cmap__root .d { width: 7px; height: 7px; border-radius: 50%; background: #4a56f6; }
+.cmap__cols { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
+@media(max-width: 860px) { .cmap__cols { grid-template-columns: repeat(2,1fr); } }
+.cmap__node { font-family: var(--f-sans); font-weight: 600; font-size: 13.5px; padding-bottom: 8px; border-bottom: 1px solid var(--line-2); margin-bottom: 10px; }
+.cmap__leaves { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.cmap__leaves li { font-size: 12.5px; color: var(--ink-dim); }
+
+/* ============================================================
+   Case study — user research bridge
+   ============================================================ */
+.cubridge { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 30px; }
+@media(max-width: 760px) { .cubridge { grid-template-columns: 1fr; } }
+.cubridge__n { font-family: var(--f-mono); font-size: 11px; color: #4a56f6; margin-bottom: 10px; }
+.cubridge__t { font-family: var(--f-sans); font-weight: 600; font-size: 16px; margin-bottom: 7px; letter-spacing: -.01em; }
+.cubridge__d { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+.cubridge__d .lead { display: block; font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: #4a56f6; margin-bottom: 4px; }
+
+/* ============================================================
+   Case study — roles grid
+   ============================================================ */
+.croles { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; margin-top: 34px; }
+@media(max-width: 860px) { .croles { grid-template-columns: repeat(2,1fr); } }
+@media(max-width: 480px) { .croles { grid-template-columns: 1fr; } }
+.crole { background: var(--bg-3); border: 1px solid var(--line); padding: 20px; }
+.crole__k { font-family: var(--f-mono); font-size: 12px; color: #4a56f6; margin-bottom: 12px; }
+.crole__n { font-family: var(--f-sans); font-weight: 600; font-size: 15px; letter-spacing: -.01em; margin-bottom: 8px; }
+.crole__q { font-style: italic; font-size: 13px; color: var(--ink-dim); line-height: 1.4; }
+
+/* ============================================================
+   Case study — headline formula
+   ============================================================ */
+.cformula { margin-top: 30px; display: flex; flex-direction: column; gap: 14px; }
+.cformula__row { font-family: var(--f-sans); font-weight: 600; font-size: clamp(20px,2.4vw,30px); letter-spacing: -.02em; color: var(--ink-soft); border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+.tl { color: #4a56f6; font-style: italic; }
+
+/* ============================================================
+   Case study — platform IA hubs
+   ============================================================ */
+.cptree__hubs { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+@media(max-width: 760px) { .cptree__hubs { grid-template-columns: 1fr 1fr; } }
+.cptree__hub { border: 1px solid var(--line); border-top: 2px solid var(--hc,#4a56f6); background: var(--bg-2); padding: 16px; }
+.cptree__hub b { display: flex; align-items: center; gap: 8px; font-size: 13.5px; margin-bottom: 10px; }
+.cptree__hub b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--hc,#4a56f6); flex: none; }
+.cptree__hub ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.cptree__hub li { font-size: 12px; color: var(--ink-dim); }
+.cptree__global { margin-top: 14px; border: 1px dashed var(--line-2); padding: 14px; }
+.cptree__glabel { font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); margin-bottom: 10px; display: block; }
+.cptree__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.cptree__chips span { font-size: 12px; color: var(--ink-soft); border: 1px solid var(--line); padding: 5px 11px; }
+
+/* ============================================================
+   Case study — more work footer
+   ============================================================ */
+.morework { border-top: 1px solid var(--line); padding: clamp(48px,7vw,90px) var(--gutter); }
+.morework__in { max-width: 1180px; margin: 0 auto; }
+.morework__lbl { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-dim); margin-bottom: clamp(20px,2.5vw,34px); }
+.morework__grid { display: grid; grid-template-columns: 1fr 1fr; }
+.mwcard { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; row-gap: 10px; align-items: baseline; padding: clamp(28px,3.5vw,52px) 0; transition: color .35s ease; text-decoration: none; }
+.morework__grid .mwcard:first-child { padding-right: clamp(24px,3vw,52px); border-right: 1px solid var(--line); }
+.morework__grid .mwcard:last-child { padding-left: clamp(24px,3vw,52px); }
+.mwcard__t { grid-column: 1; grid-row: 1; font-family: var(--f-sans); font-weight: 600; font-size: clamp(26px,3.2vw,44px); letter-spacing: -.025em; line-height: 1; color: var(--ink); transition: color .35s ease; }
+.mwcard__s { grid-column: 1; grid-row: 2; color: var(--ink-dim); font-size: 14px; }
+.mwcard__arrow { grid-column: 2; grid-row: 1; font-size: 24px; color: #4a56f6; transition: transform .4s var(--ease); }
+.mwcard:hover .mwcard__t { color: #4a56f6; }
+.mwcard:hover .mwcard__arrow { transform: translate(5px,-5px); }
+@media(max-width: 680px) { .morework__grid { grid-template-columns: 1fr; } .morework__grid .mwcard:first-child { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line); } .morework__grid .mwcard:last-child { padding-left: 0; } }
+
+/* ============================================================
+   Lumen — specific overrides
+   ============================================================ */
+.lumen-phone { width: 100%; height: auto; display: block; }
