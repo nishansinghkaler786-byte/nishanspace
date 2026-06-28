@@ -7,26 +7,60 @@ import { CaseStudy } from '@/lib/cases';
 
 /* ─── per-case content maps ─────────────────────────── */
 
-const LUMEN_SCREENS = [
-  { src: '/assets/lumen/home-dark.png', lightSrc: '/assets/lumen/home-light.png', label: 'Home', sub: 'Portfolio overview' },
-  { src: '/assets/lumen/proAnalysis-dark.png', lightSrc: '/assets/lumen/proAnalysis-light.png', label: 'AI Analysis', sub: 'Pro market intelligence' },
-  { src: '/assets/lumen/feeBreakdown-dark.png', lightSrc: '/assets/lumen/feeBreakdown-light.png', label: 'Fee Breakdown', sub: 'Transparent costs' },
-  { src: '/assets/lumen/explore-dark.png', lightSrc: '/assets/lumen/explore-light.png', label: 'Explore', sub: 'Asset discovery' },
-  { src: '/assets/lumen/askLumi-dark.png', lightSrc: '/assets/lumen/askLumi-light.png', label: 'Ask Lumi', sub: 'AI companion' },
-  { src: '/assets/lumen/coinDetail-dark.png', lightSrc: '/assets/lumen/coinDetail-light.png', label: 'Coin Detail', sub: 'Deep dive' },
-  { src: '/assets/lumen/tradeAmount-dark.png', lightSrc: '/assets/lumen/tradeAmount-light.png', label: 'Trade', sub: 'Buy/sell flow' },
-  { src: '/assets/lumen/confirm-dark.png', lightSrc: '/assets/lumen/confirm-light.png', label: 'Confirm', sub: 'Review & confirm' },
+const LUMEN_ONBOARDING = [
+  { src: '/assets/lumen/splash-dark.png', lightSrc: '/assets/lumen/splash-light.png', label: 'Splash', sub: 'Launch screen' },
+  { src: '/assets/lumen/welcome-dark.png', lightSrc: '/assets/lumen/welcome-light.png', label: 'Welcome', sub: 'Onboarding intro' },
+  { src: '/assets/lumen/signup-dark.png', lightSrc: '/assets/lumen/signup-light.png', label: 'Sign Up', sub: 'Account creation' },
+  { src: '/assets/lumen/login-dark.png', lightSrc: '/assets/lumen/login-light.png', label: 'Login', sub: 'Secure entry' },
+  { src: '/assets/lumen/verifyIntro-dark.png', lightSrc: '/assets/lumen/verifyIntro-light.png', label: 'Verify Intro', sub: 'KYC start' },
+  { src: '/assets/lumen/verifyCapture-dark.png', lightSrc: '/assets/lumen/verifyCapture-light.png', label: 'Verify Capture', sub: 'ID capture' },
+  { src: '/assets/lumen/verifyStatus-dark.png', lightSrc: '/assets/lumen/verifyStatus-light.png', label: 'Verify Status', sub: 'Pending review' },
 ];
 
-const POCIAL_SCREENS = [
+const LUMEN_CORE = [
+  { src: '/assets/lumen/home-dark.png', lightSrc: '/assets/lumen/home-light.png', label: 'Home', sub: 'Portfolio overview' },
+  { src: '/assets/lumen/explore-dark.png', lightSrc: '/assets/lumen/explore-light.png', label: 'Explore', sub: 'Asset discovery' },
+  { src: '/assets/lumen/coinDetail-dark.png', lightSrc: '/assets/lumen/coinDetail-light.png', label: 'Coin Detail', sub: 'Deep dive' },
+  { src: '/assets/lumen/news-dark.png', lightSrc: '/assets/lumen/news-light.png', label: 'News', sub: 'Market updates' },
+  { src: '/assets/lumen/proAnalysis-dark.png', lightSrc: '/assets/lumen/proAnalysis-light.png', label: 'AI Analysis', sub: 'Pro market intelligence' },
+  { src: '/assets/lumen/askLumi-dark.png', lightSrc: '/assets/lumen/askLumi-light.png', label: 'Ask Lumi', sub: 'AI companion' },
+  { src: '/assets/lumen/profile-dark.png', lightSrc: '/assets/lumen/profile-light.png', label: 'Profile', sub: 'Account settings' },
+  { src: '/assets/lumen/card-dark.png', lightSrc: '/assets/lumen/card-light.png', label: 'Card', sub: 'Payment card' },
+];
+
+const LUMEN_TRADING = [
+  { src: '/assets/lumen/tradeCoin-dark.png', lightSrc: '/assets/lumen/tradeCoin-light.png', label: 'Trade Coin', sub: 'Asset selection' },
+  { src: '/assets/lumen/tradeAmount-dark.png', lightSrc: '/assets/lumen/tradeAmount-light.png', label: 'Trade Amount', sub: 'Buy/sell flow' },
+  { src: '/assets/lumen/feeBreakdown-dark.png', lightSrc: '/assets/lumen/feeBreakdown-light.png', label: 'Fee Breakdown', sub: 'Transparent costs' },
+  { src: '/assets/lumen/confirm-dark.png', lightSrc: '/assets/lumen/confirm-light.png', label: 'Confirm', sub: 'Review & confirm' },
+  { src: '/assets/lumen/success-dark.png', lightSrc: '/assets/lumen/success-light.png', label: 'Success', sub: 'Trade complete' },
+  { src: '/assets/lumen/recurring-dark.png', lightSrc: '/assets/lumen/recurring-light.png', label: 'Recurring', sub: 'Auto-invest' },
+  { src: '/assets/lumen/addMoney-dark.png', lightSrc: '/assets/lumen/addMoney-light.png', label: 'Add Money', sub: 'Fund wallet' },
+  { src: '/assets/lumen/withdrawLock-dark.png', lightSrc: '/assets/lumen/withdrawLock-light.png', label: 'Withdraw', sub: 'Withdraw funds' },
+];
+
+const POCIAL_DESKTOP = [
   { src: '/assets/pocial-home.png', label: 'Dashboard', sub: 'Content overview' },
   { src: '/assets/pocial-calendar.png', label: 'Calendar', sub: 'Scheduled posts' },
-  { src: '/assets/pocial-macbook.png', label: 'Macbook view', sub: 'Desktop experience' },
   { src: '/assets/po-composer.png', label: 'Composer', sub: 'AI content creation' },
   { src: '/assets/po-ai.png', label: 'AI Assist', sub: 'Smart suggestions' },
   { src: '/assets/po-campaign.png', label: 'Campaigns', sub: 'Campaign management' },
   { src: '/assets/po-performance.png', label: 'Analytics', sub: 'Performance metrics' },
   { src: '/assets/po-schedule.png', label: 'Schedule', sub: 'Optimal timing' },
+  { src: '/assets/po-engagement.png', label: 'Engagement', sub: 'Audience insights' },
+  { src: '/assets/po-ugc.png', label: 'UGC', sub: 'User-generated content' },
+  { src: '/assets/po-newsletter.png', label: 'Newsletter', sub: 'Email campaigns' },
+  { src: '/assets/po-segment.png', label: 'Segments', sub: 'Audience targeting' },
+  { src: '/assets/po-accounts.png', label: 'Accounts', sub: 'Connected channels' },
+  { src: '/assets/po-create.png', label: 'Create', sub: 'New post flow' },
+  { src: '/assets/po-login.png', label: 'Login', sub: 'Onboarding' },
+];
+
+const POCIAL_MOBILE = [
+  { src: '/assets/pocial-mob-ai-overview.png', label: 'AI Overview' },
+  { src: '/assets/pocial-mob-ai-vault.png', label: 'AI Vault' },
+  { src: '/assets/pocial-mob-post.png', label: 'Post creation' },
+  { src: '/assets/pocial-mob-ugc.png', label: 'UGC tools' },
 ];
 
 const EBINAA_WEB = [
@@ -34,17 +68,33 @@ const EBINAA_WEB = [
   { src: '/assets/ds-01-opportunities.png', label: 'Opportunities', sub: 'Active tenders' },
   { src: '/assets/ds-02-pending.png', label: 'Pending', sub: 'Bid management' },
   { src: '/assets/ds-03-pending-ar.png', label: 'Arabic view', sub: 'RTL layout' },
-  { src: '/assets/ds-04-awarded-card.png', label: 'Awarded', sub: 'Won contracts' },
+  { src: '/assets/ds-04-awarded-card.png', label: 'Awarded (Card)', sub: 'Won contracts' },
+  { src: '/assets/ds-05-awarded-list.png', label: 'Awarded (List)', sub: 'List view' },
+  { src: '/assets/ds-06-listed.png', label: 'Listed', sub: 'Published project' },
   { src: '/assets/ds-07-profile.png', label: 'Profile', sub: 'Contractor profile' },
+  { src: '/assets/ds-08-public-profile.png', label: 'Public Profile', sub: 'Visible to owners' },
+  { src: '/assets/ds-09-public-projects.png', label: 'Public Projects', sub: 'Portfolio display' },
+  { src: '/assets/ds-10-public-projects2.png', label: 'Projects Alt', sub: 'Secondary view' },
+  { src: '/assets/ds-11-employees.png', label: 'Employees', sub: 'Team management' },
+  { src: '/assets/ds-12-services.png', label: 'Services', sub: 'Service catalogue' },
+  { src: '/assets/ds-13-reviews.png', label: 'Reviews', sub: 'Ratings & feedback' },
 ];
 
 const EBINAA_APP = [
   { src: '/assets/app-01-home.png', label: 'Home', sub: 'Dashboard' },
   { src: '/assets/app-02-design.png', label: 'Design', sub: 'Project design' },
+  { src: '/assets/app-03-design.png', label: 'Design Detail', sub: 'Design specs' },
+  { src: '/assets/app-04-build.png', label: 'Build', sub: 'Construction phase' },
+  { src: '/assets/app-05-build.png', label: 'Build Detail', sub: 'Progress tracking' },
+  { src: '/assets/app-06-build.png', label: 'Build Alt', sub: 'Alternative view' },
   { src: '/assets/app-07-consultant.png', label: 'Consultant', sub: 'Expert view' },
   { src: '/assets/app-08-contractor.png', label: 'Contractor', sub: 'Contractor portal' },
+  { src: '/assets/app-09-contractor.png', label: 'Contractor Alt', sub: 'Secondary view' },
+  { src: '/assets/app-10-contract.png', label: 'Contract', sub: 'Agreement flow' },
   { src: '/assets/app-11-buy.png', label: 'Buy', sub: 'Property purchase' },
+  { src: '/assets/app-12-buy.png', label: 'Buy Detail', sub: 'Purchase detail' },
   { src: '/assets/app-13-property.png', label: 'Property', sub: 'Listing detail' },
+  { src: '/assets/app-14-profile.png', label: 'Profile', sub: 'User profile' },
   { src: '/assets/app-15-build-ar.png', label: 'Build (AR)', sub: 'Arabic interface' },
 ];
 
@@ -125,9 +175,9 @@ function LumenPage({ c }: { c: CaseStudy }) {
               <h2 className="csec__title rv">Full app walkthrough</h2>
               <p className="lmodebar__k" style={{ margin: '16px 0 24px' }}>Toggle between dark and light themes above</p>
 
-              <p className="lstripcap">Onboarding & Home</p>
+              <p className="lstripcap">Onboarding & Verification</p>
               <div className="lstrip">
-                {LUMEN_SCREENS.slice(0, 4).map((s) => (
+                {LUMEN_ONBOARDING.map((s) => (
                   <figure key={s.label} className="lshot">
                     <Image src={mode === 'dark' ? s.src : s.lightSrc} alt={s.label} width={228} height={492} />
                     <figcaption><b>{s.label}</b><br />{s.sub}</figcaption>
@@ -135,9 +185,19 @@ function LumenPage({ c }: { c: CaseStudy }) {
                 ))}
               </div>
 
-              <p className="lstripcap" style={{ marginTop: 40 }}>AI & Trading Flows</p>
+              <p className="lstripcap" style={{ marginTop: 40 }}>Core Experience</p>
               <div className="lstrip">
-                {LUMEN_SCREENS.slice(4).map((s) => (
+                {LUMEN_CORE.map((s) => (
+                  <figure key={s.label} className="lshot">
+                    <Image src={mode === 'dark' ? s.src : s.lightSrc} alt={s.label} width={228} height={492} />
+                    <figcaption><b>{s.label}</b><br />{s.sub}</figcaption>
+                  </figure>
+                ))}
+              </div>
+
+              <p className="lstripcap" style={{ marginTop: 40 }}>Trading & Transactions</p>
+              <div className="lstrip">
+                {LUMEN_TRADING.map((s) => (
                   <figure key={s.label} className="lshot">
                     <Image src={mode === 'dark' ? s.src : s.lightSrc} alt={s.label} width={228} height={492} />
                     <figcaption><b>{s.label}</b><br />{s.sub}</figcaption>
@@ -245,7 +305,7 @@ function PocialPage({ c }: { c: CaseStudy }) {
             <div>
               <h2 className="csec__title rv">Web platform</h2>
               <div className="cgal rv" style={{ transitionDelay: '0.1s', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))' }}>
-                {POCIAL_SCREENS.slice(0, 4).map((s) => (
+                {POCIAL_DESKTOP.map((s) => (
                   <figure key={s.label} className="cshot">
                     <Image src={s.src} alt={s.label} width={600} height={380} style={{ width: '100%', height: 'auto' }} />
                     <figcaption>{s.label} — {s.sub}</figcaption>
@@ -255,12 +315,7 @@ function PocialPage({ c }: { c: CaseStudy }) {
 
               <h2 className="csec__title rv" style={{ marginTop: 48, transitionDelay: '0.05s' }}>Mobile app</h2>
               <div className="cmob rv" style={{ transitionDelay: '0.1s' }}>
-                {[
-                  { src: '/assets/pocial-mob-ai-overview.png', label: 'AI Overview' },
-                  { src: '/assets/pocial-mob-ai-vault.png', label: 'AI Vault' },
-                  { src: '/assets/pocial-mob-post.png', label: 'Post creation' },
-                  { src: '/assets/pocial-mob-ugc.png', label: 'UGC tools' },
-                ].map((s) => (
+                {POCIAL_MOBILE.map((s) => (
                   <figure key={s.label} className="cphone">
                     <Image src={s.src} alt={s.label} width={200} height={432} style={{ width: '100%', height: 'auto', borderRadius: 18 }} />
                     <figcaption>{s.label}</figcaption>

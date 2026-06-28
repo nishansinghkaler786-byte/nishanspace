@@ -86,8 +86,8 @@ export default function Footer() {
         {/* Brand */}
         <div className="ft__logo">
           <Image src="/assets/wordmark-light.svg" alt="nishan.space" width={110} height={24} />
-          <p>Senior UX Designer helping teams turn complex enterprise systems into products people actually love.</p>
-          <span className="ft__copy">© 2026 Nishan Singh · Dubai, UAE</span>
+          <p>Currently leading UX at Mercer Talent Enterprise. Open to collaboration, consulting, and speaking.</p>
+          <span className="ft__copy">© 2026 nishanspace · Quality matters.</span>
         </div>
 
         {/* Link columns */}
@@ -95,25 +95,24 @@ export default function Footer() {
           <div className="ft__col">
             <h4>Explore</h4>
             <Link href="/#work">Work</Link>
-            <Link href="/#services">Services</Link>
-            <Link href="/#about">About</Link>
-            <Link href="/contact">Contact</Link>
-            <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
+            <Link href="/#approach">Approach</Link>
+            <Link href="/#reviews">Reviews</Link>
+            <a href="https://www.linkedin.com/in/nishansingh" target="_blank" rel="noopener noreferrer">UX Profile ↗</a>
           </div>
           <div className="ft__col">
             <h4>Social</h4>
-            <a href="https://linkedin.com/in/nishansingh" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            <a href="https://dribbble.com/nishanspace" target="_blank" rel="noopener noreferrer">Dribbble ↗</a>
-            <a href="https://behance.net/nishanspace" target="_blank" rel="noopener noreferrer">Behance ↗</a>
-            <a href="mailto:hello@nishan.space">hello@nishan.space</a>
+            <a href="https://dribbble.com/nishanspace" target="_blank" rel="noopener noreferrer">Dribbble</a>
+            <a href="https://behance.net/nishanspace" target="_blank" rel="noopener noreferrer">Behance</a>
+            <a href="https://linkedin.com/in/nishansingh" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
           <div className="ft__col">
             <h4>Status</h4>
-            <span style={{ fontSize: 14, color: 'var(--ink-soft)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 14, color: 'var(--ink-soft)' }}>Dubai, UAE (Remote)</span>
+            <span style={{ fontSize: 14, color: 'var(--ink-soft)', display: 'block', marginTop: 8 }}>GMT+4</span>
+            <span style={{ fontSize: 14, color: 'var(--ink-soft)', display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
               <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#3ddc84', boxShadow: '0 0 8px rgba(61,220,132,.55)', display: 'inline-block' }} />
-              Available Q3 2026
+              Available
             </span>
-            <a href="mailto:hello@nishan.space" style={{ marginTop: 6, display: 'block' }}>Start a conversation</a>
           </div>
         </div>
       </div>
