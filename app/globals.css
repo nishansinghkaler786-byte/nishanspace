@@ -595,12 +595,13 @@ button { cursor: pointer; }
 /* ============================================================
    CASE STUDY PAGES
    ============================================================ */
-.cback { padding: 120px var(--gutter) 0; font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-dim); max-width: 1180px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
+.cback { padding: clamp(130px,14vw,160px) var(--gutter) 0; font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-dim); max-width: 1180px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
 .cback a { display: inline-flex; align-items: center; gap: 8px; transition: color .3s, gap .3s var(--ease); }
 .cback a:hover { color: var(--ink); gap: 12px; }
 .cback b { color: var(--ink); font-weight: 500; }
 .cback .sep { color: var(--ink-faint); }
-.chero { padding: 40px 0 0; }
+.chero { padding-top: 40px; }
+.chero.cwrap { padding: 40px var(--gutter) 0; }
 .chero__ey { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 26px; font-family: var(--f-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-dim); }
 .chero__ey .dot { width: 6px; height: 6px; border-radius: 50%; background: #4a56f6; }
 .chero__ey .nm { color: var(--ink); font-weight: 500; }
