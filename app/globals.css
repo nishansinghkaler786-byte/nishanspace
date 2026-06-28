@@ -588,8 +588,9 @@ button { cursor: pointer; }
 .ft__giant { position: relative; margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); margin-top: clamp(44px,6vw,84px); overflow: hidden; }
 .ft__net { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 @media(max-width: 760px) { .ft__net { display: none; } }
-.ft__word { position: relative; z-index: 2; display: block; width: 100%; user-select: none; line-height: 0; }
-.ft__word img { display: block; width: 100%; height: auto; }
+.ft__word { position: relative; z-index: 2; display: block; width: 100%; user-select: none; }
+.ft__word svg { display: block; width: 100%; height: auto; }
+.ft__word image { filter: grayscale(1) brightness(.5) sepia(.35); opacity: .92; }
 
 /* ============================================================
    CASE STUDY PAGES

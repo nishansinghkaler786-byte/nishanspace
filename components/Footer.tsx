@@ -129,7 +129,7 @@ export default function Footer() {
                 <stop offset="1" stopColor="#403b32" />
               </linearGradient>
             </defs>
-            <image href="/assets/icon.svg" x="6" y="34" width="160" height="160" />
+            <image href="/assets/icon.svg" x="6" y="34" width="160" height="160" style={{ filter: 'grayscale(1) brightness(.5) sepia(.35)', opacity: 0.92 }} />
             <text x="196" y="172" fontFamily="Geist, sans-serif" fontWeight="600" fontSize="210" letterSpacing="-6" fill="url(#ftg)">nishanspace</text>
           </svg>
         </div>
