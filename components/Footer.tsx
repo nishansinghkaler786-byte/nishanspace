@@ -124,12 +124,12 @@ export default function Footer() {
           <div
             role="img"
             aria-label="nishanspace"
-            style={{ display: 'flex', alignItems: 'center', gap: '2%', width: '100%', opacity: 0.5 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '1.5%', width: '80%', opacity: 0.3 }}
           >
             {/* NS icon — portrait SVG, sized to match text height */}
             <div style={{
               flexShrink: 0,
-              width: '13%',
+              width: '10%',
               aspectRatio: '856.73 / 1080.73',
               background: 'linear-gradient(to bottom, #9a9384 0%, #403b32 100%)',
               WebkitMaskImage: 'url(/assets/icon.svg)',
