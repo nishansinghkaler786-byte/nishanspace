@@ -14,7 +14,24 @@
       "Bash(npm run *)",
       "Bash(mkdir -p \"/Users/nishanm1/Library/CloudStorage/GoogleDrive-nishansinghkaler786@gmail.com/My Drive/TTE Shared Drive 2024/Nishan Space Website/.claude\")",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(unzip -o \"/Users/nishanm1/Downloads/Nishan Space.zip\" -d nishan-space-upload)",
+      "Bash(npx next *)",
+      "Bash(python3 -c ' *)",
+      "Bash(rm -f components/Cursor.tsx components/MockupSVGs.tsx components/ProjectPreview.tsx components/ProjectRow.tsx components/SectionHeader.tsx components/SmoothScroll.tsx components/ThemeToggle.tsx components/WordmarkBand.tsx)",
+      "Bash(rm -rf components/providers)",
+      "Bash(rm -f lib/cursor-store.ts lib/gsap.ts lib/theme-store.ts)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx vercel *)",
+      "Read(//Users/nishanm1/.local/share/com.vercel.cli/**)",
+      "Read(//Users/nishanm1/.vercel/**)",
+      "Read(//Users/nishanm1/.config/vercel/**)",
+      "Bash(find ~ -name \"auth.json\" -path \"*/vercel*\" 2>/dev/null | head -5)",
+      "Bash(npx vercel@latest --version)",
+      "Bash(node -e \"const os=require\\('os'\\); console.log\\(os.homedir\\(\\)\\)\")",
+      "Bash(gh auth *)",
+      "Bash(git --version)",
+      "Bash(ssh -T git@github.com)"
     ]
   }
 }
