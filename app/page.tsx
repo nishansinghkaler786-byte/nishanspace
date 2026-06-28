@@ -74,6 +74,22 @@ const COVERS: Record<string, string> = {
   ebinaa: '/assets/ds-00-homepage.png',
 };
 
+/* ─── Arrow icons ──────────────────────────────────── */
+function Arr() {
+  return (
+    <svg width="13" height="11" viewBox="0 0 13 11" fill="none" aria-hidden="true" style={{ display: 'inline-block', flexShrink: 0 }}>
+      <path d="M1 5.5H12M12 5.5L7.5 1M12 5.5L7.5 10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function ArrDiag() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" style={{ display: 'inline-block', flexShrink: 0 }}>
+      <path d="M1 10L10 1M10 1H3.5M10 1V7.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 /* ─── Lo layout component ──────────────────────────── */
 function Lo({ cls }: { cls: string }) {
   return (
@@ -572,10 +588,10 @@ export default function HomePage() {
 
         <div className="hero__act rv" style={{ transitionDelay: '0.3s' }}>
           <Link href="/contact" className="pill">
-            Build together <span className="a">→</span>
+            Build together <span className="a"><Arr /></span>
           </Link>
           <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer" className="pill pill--ghost">
-            My UX talent profile <span className="a">↗</span>
+            My UX talent profile <span className="a"><ArrDiag /></span>
           </a>
         </div>
 
@@ -696,30 +712,63 @@ export default function HomePage() {
           </p>
 
           <div className="cs rv-s" style={{ marginTop: 54, transitionDelay: '0.15s' }}>
-            {cases.map((c) => (
+            {[
+              {
+                slug: 'lumen',
+                barText: 'lumen · ios & android',
+                number: '001',
+                tag: 'Consumer Crypto · iOS & Android',
+                title: 'Lumen — AI-guided crypto',
+                desc: 'Calm crypto app for first-timers · light & dark · AI guide',
+                img: '/assets/lumen/home-dark.png',
+                alt: 'Lumen — AI-guided crypto',
+              },
+              {
+                slug: 'pocial',
+                barText: 'pocial.com',
+                number: '002',
+                tag: 'SaaS / MarTech',
+                title: 'Pocial — AI Marketing',
+                desc: 'AI marketing-automation platform · 20+ tools in four hubs',
+                img: '/assets/pocial-home.png',
+                alt: 'Pocial — AI Marketing',
+              },
+              {
+                slug: 'ebinaa',
+                barText: 'ebinaa.info',
+                number: '003',
+                tag: 'Construction-tech',
+                title: 'eBinaa',
+                desc: 'Contractor portal · Oman · bilingual RTL',
+                img: '/assets/ds-01-opportunities.png',
+                alt: 'eBinaa — Contractor Portal',
+              },
+            ].map((c) => (
               <Link key={c.slug} href={`/case-studies/${c.slug}`} className="cs__card">
-                <div className="cs__bar">
-                  <span /><span /><span />
-                  <i>nishan.space/work/{c.slug}</i>
-                </div>
-                <div className="cs__view">
-                  <Image
-                    src={COVERS[c.slug] || c.coverImage}
-                    alt={c.coverAlt}
-                    fill
-                    className="cs__shot"
-                    style={{ objectFit: 'cover', objectPosition: 'top' }}
-                  />
+                <div className="cs__win">
+                  <div className="cs__bar">
+                    <span /><span /><span />
+                    <i>{c.barText}</i>
+                  </div>
+                  <div className="cs__view">
+                    <Image
+                      src={c.img}
+                      alt={c.alt}
+                      fill
+                      className="cs__shot"
+                      style={{ objectFit: 'cover', objectPosition: 'top' }}
+                    />
+                  </div>
                 </div>
                 <div className="cs__body">
                   <div className="cs__top">
                     <span className="cs__num">{c.number}</span>
-                    <span className="cs__tag">{c.tagline.split(' · ')[0]}</span>
+                    <span className="cs__tag">{c.tag}</span>
                   </div>
                   <h3 className="cs__h">{c.title}</h3>
-                  <p className="cs__d">{c.tagline}</p>
+                  <p className="cs__d">{c.desc}</p>
                   <span className="cs__link">
-                    View case study <span className="cs__arr">↗</span>
+                    View case study <span className="cs__arr"><ArrDiag /></span>
                   </span>
                 </div>
               </Link>
@@ -887,10 +936,10 @@ export default function HomePage() {
         </h2>
         <div className="cta__act rv" style={{ transitionDelay: '0.15s' }}>
           <Link href="/contact" className="pill">
-            Build together <span className="a">→</span>
+            Build together <span className="a"><Arr /></span>
           </Link>
           <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer" className="pill pill--ghost">
-            My UX talent profile <span className="a">↗</span>
+            My UX talent profile <span className="a"><ArrDiag /></span>
           </a>
         </div>
       </section>

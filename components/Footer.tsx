@@ -97,12 +97,11 @@ export default function Footer() {
             <Link href="/#work">Work</Link>
             <Link href="/#approach">Approach</Link>
             <Link href="/#reviews">Reviews</Link>
-            <a href="https://www.linkedin.com/in/ux-specialist-nishan/" target="_blank" rel="noopener noreferrer">UX Profile ↗</a>
+            <a href="https://www.linkedin.com/in/ux-specialist-nishan/" target="_blank" rel="noopener noreferrer">UX Profile <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true" style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: 2 }}><path d="M1 10L10 1M10 1H3.5M10 1V7.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
           </div>
           <div className="ft__col">
             <h4>Social</h4>
             <a href="https://dribbble.com/nishan_UX_Design" target="_blank" rel="noopener noreferrer">Dribbble</a>
-            <a href="https://www.behance.net/nishansing21ef" target="_blank" rel="noopener noreferrer">Behance</a>
             <a href="https://www.linkedin.com/in/ux-specialist-nishan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://www.instagram.com/nishanspace.coom?igsh=MWI1eWx5c29iZXdtcQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
@@ -122,16 +121,41 @@ export default function Footer() {
       <div className="ft__giant">
         <FooterCanvas />
         <div className="ft__word">
-          <svg viewBox="0 0 1180 230" preserveAspectRatio="xMidYMid meet" role="img" aria-label="nishanspace" style={{ width: '100%', height: 'auto' }}>
-            <defs>
-              <linearGradient id="ftg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="#9a9384" />
-                <stop offset="1" stopColor="#403b32" />
-              </linearGradient>
-            </defs>
-            <image href="/assets/icon.svg" x="6" y="34" width="160" height="160" style={{ filter: 'grayscale(1) brightness(.5) sepia(.35)', opacity: 0.92 }} />
-            <text x="196" y="172" fontFamily="Geist, sans-serif" fontWeight="600" fontSize="210" letterSpacing="-6" fill="url(#ftg)">nishanspace</text>
-          </svg>
+          <div
+            role="img"
+            aria-label="nishanspace"
+            style={{ display: 'flex', alignItems: 'center', gap: '2%', width: '100%', opacity: 0.5 }}
+          >
+            {/* NS icon — portrait SVG, sized to match text height */}
+            <div style={{
+              flexShrink: 0,
+              width: '13%',
+              aspectRatio: '856.73 / 1080.73',
+              background: 'linear-gradient(to bottom, #9a9384 0%, #403b32 100%)',
+              WebkitMaskImage: 'url(/assets/icon.svg)',
+              maskImage: 'url(/assets/icon.svg)',
+              WebkitMaskSize: '100% 100%',
+              maskSize: '100% 100%',
+              WebkitMaskRepeat: 'no-repeat',
+              maskRepeat: 'no-repeat',
+              WebkitMaskMode: 'alpha',
+              maskMode: 'alpha',
+            }} />
+            {/* nishanspace text — separate text-only SVG, actual vector paths */}
+            <div style={{
+              flex: 1,
+              aspectRatio: '839.66 / 149.28',
+              background: 'linear-gradient(to bottom, #9a9384 0%, #403b32 100%)',
+              WebkitMaskImage: 'url(/assets/nishanspace-text.svg)',
+              maskImage: 'url(/assets/nishanspace-text.svg)',
+              WebkitMaskSize: '100% 100%',
+              maskSize: '100% 100%',
+              WebkitMaskRepeat: 'no-repeat',
+              maskRepeat: 'no-repeat',
+              WebkitMaskMode: 'alpha',
+              maskMode: 'alpha',
+            }} />
+          </div>
         </div>
       </div>
     </footer>

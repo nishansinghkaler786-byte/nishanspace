@@ -55,7 +55,6 @@ export default function Nav() {
           <Link href="/#work">Work</Link>
           <Link href="/#approach">Approach</Link>
           <Link href="/#reviews">Reviews</Link>
-          <Link href="/contact">Contact</Link>
         </div>
 
         <div className="nv__right">
