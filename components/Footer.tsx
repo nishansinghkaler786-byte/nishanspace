@@ -124,7 +124,7 @@ export default function Footer() {
           <div
             role="img"
             aria-label="nishanspace"
-            style={{ display: 'flex', alignItems: 'center', gap: '1.5%', width: '80%', opacity: 0.3 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '1.5%', width: '100%', maxWidth: 'var(--maxw)', margin: '0 auto', padding: '0 var(--gutter)', opacity: 0.3 }}
           >
             {/* NS icon — portrait SVG, sized to match text height */}
             <div style={{
