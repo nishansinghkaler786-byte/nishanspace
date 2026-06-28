@@ -53,8 +53,8 @@ export default function Nav() {
 
         <div className="nv__links">
           <Link href="/#work">Work</Link>
-          <Link href="/#services">Services</Link>
-          <Link href="/#about">About</Link>
+          <Link href="/#approach">Approach</Link>
+          <Link href="/#reviews">Reviews</Link>
           <Link href="/contact">Contact</Link>
         </div>
 
@@ -74,8 +74,8 @@ export default function Nav() {
           <div className="nv__mobile open">
             {[
               { href: '/#work', n: '01', label: 'Work' },
-              { href: '/#services', n: '02', label: 'Services' },
-              { href: '/#about', n: '03', label: 'About' },
+              { href: '/#approach', n: '02', label: 'Approach' },
+              { href: '/#reviews', n: '03', label: 'Reviews' },
               { href: '/contact', n: '04', label: 'Contact' },
             ].map(({ href, n, label }) => (
               <Link key={href} href={href} onClick={() => setMobileOpen(false)}>

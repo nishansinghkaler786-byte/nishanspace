@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-const BUDGETS = ['< $5K', '$5K–15K', '$15K–40K', '$40K–100K', '$100K+', "Let's talk"];
-const PROJECT_TYPES = ['UX Strategy & Consulting', 'End-to-end Product Design', 'Design System', 'UX Audit & Research', 'Workshop / Speaking', 'Other'];
+const BUDGETS = ['< $10k', '$10k — $30k', '$30k — $75k', '$75k+', 'Not sure yet'];
+const PROJECT_TYPES = ['New product (0 → 1)', 'Redesign of an existing product', 'Design system / UI architecture', 'UX research & testing', 'Fractional / ongoing design', 'Something else'];
 
 export default function ContactPage() {
   const [budgets, setBudgets] = useState<string[]>([]);
@@ -40,18 +40,22 @@ export default function ContactPage() {
           Let&apos;s build something <span className="ax">worth using.</span>
         </h1>
 
+        <p className="hero__sub rv" style={{ transitionDelay: '0.12s', fontSize: 'clamp(15px,1.4vw,18px)', maxWidth: 460 }}>
+          Tell me a little about your product and the problem you&apos;re trying to solve. I read every message personally and reply within two business days.
+        </p>
+
         <ul className="intro__list rv" style={{ transitionDelay: '0.15s' }}>
           <li>
             <span className="ic">✓</span>
-            <span>I reply within 24 hours — usually same day.</span>
+            <span>I read every message personally — no bots, no agencies.</span>
           </li>
           <li>
             <span className="ic">✓</span>
-            <span>Every engagement starts with a discovery call, no cost, no commitment.</span>
+            <span>You&apos;ll hear back within two business days.</span>
           </li>
           <li>
             <span className="ic">✓</span>
-            <span>If I&apos;m not the right fit, I&apos;ll tell you honestly and point you somewhere better.</span>
+            <span>No pitch, no obligation. Just a real conversation.</span>
           </li>
         </ul>
 
@@ -66,7 +70,7 @@ export default function ContactPage() {
 
           <div className="aside__block">
             <p className="aside__h">Availability</p>
-            <span className="aside__avail">Open to new projects — Q3 2026</span>
+            <span className="aside__avail">— Available · 2026</span>
           </div>
 
           <div className="aside__block">
@@ -93,8 +97,8 @@ export default function ContactPage() {
                 </svg>
               </div>
             </div>
-            <h2 className="success__title">Message sent!</h2>
-            <p className="success__body">Thanks for reaching out. I&apos;ll be in touch within 24 hours — usually sooner.</p>
+            <h2 className="success__title">Inquiry sent.</h2>
+            <p className="success__body">Thank you — your message just landed in my inbox. Sit tight; I&apos;ll personally read it and get back to you within two business days.</p>
             <Link href="/" className="success__home">← Back to work</Link>
           </div>
         ) : (
@@ -156,14 +160,14 @@ export default function ContactPage() {
               <div className={`upload${fileName ? ' is-drag' : ''}`}>
                 <input
                   type="file"
-                  accept=".pdf,.doc,.docx,.ppt,.pptx,.key,.zip,.fig"
+                  accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg,.fig"
                   onChange={(e) => setFileName(e.target.files?.[0]?.name || '')}
                 />
                 <div className="upload__icon">↑</div>
                 <p className="upload__text">
                   <b>Click to upload</b> or drag and drop
                 </p>
-                <p className="upload__hint">PDF, DOC, PPT, Figma, ZIP — max 20MB</p>
+                <p className="upload__hint">PDF, DOC, PPT, FIG or image · up to 25MB</p>
                 {fileName && (
                   <div className="upload__file show">
                     ✓ {fileName}
@@ -173,9 +177,9 @@ export default function ContactPage() {
             </div>
 
             <button type="submit" className="submit submit--full">
-              Send message <span className="a">→</span>
+              Let&apos;s build something great <span className="a">→</span>
             </button>
-            <p className="form__note">No spam, no sales pitch. Just a conversation.</p>
+            <p className="form__note">By sending, you agree to be contacted about your inquiry. No spam, ever.</p>
           </form>
         )}
       </div>

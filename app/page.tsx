@@ -8,53 +8,53 @@ import { cases } from '@/lib/cases';
 /* ─── AI session steps ─────────────────────────────── */
 const AI_STEPS = [
   'Capture requirements',
-  'Interview users',
-  'Wireframe',
-  'Design',
-  'Prototype',
-  'Test',
+  'Interview real users',
+  'Wireframe the flows',
+  'Design the system',
+  'Prototype the flow',
+  'Test with users',
   'Ship & hand off',
 ];
 
 /* ─── Reviews data ─────────────────────────────────── */
 const REVIEWS = [
   {
-    q: `"Nishan has an exceptional ability to distill complex enterprise workflows into interfaces that feel obvious. He changed how we think about product quality."`,
+    q: `"Who works with Nishan does not obtain only a good UX expert, but a really good partner for elevated results."`,
     name: 'Sabby Singh',
-    role: 'CEO, Mercer Talent Enterprise',
+    role: 'Enterprise Web3 solutions',
   },
   {
-    q: `"Working with Nishan was one of the most productive design collaborations I've had. He brings both rigour and taste to every decision."`,
+    q: `"With very little direction other than showing a few examples and what I liked, Nishan turned those into an actual product."`,
     name: 'Patrick Spielmann',
-    role: 'Principal PM, Microsoft',
+    role: 'Founder, LeadMagic.io',
   },
   {
-    q: `"Nishan pioneered blockchain UX at Antier before anyone had a playbook. The patterns he created are still industry references."`,
+    q: `"The level of detail he puts in his work is astonishing and his work stands out from the rest of the team. A passionate, positive, humble, hard-working team player."`,
     name: 'Harpreet Singh Sidhu',
-    role: 'Co-founder, Antier Solutions',
+    role: 'Product Designer · Microsoft',
   },
   {
-    q: `"He doesn't just design screens — he designs outcomes. Every recommendation came with a clear rationale tied to business or user impact."`,
+    q: `"He delivers peace of mind to clients and supervisors alike. Over the years and through a wide range of projects, Nishan has met every challenge face on."`,
     name: 'Gunjit Singh',
-    role: 'Senior Director, Mercer Talent Enterprise',
+    role: 'Business Analyst & PM',
   },
   {
-    q: `"Nishan's design systems work is some of the best I've seen in enterprise. The Lighthouse system scaled to 500+ clients without breaking a sweat."`,
+    q: `"Every time you can find some new and some creativity in his work — this is what makes him different from others."`,
     name: 'Swati Rana',
-    role: 'Team Lead Designer, Mercer Talent Enterprise',
+    role: 'Immersive tech · AR/VR/XR',
   },
   {
-    q: `"I've seen a lot of designers over the years — Nishan is one of the rare ones who makes every meeting, every review, and every critique better."`,
+    q: `"Expert in creating stunning UI designs. Very good at giving suggestions to improve the user experience of any project."`,
     name: 'Tarandeep Singh',
-    role: 'Co-founder, Antier Solutions',
+    role: 'Ex-Nagarro · Same team',
   },
 ];
 
 /* ─── Stats ────────────────────────────────────────── */
 const STATS = [
-  { n: 13, suffix: '+', label: 'Years designing enterprise software at scale' },
-  { n: 500, suffix: '+', label: 'Global organisations served across industries' },
-  { n: 100, suffix: 'K+', label: `Daily active users on products I've designed` },
+  { n: 13, suffix: '+', label: 'Years designing enterprise software' },
+  { n: 500, suffix: '+', label: 'Global organizations served across 50+ countries' },
+  { n: 100, suffix: 'K+', label: `Daily active users across platforms I've shaped` },
 ];
 
 /* ─── Case study cover images ──────────────────────── */
@@ -106,7 +106,7 @@ function AiWidget() {
         <div className="agent__bar">
           <div className="agent__dots"><i /><i /><i /></div>
           <span className="agent__title">
-            <span className="n">nishan</span>.space — AI Design Session
+            <span className="n">nishan</span> space — design session
           </span>
           <span className="agent__live">
             <span className="d" /> Active
@@ -116,8 +116,8 @@ function AiWidget() {
           {/* Left: steps */}
           <div className="agent__chat">
             <div className="agent__prompt">
-              <span className="who">You</span>
-              We need a new enterprise dashboard — complex data, 10+ user roles, 3-month timeline.
+              <span className="who">— The brief</span>
+              Take our tangled internal dashboard and make it something the whole team actually wants to open.
             </div>
             <div className="agent__steps">
               {AI_STEPS.map((step, i) => (
@@ -340,9 +340,12 @@ function ReviewsCarousel() {
   const doubled = [...REVIEWS, ...REVIEWS];
 
   return (
-    <section className="rev">
+    <section className="rev" id="reviews">
       <div className="inner rv" style={{ marginBottom: 32 }}>
         <span className="ey">What collaborators say</span>
+        <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
+          Six perspectives, thirteen years.
+        </h2>
       </div>
       <div className="rev__wrap">
         <div ref={scrollRef} className="rev__scroll">
@@ -388,7 +391,7 @@ export default function HomePage() {
         </h1>
 
         <p className="hero__sub rv" style={{ transitionDelay: '0.2s' }}>
-          Your imagination, my solution. I help teams turn complex enterprise systems — psychometric platforms, clinical EMRs, crypto apps — into products people actually love.
+          Your imagination, my solution. I help teams turn complex enterprise systems — psychometric assessments, healthcare EMRs, blockchain platforms — into software users actually want to use.
         </p>
 
         <div className="hero__act rv" style={{ transitionDelay: '0.3s' }}>
@@ -414,11 +417,8 @@ export default function HomePage() {
             <span className="ln" />
           </div>
           <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
-            What I do
+            How I can help.
           </h2>
-          <p className="sec__lead rv" style={{ transitionDelay: '0.2s' }}>
-            From strategy to pixels — I cover the full design lifecycle for complex enterprise products.
-          </p>
 
           <div className="svc rv-s" style={{ transitionDelay: '0.1s' }}>
             {/* Card 1 — UX Consulting */}
@@ -432,9 +432,9 @@ export default function HomePage() {
                 </svg>
               </div>
               <div className="svc__in">
-                <p className="svc__n">01 — Consulting</p>
-                <h3 className="svc__h">UX Strategy & Consulting</h3>
-                <p className="svc__b"><b>Embedded or advisory.</b> I join your team to audit what's broken, define what "good" looks like, and build the roadmap to get there.</p>
+                <p className="svc__n">— 01</p>
+                <h3 className="svc__h">Enterprise UX consulting</h3>
+                <p className="svc__b">I join your team to redesign a product, build a design system, or unblock a stalled redesign. Best for: enterprise companies with one product, real users, and UX debt slowing them down.</p>
               </div>
             </div>
 
@@ -451,9 +451,9 @@ export default function HomePage() {
                 </svg>
               </div>
               <div className="svc__in">
-                <p className="svc__n">02 — Systems</p>
-                <h3 className="svc__h">Design Systems</h3>
-                <p className="svc__b"><b>Token-based, scalable.</b> I build component libraries and design systems that let your team ship faster without breaking things.</p>
+                <p className="svc__n">— 02</p>
+                <h3 className="svc__h">Design system architecture</h3>
+                <p className="svc__b">White-label, multi-tenant, scalable. The kind of system that cuts client implementation from a drawn-out build to a fraction of the effort — proven across 500+ organizations.</p>
               </div>
             </div>
 
@@ -472,9 +472,9 @@ export default function HomePage() {
                 </svg>
               </div>
               <div className="svc__in">
-                <p className="svc__n">03 — Audit</p>
-                <h3 className="svc__h">UX Audit & Research</h3>
-                <p className="svc__b"><b>Evidence, not opinions.</b> I surface the real friction in your product through heuristic evaluation, usability testing, and analytics review.</p>
+                <p className="svc__n">— 03</p>
+                <h3 className="svc__h">UX audit & strategy</h3>
+                <p className="svc__b">A deep dive into your current product. Concrete findings, prioritized roadmap, decisions you can act on. Best when you have a product live and need to know what to fix first.</p>
               </div>
             </div>
 
@@ -493,9 +493,9 @@ export default function HomePage() {
                 </svg>
               </div>
               <div className="svc__in">
-                <p className="svc__n">04 — Speaking</p>
-                <h3 className="svc__h">Workshops & Speaking</h3>
-                <p className="svc__b"><b>Transferable insights.</b> Design-thinking workshops, conference talks, and in-house training on enterprise UX craft.</p>
+                <p className="svc__n">— 04</p>
+                <h3 className="svc__h">Speaking & workshops</h3>
+                <p className="svc__b">Enterprise UX, designing for high-stakes domains (healthcare, finance, talent), building design systems that scale. Conferences, internal team workshops, design-org coaching.</p>
               </div>
             </div>
           </div>
@@ -510,7 +510,7 @@ export default function HomePage() {
             <span className="ln" />
           </div>
           <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
-            Selected case studies
+            Selected case studies.
           </h2>
 
           <div className="cs rv-s" style={{ marginTop: 54, transitionDelay: '0.15s' }}>
@@ -547,24 +547,27 @@ export default function HomePage() {
       </section>
 
       {/* ── APPROACH ──────────────────────────────────── */}
-      <section className="sec" id="about">
+      <section className="sec" id="approach">
         <div className="inner">
           <div className="sec__eyrow rv">
             <span className="ey">Approach</span>
             <span className="ln" />
           </div>
           <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
-            How I work
+            My approach.
           </h2>
+          <p className="sec__lead rv" style={{ transitionDelay: '0.15s' }}>
+            The principles behind every product I&apos;ve shipped.
+          </p>
 
           {/* Research */}
           <div className="feat rv">
             <div className="feat__txt">
-              <p className="feat__n">01 — Discovery</p>
-              <h3 className="feat__h">Research before pixels</h3>
-              <p className="feat__b">I don't open Figma until I understand the problem. That means interviews, context mapping, journey analysis, and competitive teardowns — the work that makes every pixel purposeful.</p>
+              <p className="feat__n">01 — Research</p>
+              <h3 className="feat__h">Start with real users.</h3>
+              <p className="feat__b">I watch people use the product before I touch a pixel. Their constraints shape the design — not my assumptions.</p>
               <div className="feat__tags">
-                {['User interviews','Contextual inquiry','Journey mapping','Heuristic analysis'].map((t) => <span key={t}>{t}</span>)}
+                {['Interviews','Journey mapping','Synthesis'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
             <div className="feat__media">
@@ -593,11 +596,11 @@ export default function HomePage() {
           {/* Wireframing */}
           <div className="feat rv" style={{ transitionDelay: '0.1s' }}>
             <div className="feat__txt">
-              <p className="feat__n">02 — Structure</p>
-              <h3 className="feat__h">Wireframes that think</h3>
-              <p className="feat__b">Lo-fi wireframes are where architecture decisions get made. I move fast here — a day of wireframing beats a week of high-fidelity revision cycles every time.</p>
+              <p className="feat__n">02 — Wireframing</p>
+              <h3 className="feat__h">Cut the complexity.</h3>
+              <p className="feat__b">If it needs a manual, I haven&apos;t finished. The best interfaces feel obvious the first time you see them.</p>
               <div className="feat__tags">
-                {['Information architecture','Lo-fi wireframes','Flow diagrams','Content mapping'].map((t) => <span key={t}>{t}</span>)}
+                {['Flows','Low-fi','IA'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
             <div className="feat__media">
@@ -625,10 +628,10 @@ export default function HomePage() {
           <div className="feat rv" style={{ transitionDelay: '0.1s' }}>
             <div className="feat__txt">
               <p className="feat__n">03 — Visual Design</p>
-              <h3 className="feat__h">Craft that earns trust</h3>
-              <p className="feat__b">High-fidelity UI built on token-based design systems. Every spacing value, colour decision, and type choice is intentional — and documented so your team can extend it.</p>
+              <h3 className="feat__h">Design to scale.</h3>
+              <p className="feat__b">Systems, not screens. Every decision has to hold up across products, platforms, and the next hundred edge cases.</p>
               <div className="feat__tags">
-                {['Design systems','Component libraries','Token architecture','Accessibility'].map((t) => <span key={t}>{t}</span>)}
+                {['Design systems','Components','Tokens'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
             <div className="feat__media">
@@ -655,10 +658,10 @@ export default function HomePage() {
           <div className="feat rv" style={{ transitionDelay: '0.1s' }}>
             <div className="feat__txt">
               <p className="feat__n">04 — Prototyping</p>
-              <h3 className="feat__h">Prototypes that prove it</h3>
-              <p className="feat__b">From clickable Figma flows to coded prototypes — I build what's needed to test the hypothesis and get alignment from engineers, stakeholders, and users alike.</p>
+              <h3 className="feat__h">Prove it worked.</h3>
+              <p className="feat__b">Completion rates, time-on-task, support load, revenue. I ship outcomes I can measure — not opinions.</p>
               <div className="feat__tags">
-                {['Interactive prototypes','Usability testing','Stakeholder reviews','Handoff specs'].map((t) => <span key={t}>{t}</span>)}
+                {['Prototypes','Usability testing','Metrics'].map((t) => <span key={t}>{t}</span>)}
               </div>
             </div>
             <div className="feat__media">
