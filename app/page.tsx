@@ -761,7 +761,7 @@ export default function HomePage() {
                   <rect x="54" y="70" width="100" height="14" fill="rgba(245,243,239,.28)"/><rect x="54" y="94" width="70" height="9" fill="rgba(245,243,239,.16)"/><rect x="54" y="112" width="120" height="9" fill="rgba(245,243,239,.12)"/><rect x="54" y="150" width="62" height="34" fill="rgba(74,86,246,.25)"/>
                   <circle className="rjheat" cx="86" cy="166" r="22" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjheat" cx="142" cy="108" r="16" style={{'--d':'.7s'} as React.CSSProperties}/>
                   <circle cx="72" cy="266" r="16" fill="#0f0e0c" stroke="rgba(245,243,239,.3)"/><circle cx="72" cy="260" r="6" fill="rgba(245,243,239,.5)"/><path d="M60 274 q12 -13 24 0" fill="rgba(245,243,239,.3)"/>
-                  <circle cx="302" cy="78" r="22" fill="#0f0e0c" stroke="rgba(245,243,239,.2)"/><circle cx="302" cy="78" r="10" fill="#4a56f6" opacity=".7"/>
+                  <circle cx="302" cy="78" r="22" fill="#0f0e0c" stroke="rgba(245,243,239,.2)"/><image href="/assets/icon.svg" x="286" y="62" width="32" height="32"/>
                   <line x1="282" y1="92" x2="160" y2="150" strokeDasharray="3 5"/>
                   <line className="rjwire" x1="296" y1="98" x2="244" y2="140"/><line className="rjwire" x1="244" y1="140" x2="244" y2="241"/>
                   <circle className="rjax rjblink" cx="244" cy="149" r="3.6" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjax rjblink" cx="244" cy="195" r="3.6" style={{'--d':'.35s'} as React.CSSProperties}/><circle className="rjax rjblink" cx="244" cy="241" r="3.6" style={{'--d':'.7s'} as React.CSSProperties}/>
