@@ -122,14 +122,16 @@ export default function Footer() {
       <div className="ft__giant">
         <FooterCanvas />
         <div className="ft__word">
-          <Image
-            src="/assets/wordmark-cream.svg"
-            alt=""
-            width={1340}
-            height={160}
-            style={{ width: '100%', height: 'auto', opacity: 0.65 }}
-            aria-hidden="true"
-          />
+          <svg viewBox="0 0 1180 230" preserveAspectRatio="xMidYMid meet" role="img" aria-label="nishanspace" style={{ width: '100%', height: 'auto' }}>
+            <defs>
+              <linearGradient id="ftg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stopColor="#9a9384" />
+                <stop offset="1" stopColor="#403b32" />
+              </linearGradient>
+            </defs>
+            <image href="/assets/icon.svg" x="6" y="34" width="160" height="160" />
+            <text x="196" y="172" fontFamily="Geist, sans-serif" fontWeight="600" fontSize="210" letterSpacing="-6" fill="url(#ftg)">nishanspace</text>
+          </svg>
         </div>
       </div>
     </footer>
