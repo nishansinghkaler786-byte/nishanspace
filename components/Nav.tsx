@@ -59,7 +59,7 @@ export default function Nav() {
         </div>
 
         <div className="nv__right">
-          <Link href="/contact" className="nv__cta">Let&apos;s build →</Link>
+          <Link href="/contact" className="nv__cta">Let&apos;s build</Link>
           <button
             className={`nv__burger${mobileOpen ? ' open' : ''}`}
             aria-label="Toggle menu"

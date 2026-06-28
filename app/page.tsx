@@ -719,7 +719,7 @@ export default function HomePage() {
                   <h3 className="cs__h">{c.title}</h3>
                   <p className="cs__d">{c.tagline}</p>
                   <span className="cs__link">
-                    View case study <span className="cs__arr">→</span>
+                    View case study <span className="cs__arr">↗</span>
                   </span>
                 </div>
               </Link>
@@ -887,10 +887,10 @@ export default function HomePage() {
         </h2>
         <div className="cta__act rv" style={{ transitionDelay: '0.15s' }}>
           <Link href="/contact" className="pill">
-            Start a conversation <span className="a">→</span>
+            Build together <span className="a">→</span>
           </Link>
-          <a href="mailto:hello@nishan.space" className="pill pill--ghost">
-            hello@nishan.space
+          <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer" className="pill pill--ghost">
+            My UX talent profile <span className="a">↗</span>
           </a>
         </div>
       </section>
