@@ -118,15 +118,6 @@ function LumenPage({ c }: { c: CaseStudy }) {
           </figure>
         </div>
 
-        {/* Mode toggle */}
-        <div className="lmodebar" style={{ marginTop: 32 }}>
-          <span className="lmodebar__k">Appearance</span>
-          <div className="lmode">
-            <button className={mode === 'dark' ? 'on' : ''} onClick={() => setMode('dark')}>Dark</button>
-            <button className={mode === 'light' ? 'on' : ''} onClick={() => setMode('light')}>Light</button>
-          </div>
-        </div>
-
         {/* Facts */}
         <div className="cfacts rv">
           {c.facts.map((f) => (
@@ -142,9 +133,9 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">01 / Overview</aside>
+            <aside className="csplit__aside rv">— 01 / Overview</aside>
             <div>
-              <h2 className="csec__title rv">A first crypto app that explains itself.</h2>
+              <h2 className="csec__title rv">A first crypto app that <em className="ax">explains itself.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.1s' }}>
                 <p>Lumen helps a cautious first-timer buy and hold crypto without the usual anxiety. The product is built around one promise: you should never tap a button you don&apos;t understand. Lumi — an AI guide — sits one tap away on every screen to explain spreads, fees, holds and signals in human language.</p>
                 <p>The whole experience was designed as a system: onboarding and KYC, a three-tap buy, a wallet, an explore surface, market news, and a pro charting mode — each shipped in a full light and dark theme so it feels native on any phone.</p>
@@ -158,7 +149,7 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">02 / Challenge</aside>
+            <aside className="csplit__aside rv">— 02 / The challenge</aside>
             <div>
               <h2 className="csec__title rv">For most people, buying crypto feels like a trap.</h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.1s' }}>
@@ -182,9 +173,9 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">03 / Research</aside>
+            <aside className="csplit__aside rv">— 03 / Understanding the user</aside>
             <div>
-              <h2 className="csec__title rv">I designed for the cautious first-timer.</h2>
+              <h2 className="csec__title rv">I designed for the <em className="ax">cautious</em> first-timer.</h2>
               <div className="cpgrid rv" style={{ transitionDelay: '0.1s' }}>
                 {/* Dami */}
                 <div className="cper">
@@ -256,9 +247,9 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">04 / Problem</aside>
+            <aside className="csplit__aside rv">— 04 / Defining the problem</aside>
             <div>
-              <h2 className="csec__title rv">It came down to one question.</h2>
+              <h2 className="csec__title rv">It came down to <em className="ax">one question.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
                 <p>Lumen wouldn&apos;t win on coin selection or trading power — bigger apps own that. It would win or lose on whether a nervous beginner felt safe, informed and in control at every step.</p>
               </div>
@@ -288,24 +279,55 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">05 / Big Idea</aside>
+            <aside className="csplit__aside rv">— 05 / The big idea</aside>
             <div>
-              <h2 className="csec__title rv">Lumi — trust, built into the product.</h2>
+              <h2 className="csec__title rv">Lumi — trust, built <em className="ax">into the product.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
                 <p>Rather than reassure with marketing copy, Lumen builds trust into the mechanics. Three promises — made on the first screen and kept on every screen after it — carry the entire product.</p>
               </div>
-              <div className="cpaths rv" style={{ transitionDelay: '0.12s' }}>
-                {[
-                  { tag: 'Pillar 01', t: 'Buy in seconds.', b: 'Three taps to your first coin — choose, enter an amount, confirm. No order book to decode.' },
-                  { tag: 'Pillar 02', t: 'Fees shown upfront.', b: 'Coin amount, spread, network and platform fees — the total cost, itemised, before you confirm.' },
-                  { tag: 'Pillar 03', t: 'Your funds are protected.', b: 'Insured, audited and status-tracked — with security holds that explain themselves instead of alarming you.' },
-                ].map((p) => (
-                  <div key={p.tag} className="cpath">
-                    <p className="cpath__tag">{p.tag}</p>
-                    <h3 className="cpath__t">{p.t}</h3>
-                    <p className="cpath__b">{p.b}</p>
-                  </div>
-                ))}
+              <div className="lpill rv-s" style={{ transitionDelay: '0.12s' }}>
+                <div className="lpill__c">
+                  <div className="lpill__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+                  <div className="lpill__t">Buy in seconds</div>
+                  <div className="lpill__d">Three taps to your first coin — choose, enter an amount, confirm. No order book to decode.</div>
+                </div>
+                <div className="lpill__c">
+                  <div className="lpill__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 12h6M9 15h3"/></svg></div>
+                  <div className="lpill__t">Fees shown upfront</div>
+                  <div className="lpill__d">Coin amount, spread, network and platform fees — the total cost, itemised, before you confirm.</div>
+                </div>
+                <div className="lpill__c">
+                  <div className="lpill__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                  <div className="lpill__t">Your funds are protected</div>
+                  <div className="lpill__d">Insured, audited and status-tracked — with security holds that explain themselves instead of alarming you.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Lumen is different */}
+      <section className="csec">
+        <div className="cwrap">
+          <div className="csplit">
+            <aside className="csplit__aside rv">— 06 / Why Lumen is different</aside>
+            <div>
+              <h2 className="csec__title rv">Two things <em className="ax">nobody else does.</em></h2>
+              <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
+                <p>Most crypto apps hand a beginner a chart and wish them luck. Lumen does two things no one else does — it brings the <i>analysis</i> to you, and it brings the <i>whole market</i> into one place.</p>
+              </div>
+              <div className="ldiff rv-s" style={{ transitionDelay: '0.12s' }}>
+                <div className="ldiff__c">
+                  <div className="ldiff__k">— 01 · The first live-market AI</div>
+                  <div className="ldiff__t">Lumi reads the market for you.</div>
+                  <div className="ldiff__d">Lumen is the first app to put real-time AI analysis on the <i>live</i> market right inside the decision. Lumi watches price and momentum alongside the wider web — the same news, posts and sources you&apos;d otherwise hunt down on Google — and turns all of it into one plain signal: buy, hold, or wait, with the full cost spelled out. Ask it anything in your own words on any screen, and it walks you through placing the trade.</div>
+                </div>
+                <div className="ldiff__c">
+                  <div className="ldiff__k">— 02 · Every market, one place</div>
+                  <div className="ldiff__t">All the insight, without ten open tabs.</div>
+                  <div className="ldiff__d">Normally you&apos;d jump between exchanges, news sites and forums to piece together what&apos;s happening — then guess. Lumen pulls the whole market onto a single surface: live world events, real-time market mood and on-chain context, read and summarised for you — with a one-tap path straight into the trade.</div>
+                </div>
               </div>
             </div>
           </div>
@@ -313,34 +335,35 @@ function LumenPage({ c }: { c: CaseStudy }) {
       </section>
 
       {/* IA */}
-      <section className="csec">
+      <section className="csec csec--wide">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">06 / Architecture</aside>
+            <aside className="csplit__aside rv">— 07 / Information architecture</aside>
             <div>
-              <h2 className="csec__title rv">One map a beginner can hold in their head.</h2>
+              <h2 className="csec__title rv">One map a beginner can <em className="ax">hold in their head.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
                 <p>The product is organised around six surfaces — onboarding, home, trade, markets, wallet and profile. Lumi reaches across all of them; there&apos;s no separate &ldquo;AI section,&rdquo; just a guide you can summon anywhere.</p>
               </div>
-              <div className="cmap rv" style={{ transitionDelay: '0.12s' }}>
-                <div className="cmap__root"><span className="d" />Lumen App</div>
-                <div className="cmap__cols" style={{ gridTemplateColumns: 'repeat(6,1fr)' }}>
+              <div className="lia rv-s" style={{ transitionDelay: '0.12s' }}>
+                <div className="lia__root"><span className="lia__rootpill"><span className="lia__dot" />Lumen</span></div>
+                <div className="lia__stem" />
+                <div className="lia__branch"><span /><span /><span /><span /><span /><span /></div>
+                <div className="lia__grid">
                   {[
-                    { node: 'A. Onboarding', leaves: ['Splash', 'Log in', 'Sign up', 'Meet Lumi', 'Verify (KYC)', 'Status'] },
-                    { node: 'B. Home', leaves: ['Total balance', 'Quick buy / sell', 'Lumi nudge', 'Starter coins'] },
-                    { node: 'C. Trade', leaves: ['Choose coin', 'Amount → fees', 'Recurring buys', 'Add money'] },
-                    { node: 'D. Markets', leaves: ['Coin detail', 'Pro analysis', 'Signal', 'News', 'Report'] },
-                    { node: 'E. Wallet', leaves: ['Balances', 'Card', 'Withdrawal lock'] },
-                    { node: 'F. Profile', leaves: ['Security', '2FA', 'Payment methods', 'Verification', 'Ask Lumi'] },
+                    { b: 'A', h: 'Onboarding', items: ['Splash', 'Log in · Sign up', 'Meet Lumi', 'Verify (KYC) · status'] },
+                    { b: 'B', h: 'Home', items: ['Total balance', 'Quick buy / sell', 'Lumi nudge', 'Starter coins'] },
+                    { b: 'C', h: 'Trade', items: ['Choose coin', 'Amount → fees → confirm', 'Recurring buys', 'Add money'] },
+                    { b: 'D', h: 'Markets', items: ['Coin detail', 'Pro analysis', 'Signal · News · Report', 'Market news'] },
+                    { b: 'E', h: 'Wallet', items: ['Balances', 'Card', 'Withdrawal lock'] },
+                    { b: 'F', h: 'Profile', items: ['Security · 2FA', 'Payment methods', 'Verification', 'Ask Lumi · Log out'] },
                   ].map((col) => (
-                    <div key={col.node}>
-                      <div className="cmap__node">{col.node}</div>
-                      <ul className="cmap__leaves">
-                        {col.leaves.map((l) => <li key={l}>{l}</li>)}
-                      </ul>
+                    <div key={col.b} className="lia__col">
+                      <div className="lia__head"><span className="lia__b">{col.b}</span><span className="lia__h">{col.h}</span></div>
+                      {col.items.map((item) => <div key={item} className="lia__item">{item}</div>)}
                     </div>
                   ))}
                 </div>
+                <div className="lia__note"><span className="lia__dot" /><div><b>Ask Lumi is global</b> — reachable from Home, any coin, the news feed and Profile.</div></div>
               </div>
             </div>
           </div>
@@ -351,28 +374,38 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">07 / User Flow</aside>
+            <aside className="csplit__aside rv">— 08 / User flow</aside>
             <div>
-              <h2 className="csec__title rv">From splash to a first confident trade.</h2>
+              <h2 className="csec__title rv">From splash to a <em className="ax">first confident trade.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
                 <p>The happy path is seven honest states — trust, identity, then a buy where nothing is hidden. Verification never dead-ends: a live status tracker keeps the anxious moment legible, and news or any coin can jump you straight into an action.</p>
               </div>
-              <div className="cloop rv" style={{ transitionDelay: '0.12s', gridTemplateColumns: 'repeat(4,1fr)' }}>
-                {[
-                  { n: '01', t: 'Splash', d: 'Trust + one CTA' },
-                  { n: '02', t: 'Log in', d: 'Or sign up' },
-                  { n: '03', t: 'Meet Lumi', d: 'Set expectations' },
-                  { n: '04', t: 'Verify (KYC)', d: 'KYC + live status' },
-                  { n: '05', t: 'Home', d: 'Balance + Buy' },
-                  { n: '06', t: 'Review fees', d: 'Nothing hidden' },
-                  { n: '07', t: 'Success', d: 'You own crypto' },
-                ].map((s) => (
-                  <div key={s.n} className="cloopstep">
-                    <p className="cloopstep__n">{s.n}</p>
-                    <p className="cloopstep__t">{s.t}</p>
-                    <p className="cloopstep__d">{s.d}</p>
-                  </div>
-                ))}
+              <div className="lflow rv-s" style={{ transitionDelay: '0.12s' }}>
+                <div className="lflow__row">
+                  {([
+                    { n: '01', t: 'Splash', d: 'Trust + one CTA', key: false },
+                    { n: '02', t: 'Log in', d: 'Or sign up', key: false },
+                    { n: '03', t: 'Meet Lumi', d: 'Set expectations', key: false },
+                    { n: '04', t: 'Verify', d: 'KYC + status', key: true },
+                    { n: '05', t: 'Home', d: 'Balance + Buy', key: false },
+                    { n: '06', t: 'Review fees', d: 'Nothing hidden', key: false },
+                    { n: '07', t: 'Success', d: 'You own crypto', key: false },
+                  ] as { n: string; t: string; d: string; key: boolean }[]).flatMap((s, i, arr) => {
+                    const step = (
+                      <div key={s.n} className={`lstep${s.key ? ' lstep--key' : ''}`}>
+                        <div className="lstep__n">{s.n}</div>
+                        <div className="lstep__t">{s.t}</div>
+                        <div className="lstep__d">{s.d}</div>
+                      </div>
+                    );
+                    return i < arr.length - 1 ? [step, <div key={`a${i}`} className="larr">→</div>] : [step];
+                  })}
+                </div>
+                <div className="lbranch">
+                  <div className="lbr"><span className="lbr__k">Verify · pending</span><span>↩ Live status tracker + ETA</span></div>
+                  <div className="lbr"><span className="lbr__k">Any coin</span><span>→ Coin detail → Pro analysis (Signal · News · Report)</span></div>
+                  <div className="lbr"><span className="lbr__k">News</span><span>→ Buy / Sell action jumps to the asset</span></div>
+                </div>
               </div>
             </div>
           </div>
@@ -383,32 +416,88 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">08 / Wireframes</aside>
+            <aside className="csplit__aside rv">— 09 / Wireframes</aside>
             <div>
-              <h2 className="csec__title rv">Structure first, in grayscale.</h2>
+              <h2 className="csec__title rv">Structure first, in <em className="ax">grayscale.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
-                <p>Before any colour, I blocked out the riskiest screens as low-fidelity wireframes — proving the layout and hierarchy of the buy flow, verification and the Pro chart while they were still cheap to change.</p>
+                <p>Before any colour, I blocked out the riskiest screens as low-fidelity wireframes — proving the layout and hierarchy of the buy flow, verification and the Pro chart while they were still cheap to change. Each one maps directly to a shipped screen.</p>
               </div>
-              <div className="cwires rv" style={{ transitionDelay: '0.12s' }}>
-                {[
-                  { tag: 'A. Home', h: 'Balance, quick buy/sell, starter coins.' },
-                  { tag: 'B. Pro analysis', h: 'Chart, indicators, Lumi signal card.' },
-                  { tag: 'C. Verify (KYC)', h: 'Doc type, scan frame, capture CTA.' },
-                  { tag: 'D. Fees & confirm', h: 'Itemised costs, total, slide-to-confirm.' },
-                ].map((w) => (
-                  <div key={w.tag} className="cwire">
-                    <p className="cwire__tag">{w.tag}</p>
-                    <p className="cwire__h">{w.h}</p>
-                    <div className="cwb cwb--bar" style={{ width: '70%' }} />
-                    <div style={{ display: 'flex', gap: 8 }}>
-                      <div className="cwb cwb--block" style={{ flex: 1 }} />
-                      <div className="cwb cwb--block" style={{ flex: 1 }} />
+              <div className="wf rv-s" style={{ transitionDelay: '0.12s' }}>
+                <div className="wf__grid">
+                  {/* WF A: Home */}
+                  <div className="wf__card">
+                    <div className="wf__phone">
+                      <div className="wf__sb"><div className="wf__row"><span className="wb wc" style={{width:18,height:18}} /><span className="wb wb--line" style={{width:46}} /></div><span className="wb wc wb--soft" style={{width:16,height:16}} /></div>
+                      <div className="wo" style={{padding:'13px 12px',display:'flex',flexDirection:'column',gap:9,alignItems:'center'}}>
+                        <span className="wb wb--soft wb--line" style={{width:54,height:6}} />
+                        <span className="wb" style={{width:108,height:18}} />
+                        <span className="wb wb--soft wb--line" style={{width:40,height:6}} />
+                      </div>
+                      <div className="wf__row" style={{gap:9}}><span className="wo wf__sp" style={{height:30}} /><span className="wo wf__sp" style={{height:30}} /></div>
+                      <div className="wf__col" style={{marginTop:2}}>
+                        <div className="wf__row"><span className="wb wc" style={{width:20,height:20}} /><div className="wf__col wf__sp" style={{gap:5}}><span className="wb wb--line" style={{width:'60%'}} /><span className="wb wb--soft wb--line" style={{width:'34%',height:5}} /></div><span className="wb wb--soft" style={{width:34,height:12}} /></div>
+                        <div className="wf__row"><span className="wb wc" style={{width:20,height:20}} /><div className="wf__col wf__sp" style={{gap:5}}><span className="wb wb--line" style={{width:'52%'}} /><span className="wb wb--soft wb--line" style={{width:'30%',height:5}} /></div><span className="wb wb--soft" style={{width:34,height:12}} /></div>
+                        <div className="wf__row"><span className="wb wc" style={{width:20,height:20}} /><div className="wf__col wf__sp" style={{gap:5}}><span className="wb wb--line" style={{width:'58%'}} /><span className="wb wb--soft wb--line" style={{width:'32%',height:5}} /></div><span className="wb wb--soft" style={{width:34,height:12}} /></div>
+                      </div>
+                      <span className="wf__sp" />
+                      <div className="wo wf__sb" style={{padding:'7px 14px'}}><span className="wb wc wb--soft" style={{width:13,height:13}} /><span className="wb wc wb--soft" style={{width:13,height:13}} /><span className="wb wc" style={{width:13,height:13}} /><span className="wb wc wb--soft" style={{width:13,height:13}} /></div>
                     </div>
-                    <div className="cwb cwb--line" />
-                    <div className="cwb cwb--line s" />
-                    <div className="cwb cwb--btn" />
+                    <div className="wf__cap"><span className="wf__n">A</span><div><div className="wf__t">Home</div><div className="wf__s">Balance, quick buy/sell, starter coins.</div></div></div>
                   </div>
-                ))}
+                  {/* WF B: Pro chart */}
+                  <div className="wf__card">
+                    <div className="wf__phone">
+                      <div className="wf__sb"><div className="wf__row"><span className="wb wc" style={{width:18,height:18}} /><span className="wb wb--line" style={{width:50}} /></div><span className="wb wb--soft" style={{width:30,height:12}} /></div>
+                      <div className="wf__row" style={{gap:6}}><span className="wb wb--soft wb--line" style={{width:38}} /><span className="wb wb--soft wb--line" style={{width:38}} /><span className="wb wb--soft wb--line" style={{width:38}} /></div>
+                      <div className="wo" style={{height:88,position:'relative',overflow:'hidden',padding:0}}>
+                        <svg viewBox="0 0 160 88" preserveAspectRatio="none" style={{width:'100%',height:'100%',display:'block'}}><polyline points="4,60 22,52 38,58 54,40 72,46 90,30 108,38 126,22 144,30 156,16" fill="none" stroke="color-mix(in srgb,var(--ink) 26%,transparent)" strokeWidth="2" /></svg>
+                      </div>
+                      <div className="wf__row" style={{gap:6}}><span className="wo wf__sp" style={{height:18}} /><span className="wo wf__sp" style={{height:18}} /><span className="wb wf__sp" style={{height:18,borderRadius:7}} /><span className="wo wf__sp" style={{height:18}} /></div>
+                      <div className="wo" style={{padding:10,display:'flex',flexDirection:'column',gap:7}}>
+                        <div className="wf__row"><span className="wb wc" style={{width:16,height:16}} /><span className="wb wb--line" style={{width:50}} /><span className="wf__sp" /><span className="wb wb--soft" style={{width:40,height:13}} /></div>
+                        <span className="wb wb--soft wb--line" style={{width:'90%',height:6}} />
+                        <span className="wb wb--soft wb--line" style={{width:'70%',height:6}} />
+                      </div>
+                      <span className="wf__sp" />
+                    </div>
+                    <div className="wf__cap"><span className="wf__n">B</span><div><div className="wf__t">Pro analysis</div><div className="wf__s">Chart, indicators, Lumi signal card.</div></div></div>
+                  </div>
+                  {/* WF C: Verify */}
+                  <div className="wf__card">
+                    <div className="wf__phone">
+                      <div className="wf__row"><span className="wo" style={{width:22,height:22}} /><span className="wb wb--line" style={{width:70}} /></div>
+                      <div className="wf__row" style={{gap:7}}><span className="wb wf__sp" style={{height:22,borderRadius:7}} /><span className="wo wf__sp" style={{height:22}} /><span className="wo wf__sp" style={{height:22}} /></div>
+                      <div className="wo wf__center wf__sp" style={{margin:'2px 0'}}>
+                        <span className="wo wo--dash" style={{width:'74%',height:84,borderRadius:9}} />
+                        <span className="wb wb--soft wb--line" style={{width:'60%'}} />
+                      </div>
+                      <div className="wo" style={{padding:9,display:'flex',gap:8,alignItems:'center'}}><span className="wb wc" style={{width:18,height:18}} /><div className="wf__col wf__sp" style={{gap:5}}><span className="wb wb--soft wb--line" style={{width:'90%',height:6}} /><span className="wb wb--soft wb--line" style={{width:'60%',height:6}} /></div></div>
+                      <span className="wb" style={{height:30,borderRadius:9}} />
+                    </div>
+                    <div className="wf__cap"><span className="wf__n">C</span><div><div className="wf__t">Verify (KYC)</div><div className="wf__s">Doc type, scan frame, capture CTA.</div></div></div>
+                  </div>
+                  {/* WF D: Fees & confirm */}
+                  <div className="wf__card">
+                    <div className="wf__phone">
+                      <div className="wf__row"><span className="wo" style={{width:22,height:22}} /><span className="wb wb--line" style={{width:60}} /></div>
+                      <div className="wo wf__center" style={{padding:'13px 0'}}>
+                        <span className="wb wb--soft wb--line" style={{width:40,height:6}} />
+                        <span className="wb" style={{width:96,height:20}} />
+                      </div>
+                      <div className="wf__col" style={{marginTop:2}}>
+                        <div className="wf__sb"><span className="wb wb--soft wb--line" style={{width:'44%'}} /><span className="wb wb--line" style={{width:'24%'}} /></div>
+                        <div className="wf__sb"><span className="wb wb--soft wb--line" style={{width:'38%'}} /><span className="wb wb--line" style={{width:'20%'}} /></div>
+                        <div className="wf__sb"><span className="wb wb--soft wb--line" style={{width:'50%'}} /><span className="wb wb--line" style={{width:'22%'}} /></div>
+                      </div>
+                      <span className="wb wb--soft" style={{height:1}} />
+                      <div className="wf__sb"><span className="wb wb--line" style={{width:'34%',height:8}} /><span className="wb" style={{width:'30%',height:8}} /></div>
+                      <span className="wf__sp" />
+                      <span className="wb" style={{height:32,borderRadius:100}} />
+                    </div>
+                    <div className="wf__cap"><span className="wf__n">D</span><div><div className="wf__t">Fees &amp; confirm</div><div className="wf__s">Itemised costs, total, slide-to-confirm.</div></div></div>
+                  </div>
+                </div>
+                <div className="lia__note" style={{marginTop:22}}><span className="lia__dot" /><div><b>Low fidelity on purpose</b> — grayscale kept the conversation on flow and hierarchy, not pixels. Every frame here became a shipped screen.</div></div>
               </div>
             </div>
           </div>
@@ -419,9 +508,9 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">09 / Design System</aside>
+            <aside className="csplit__aside rv">— 10 / Design system</aside>
             <div>
-              <h2 className="csec__title rv">One system, two modes.</h2>
+              <h2 className="csec__title rv">One system, <em className="ax">two modes.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
                 <p>Lumen runs on an electric-indigo primary with a calm violet atmosphere, green for gains and red for losses — defined once as shared tokens so the entire product holds together in both a deep dark theme and a bright light one.</p>
               </div>
@@ -454,14 +543,14 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec csec--wide">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">10 / Screens</aside>
+            <aside className="csplit__aside rv">— 11 / The shipped app</aside>
             <div>
-              <h2 className="csec__title rv">Every screen, in light and dark.</h2>
+              <h2 className="csec__title rv">Every screen, in <em className="ax">light and dark.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
-                <p>Real, mobile-first product end to end — onboarding and verification, the core tabs, the three-tap buy, and the wallet. Flip the toggle to see every screen redraw in the other theme; both were designed in parallel, never auto-generated.</p>
+                <p>Here is the real, mobile-first product end to end — onboarding and verification, the core tabs, the three-tap buy, and the wallet. Flip the toggle to see every screen redraw in the other theme; both were designed in parallel, never auto-generated.</p>
               </div>
-              <div className="lmodebar" style={{ marginTop: 28, marginBottom: 32 }}>
-                <span className="lmodebar__k">Theme</span>
+              <div className="lmodebar rv" style={{ marginTop: 28, marginBottom: 32 }}>
+                <span className="lmodebar__k">Appearance</span>
                 <div className="lmode">
                   <button className={mode === 'dark' ? 'on' : ''} onClick={() => setMode('dark')}>Dark</button>
                   <button className={mode === 'light' ? 'on' : ''} onClick={() => setMode('light')}>Light</button>
@@ -506,25 +595,24 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">11 / Validation</aside>
+            <aside className="csplit__aside rv">— 12 / Validation</aside>
             <div>
-              <h2 className="csec__title rv">How I&apos;d prove the bets actually work.</h2>
+              <h2 className="csec__title rv">How I&apos;d prove the bets <em className="ax">actually work.</em></h2>
               <div className="csec__prose rv" style={{ transitionDelay: '0.08s' }}>
                 <p>Live metrics sit outside this brief, so I won&apos;t claim numbers I never measured. Instead, every risky decision ships with a validation plan: a clear hypothesis, the method I&apos;d run, and the one signal that would tell me I was right.</p>
               </div>
-              <div className="cproc__cards rv" style={{ transitionDelay: '0.12s' }}>
+              <div className="cvtest rv-s" style={{ transitionDelay: '0.12s' }}>
                 {[
-                  { n: 'Test 01', h: 'Fee clarity', d: 'Beginners understand what a trade costs. Signal: ≥85% correctly state the total cost before confirming.' },
-                  { n: 'Test 02', h: 'Three-tap buy', d: 'A first-timer can buy without help. Signal: Completion rises, drop-off falls at review.' },
-                  { n: 'Test 03', h: 'Lumi trust', d: 'The AI guide reduces anxiety, not adds noise. Signal: Self-reported confidence up; Lumi rated helpful, not pushy.' },
-                  { n: 'Test 04', h: 'Security holds', d: 'A withdrawal hold reassures instead of alarms. Signal: Most read it as protection, not a problem.' },
+                  { n: '— Test 01 · Fee clarity', h: 'Beginners understand what a trade costs.', method: 'Comprehension test on the fee-breakdown screen', signal: '≥85% correctly state the total cost before confirming' },
+                  { n: '— Test 02 · Three-tap buy', h: 'A first-timer can buy without help.', method: 'Unmoderated first-purchase task, cold start', signal: 'Completion rises [X% → Y%], drop-off falls at review' },
+                  { n: '— Test 03 · Lumi trust', h: 'The AI guide reduces anxiety, not adds noise.', method: 'Confidence rating before/after asking Lumi', signal: 'Self-reported confidence up; Lumi rated helpful, not pushy' },
+                  { n: '— Test 04 · Security holds', h: 'A withdrawal hold reassures instead of alarms.', method: 'Reaction test on the 24-hour hold screen', signal: 'Most read it as protection, not a problem' },
                 ].map((t) => (
-                  <div key={t.n} className="ccard">
-                    <div className="ccard__body">
-                      <p className="ccard__n">{t.n}</p>
-                      <h3 className="ccard__h">{t.h}</h3>
-                      <p className="ccard__d">{t.d}</p>
-                    </div>
+                  <div key={t.n} className="cvcard">
+                    <div className="cvcard__n">{t.n}</div>
+                    <h3 className="cvcard__h">{t.h}</h3>
+                    <div className="cvrow"><div className="cvrow__k">Method</div><div className="cvrow__v">{t.method}</div></div>
+                    <div className="cvrow"><div className="cvrow__k">Signal</div><div className="cvrow__v">{t.signal}</div></div>
                   </div>
                 ))}
               </div>
@@ -533,27 +621,23 @@ function LumenPage({ c }: { c: CaseStudy }) {
         </div>
       </section>
 
-      {/* Impact */}
+      {/* Impact / Scope */}
       <section className="cimpact">
         <div className="cwrap">
-          <div className="csplit">
-            <aside className="csplit__aside rv">12 / Scope</aside>
-            <div>
-              <h2 className="csec__title rv">Scope of the work.</h2>
-              <div className="cimpact__grid rv" style={{ transitionDelay: '0.1s' }}>
-                {[
-                  { n: '23', l: 'Core screens, onboarding to wallet' },
-                  { n: '2', l: 'Full themes — light & dark, designed in parallel' },
-                  { n: '6', l: 'Tab architecture a beginner can hold in their head' },
-                  { n: '3', l: 'Taps from intent to owning your first coin' },
-                ].map((s) => (
-                  <div key={s.l}>
-                    <div className="cnum">{s.n}</div>
-                    <p className="cnum__l">{s.l}</p>
-                  </div>
-                ))}
+          <div className="csplit__aside rv" style={{position:'static',color:'#4a56f6',fontFamily:'var(--f-mono)',fontSize:12,letterSpacing:'.06em',marginBottom:14}}>— 13 / Scope of the work</div>
+          <h2 className="csec__title rv">One product, designed <em className="ax">end to end.</em></h2>
+          <div className="cimpact__grid rv-s" style={{ transitionDelay: '0.1s' }}>
+            {[
+              { n: '23', l: 'Core screens, onboarding to wallet' },
+              { n: '2', l: 'Full themes — light & dark, designed in parallel' },
+              { n: '6', l: 'Tab architecture a beginner can hold in their head' },
+              { n: '3', l: 'Taps from intent to owning your first coin' },
+            ].map((s) => (
+              <div key={s.l}>
+                <div className="cnum">{s.n}</div>
+                <p className="cnum__l">{s.l}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -561,10 +645,8 @@ function LumenPage({ c }: { c: CaseStudy }) {
       {/* Pull Quote */}
       <section className="csec">
         <div className="cwrap cwrap--narrow">
-          <div className="cpull rv">
-            An app for nervous beginners can&apos;t just look trustworthy — it has to make the cost and the risk <em className="ax">impossible to miss.</em>
-            <p className="cpull__a">Design principle behind Lumen</p>
-          </div>
+          <p className="cpull rv">An app for nervous beginners can&apos;t just look trustworthy — <em className="ax">it has to make the cost and the risk impossible to miss.</em></p>
+          <div className="cpull__a rv">— Design principle behind Lumen</div>
         </div>
       </section>
 
@@ -572,7 +654,7 @@ function LumenPage({ c }: { c: CaseStudy }) {
       <section className="csec">
         <div className="cwrap">
           <div className="csplit">
-            <aside className="csplit__aside">13 / Reflection</aside>
+            <aside className="csplit__aside rv">— 14 / Reflection</aside>
             <div>
               <h2 className="csec__title rv">What the project taught me.</h2>
               <div className="cref rv" style={{ transitionDelay: '0.1s' }}>
