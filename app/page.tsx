@@ -517,8 +517,7 @@ function ReviewsCarousel() {
   return (
     <section className="rev" id="reviews">
       <div className="inner" style={{ marginBottom: 32 }}>
-        <span className="ey rv">What collaborators say</span>
-        <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
+        <h2 className="sec__h rv">
           Six perspectives, thirteen years.
         </h2>
       </div>
@@ -589,11 +588,7 @@ export default function HomePage() {
       {/* ── SERVICES ──────────────────────────────────── */}
       <section className="sec" id="services">
         <div className="inner">
-          <div className="sec__eyrow rv">
-            <span className="ey">Services</span>
-            <span className="ln" />
-          </div>
-          <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
+          <h2 className="sec__h rv">
             How I can help.
           </h2>
           <p className="sec__lead rv" style={{ transitionDelay: '0.15s' }}>
@@ -693,11 +688,7 @@ export default function HomePage() {
       {/* ── CASE STUDIES ──────────────────────────────── */}
       <section className="sec" id="work">
         <div className="inner">
-          <div className="sec__eyrow rv">
-            <span className="ey">Work</span>
-            <span className="ln" />
-          </div>
-          <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
+          <h2 className="sec__h rv">
             Selected case studies.
           </h2>
           <p className="sec__lead rv" style={{ transitionDelay: '0.15s' }}>
@@ -740,11 +731,7 @@ export default function HomePage() {
       {/* ── APPROACH ──────────────────────────────────── */}
       <section className="sec" id="approach">
         <div className="inner">
-          <div className="sec__eyrow rv">
-            <span className="ey">Approach</span>
-            <span className="ln" />
-          </div>
-          <h2 className="sec__h rv" style={{ transitionDelay: '0.1s' }}>
+          <h2 className="sec__h rv">
             My approach.
           </h2>
           <p className="sec__lead rv" style={{ transitionDelay: '0.15s' }}>

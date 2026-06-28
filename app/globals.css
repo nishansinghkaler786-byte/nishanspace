@@ -207,6 +207,7 @@ button { cursor: pointer; }
   display: inline-flex; align-items: center; gap: 9px;
   font-size: 14.5px; font-weight: 500;
   background: var(--ink); color: var(--bg); padding: 15px 28px;
+  border-radius: 100px;
   transition: transform .4s var(--ease), background-color .3s ease;
 }
 .pill:hover { transform: translateY(-2px); background: #fff; }
