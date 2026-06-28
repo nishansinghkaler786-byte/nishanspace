@@ -79,6 +79,7 @@ export default function ContactPage() {
               <a href="https://www.linkedin.com/in/ux-specialist-nishan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="https://dribbble.com/nishan_UX_Design" target="_blank" rel="noopener noreferrer">Dribbble</a>
               <a href="https://www.behance.net/nishansing21ef" target="_blank" rel="noopener noreferrer">Behance</a>
+              <a href="https://www.instagram.com/nishanspace.coom?igsh=MWI1eWx5c29iZXdtcQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
               <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
             </div>
           </div>
