@@ -1,213 +1,136 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useCursorStore } from '@/lib/cursor-store';
 
-const socialLinks = [
-  { label: 'Dribbble', href: '#' },
-  { label: 'Behance', href: '#' },
-  { label: 'LinkedIn', href: '#' },
-  { label: 'Instagram', href: '#' },
-];
+function FooterCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-const indexLinks = [
-  { label: 'Index', href: '/' },
-  { label: 'Work', href: '/work' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-];
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-export default function Footer() {
-  const setVariant = useCursorStore((s) => s.setVariant);
+    let raf: number;
+    const particles: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.5,
+      });
+    }
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(245,243,239,0.35)';
+        ctx.fill();
+
+        for (const q of particles) {
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 90) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(245,243,239,${0.04 * (1 - d / 90)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
 
   return (
-    <footer
-      style={{
-        background: 'var(--surface)',
-        borderTop: '1px solid var(--line)',
-      }}
-    >
-      {/* CTA section */}
-      <div
-        style={{
-          padding: '8rem 2rem',
-          maxWidth: 1400,
-          margin: '0 auto',
-          borderBottom: '1px solid var(--line)',
-        }}
-      >
-        <Link
-          href="/contact"
-          data-magnetic
-          onMouseEnter={() => setVariant('hover')}
-          onMouseLeave={() => setVariant('default')}
-          style={{ textDecoration: 'none', display: 'block' }}
-        >
-          <h2
-            className="font-display"
-            style={{
-              fontSize: 'clamp(3rem, 10vw, 12rem)',
-              fontWeight: 300,
-              lineHeight: 1,
-              letterSpacing: '-0.04em',
-              color: 'var(--ink)',
-            }}
-          >
-            Let&apos;s{' '}
-            <em
-              className="font-accent"
-              style={{ fontStyle: 'italic', color: 'var(--accent)' }}
-            >
-              build
-            </em>{' '}
-            something real.
-          </h2>
-        </Link>
-        <p
-          className="font-mono-style"
-          style={{ color: 'var(--dim)', fontSize: 13, marginTop: '2rem', letterSpacing: '0.06em' }}
-        >
-          nishansinghkaler786@gmail.com · Dubai, UAE (GMT+4) · +91 84375 96666
-        </p>
-      </div>
+    <canvas
+      ref={canvasRef}
+      className="ft__net"
+      aria-hidden="true"
+    />
+  );
+}
 
-      {/* 4-col footer links */}
-      <div
-        style={{
-          padding: '3rem 2rem',
-          maxWidth: 1400,
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '2rem',
-        }}
-      >
-        <div>
-          <h3
-            className="font-mono-style"
-            style={{ fontSize: 10, color: 'var(--dim)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}
-          >
-            Contact
-          </h3>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {[
-              { label: 'nishansinghkaler786@gmail.com', href: 'mailto:nishansinghkaler786@gmail.com' },
-              { label: '+91 84375 96666', href: 'tel:+918437596666' },
-              { label: 'Dubai, UAE', href: '#' },
-            ].map(({ label, href }) => (
-              <li key={label} style={{ marginBottom: 8 }}>
-                <a
-                  href={href}
-                  onMouseEnter={() => setVariant('hover')}
-                  onMouseLeave={() => setVariant('default')}
-                  style={{ color: 'var(--dim)', fontSize: 12, textDecoration: 'none', fontFamily: 'var(--font-inter-tight)' }}
-                  className="hover:text-[var(--ink)] transition-colors"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
+export default function Footer() {
+  return (
+    <footer className="ft">
+      <div className="ft__row">
+        {/* Brand */}
+        <div className="ft__logo">
+          <Image src="/assets/wordmark-light.svg" alt="nishan.space" width={110} height={24} />
+          <p>Senior UX Designer helping teams turn complex enterprise systems into products people actually love.</p>
+          <span className="ft__copy">© 2026 Nishan Singh · Dubai, UAE</span>
         </div>
 
-        <div>
-          <h3
-            className="font-mono-style"
-            style={{ fontSize: 10, color: 'var(--dim)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}
-          >
-            Social
-          </h3>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {socialLinks.map(({ label, href }) => (
-              <li key={label} style={{ marginBottom: 8 }}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onMouseEnter={() => setVariant('hover')}
-                  onMouseLeave={() => setVariant('default')}
-                  style={{ color: 'var(--dim)', fontSize: 12, textDecoration: 'none', fontFamily: 'var(--font-inter-tight)' }}
-                  className="hover:text-[var(--ink)] transition-colors"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3
-            className="font-mono-style"
-            style={{ fontSize: 10, color: 'var(--dim)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}
-          >
-            Index
-          </h3>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {indexLinks.map(({ label, href }) => (
-              <li key={label} style={{ marginBottom: 8 }}>
-                <Link
-                  href={href}
-                  onMouseEnter={() => setVariant('hover')}
-                  onMouseLeave={() => setVariant('default')}
-                  style={{ color: 'var(--dim)', fontSize: 12, textDecoration: 'none', fontFamily: 'var(--font-inter-tight)' }}
-                  className="hover:text-[var(--ink)] transition-colors"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3
-            className="font-mono-style"
-            style={{ fontSize: 10, color: 'var(--dim)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '1rem' }}
-          >
-            Currently
-          </h3>
-          <p style={{ fontSize: 12, color: 'var(--dim)', lineHeight: 1.6, fontFamily: 'var(--font-inter-tight)' }}>
-            Senior UX Designer at Mercer Talent Enterprise (Marsh McLennan). Open to senior and principal UX roles globally.
-          </p>
-        </div>
-      </div>
-
-      {/* Bottom strip */}
-      <div
-        style={{
-          padding: '1.5rem 2rem',
-          maxWidth: 1400,
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderTop: '1px solid var(--line)',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 24, height: 24, position: 'relative' }}>
-            <Image
-              src="/logo.png"
-              alt="nishan space"
-              fill
-              style={{ objectFit: 'contain' }}
-            />
+        {/* Link columns */}
+        <div className="ft__links">
+          <div className="ft__col">
+            <h4>Explore</h4>
+            <Link href="/#work">Work</Link>
+            <Link href="/#services">Services</Link>
+            <Link href="/#about">About</Link>
+            <Link href="/contact">Contact</Link>
+            <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
           </div>
-          <span
-            className="font-mono-style"
-            style={{ fontSize: 11, color: 'var(--faint)', letterSpacing: '0.06em' }}
-          >
-            © {new Date().getFullYear()} Nishan Singh
-          </span>
+          <div className="ft__col">
+            <h4>Social</h4>
+            <a href="https://linkedin.com/in/nishansingh" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://dribbble.com/nishanspace" target="_blank" rel="noopener noreferrer">Dribbble ↗</a>
+            <a href="https://behance.net/nishanspace" target="_blank" rel="noopener noreferrer">Behance ↗</a>
+            <a href="mailto:hello@nishan.space">hello@nishan.space</a>
+          </div>
+          <div className="ft__col">
+            <h4>Status</h4>
+            <span style={{ fontSize: 14, color: 'var(--ink-soft)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#3ddc84', boxShadow: '0 0 8px rgba(61,220,132,.55)', display: 'inline-block' }} />
+              Available Q3 2026
+            </span>
+            <a href="mailto:hello@nishan.space" style={{ marginTop: 6, display: 'block' }}>Start a conversation</a>
+          </div>
         </div>
-        <span
-          className="font-mono-style"
-          style={{ fontSize: 11, color: 'var(--faint)', letterSpacing: '0.06em' }}
-        >
-          v1.0 · Built in Next.js
-        </span>
+      </div>
+
+      {/* Giant wordmark */}
+      <div className="ft__giant">
+        <FooterCanvas />
+        <div className="ft__word">
+          <Image
+            src="/assets/wordmark-cream.svg"
+            alt=""
+            width={1340}
+            height={160}
+            style={{ width: '100%', height: 'auto', opacity: 0.65 }}
+            aria-hidden="true"
+          />
+        </div>
       </div>
     </footer>
   );

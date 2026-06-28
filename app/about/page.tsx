@@ -1,9 +1,5 @@
+import { redirect } from 'next/navigation';
+
 export default function AboutPage() {
-  return (
-    <div style={{ minHeight: '100vh', padding: '4rem 2rem' }}>
-      <p style={{ fontFamily: 'var(--font-jetbrains-mono)', color: 'var(--dim)', fontSize: 13 }}>
-        about — building soon
-      </p>
-    </div>
-  );
+  redirect('/#about');
 }

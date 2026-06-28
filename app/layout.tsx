@@ -1,109 +1,68 @@
 import type { Metadata } from 'next';
-import { Fraunces, Instrument_Serif, JetBrains_Mono, Inter_Tight } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import Cursor from '@/components/Cursor';
-import SmoothScroll from '@/components/SmoothScroll';
-import ThemeProvider from '@/components/providers/ThemeProvider';
 
-const fraunces = Fraunces({
+const geist = Geist({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '700', '800'],
-  style: ['normal', 'italic'],
-  variable: '--font-fraunces',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-geist',
   display: 'swap',
 });
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
-});
-
-const interTight = Inter_Tight({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-inter-tight',
+  variable: '--font-geist-mono',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nishanspace.com'),
+  metadataBase: new URL('https://nishan.space'),
   title: {
     default: 'Nishan Singh — Senior UX Designer',
-    template: '%s · nishan space',
+    template: '%s · nishan.space',
   },
   description:
-    'Senior UX Designer with 13 years designing enterprise products at scale. Specialized in psychometric assessment platforms, healthcare EMR systems, and blockchain applications. Based in Dubai, UAE.',
+    'Senior UX Designer with 13 years helping teams turn complex enterprise systems into products people actually love. Based in Dubai, UAE.',
   keywords: [
     'UX Designer',
     'Senior UX Designer',
     'Enterprise UX',
-    'Healthcare UX',
     'Design Systems',
+    'Product Design',
     'Nishan Singh',
     'Dubai UX Designer',
   ],
-  authors: [{ name: 'Nishan Singh', url: 'https://nishanspace.com' }],
+  authors: [{ name: 'Nishan Singh', url: 'https://nishan.space' }],
   creator: 'Nishan Singh',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://nishanspace.com',
-    siteName: 'nishan space',
+    url: 'https://nishan.space',
+    siteName: 'nishan.space',
     title: 'Nishan Singh — Senior UX Designer',
     description:
-      'Senior UX Designer with 13 years designing enterprise products at scale. Psychometrics, healthcare EMR, blockchain, and AI/ML interfaces.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Nishan Singh — Senior UX Designer',
-      },
-    ],
+      'Senior UX Designer with 13 years helping teams turn complex enterprise systems into products people actually love.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Nishan Singh — Senior UX Designer' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Nishan Singh — Senior UX Designer',
-    description:
-      'Senior UX Designer with 13 years designing enterprise products at scale.',
+    description: 'Senior UX Designer with 13 years helping teams turn complex enterprise systems into products people actually love.',
     images: ['/og-image.png'],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${fraunces.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${interTight.variable}`}
-    >
+    <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <body>
-        <ThemeProvider>
-          <SmoothScroll>
-            <Cursor />
-            <Nav />
-            <main id="main-content" style={{ paddingTop: 64 }}>
-              {children}
-            </main>
-            <Footer />
-          </SmoothScroll>
-        </ThemeProvider>
+        <Nav />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
