@@ -490,79 +490,87 @@ export default function HomePage() {
           <div className="svc rv-s" style={{ transitionDelay: '0.1s' }}>
             {/* Card 1 — UX Consulting */}
             <div className="svc__c">
-              <div className="svc__anim" aria-hidden="true">
-                <svg viewBox="0 0 220 118" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="40" y1="59" x2="180" y2="59" className="rj" /><line x1="110" y1="20" x2="110" y2="98" className="rj" />
-                  <circle cx="110" cy="59" r="7" className="rjax" /><circle cx="40" cy="59" r="4" className="rjnode" /><circle cx="180" cy="59" r="4" className="rjnode" /><circle cx="110" cy="20" r="4" className="rjnode" /><circle cx="110" cy="98" r="4" className="rjnode" />
-                  <circle cx="110" cy="59" r="20" className="rjping" style={{ '--ox': '110px', '--oy': '59px' } as React.CSSProperties} /><circle cx="110" cy="59" r="20" className="rjping rjping2" style={{ '--ox': '110px', '--oy': '59px' } as React.CSSProperties} />
-                  <rect x="32" y="51" width="16" height="16" rx="2" className="rjtile rjpop" style={{ '--d': '0.3s' } as React.CSSProperties} /><rect x="172" y="51" width="16" height="16" rx="2" className="rjtile rjpop" style={{ '--d': '0.9s' } as React.CSSProperties} /><rect x="102" y="12" width="16" height="16" rx="2" className="rjtile rjpop" style={{ '--d': '1.5s' } as React.CSSProperties} /><rect x="102" y="90" width="16" height="16" rx="2" className="rjtile rjpop" style={{ '--d': '2.1s' } as React.CSSProperties} />
+              <div className="svc__anim rj rj--consult" aria-hidden="true">
+                <svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="200" y1="95" x2="60" y2="40"/><line x1="200" y1="95" x2="50" y2="150"/><line x1="200" y1="95" x2="350" y2="44"/><line x1="200" y1="95" x2="352" y2="150"/>
+                  <rect x="150" y="48" width="100" height="94" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/>
+                  <rect x="160" y="58" width="80" height="11" fill="rgba(245,243,239,.3)"/><rect x="160" y="76" width="54" height="7" fill="rgba(245,243,239,.16)"/>
+                  <rect x="160" y="98" width="80" height="10" fill="rgba(74,86,246,.2)"/><rect className="rjfill" x="160" y="98" width="80" height="10" style={{'--d':'.3s'} as React.CSSProperties}/>
+                  <rect x="160" y="116" width="80" height="10" fill="rgba(74,86,246,.2)"/><rect className="rjfill" x="160" y="116" width="58" height="10" style={{'--d':'.7s'} as React.CSSProperties}/>
+                  <circle className="rjnode rjblink" cx="60" cy="40" r="11" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="50" cy="150" r="11" style={{'--d':'.4s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="350" cy="44" r="11" style={{'--d':'.8s'} as React.CSSProperties}/>
+                  <circle cx="352" cy="150" r="15" fill="#0f0e0c" stroke="rgba(245,243,239,.2)"/>
+                  <circle className="rjpulse" style={{'--tx':'138px'} as React.CSSProperties} cx="60" cy="40" r="3.5"/><circle className="rjpulse" style={{'--tx':'-148px','--d':'.6s'} as React.CSSProperties} cx="352" cy="150" r="3.5"/>
+                  <circle className="rjfloat" cx="108" cy="40" r="4" style={{'--d':'.6s'} as React.CSSProperties}/><circle className="rjfloat" cx="292" cy="150" r="4" style={{'--d':'1.3s'} as React.CSSProperties}/>
                 </svg>
               </div>
               <div className="svc__in">
                 <p className="svc__n">— 01</p>
                 <h3 className="svc__h">Enterprise UX consulting</h3>
-                <p className="svc__b">I join your team to redesign a product, build a design system, or unblock a stalled redesign. Best for: enterprise companies with one product, real users, and UX debt slowing them down.</p>
+                <p className="svc__b">I join your team to redesign a product, build a design system, or unblock a stalled redesign. <b>Best for:</b> enterprise companies with one product, real users, and UX debt slowing them down.</p>
               </div>
             </div>
 
             {/* Card 2 — Design Systems */}
             <div className="svc__c">
-              <div className="svc__anim" aria-hidden="true">
-                <svg viewBox="0 0 220 118" xmlns="http://www.w3.org/2000/svg">
-                  {[0,1,2,3,4,5,6,7,8].map((i) => {
-                    const col = i % 3; const row = Math.floor(i / 3);
-                    const x = 52 + col * 40; const y = 19 + row * 28;
-                    return <rect key={i} x={x} y={y} width="32" height="20" className={i === 4 ? 'rjtileax' : 'rjtile'} style={{ '--d': `${i * 0.3}s` } as React.CSSProperties} />;
-                  })}
-                  <polyline points="68,108 68,95 110,83 152,95 152,108" fill="none" stroke="rgba(74,86,246,.5)" strokeWidth="1" className="rjdraw" style={{ '--d': '0.5s' } as React.CSSProperties} />
+              <div className="svc__anim rj rj--system" aria-hidden="true">
+                <svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="100" y1="100" x2="182" y2="56"/><line x1="100" y1="100" x2="182" y2="100"/><line x1="100" y1="100" x2="182" y2="144"/>
+                  <rect className="rjtile" x="34" y="40" width="58" height="34" style={{'--d':'0s'} as React.CSSProperties}/><rect className="rjtileax" x="34" y="82" width="58" height="34" style={{'--d':'.3s'} as React.CSSProperties}/><rect className="rjtile" x="34" y="124" width="58" height="34" style={{'--d':'.6s'} as React.CSSProperties}/>
+                  <circle className="rjpulse" style={{'--tx':'82px'} as React.CSSProperties} cx="100" cy="56" r="3.4"/><circle className="rjpulse" style={{'--tx':'82px','--d':'.5s'} as React.CSSProperties} cx="100" cy="100" r="3.4"/><circle className="rjpulse" style={{'--tx':'82px','--d':'1s'} as React.CSSProperties} cx="100" cy="144" r="3.4"/>
+                  <g className="rjpop" style={{'--d':'.4s'} as React.CSSProperties}><rect x="184" y="40" width="72" height="34" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="190" y="46" width="30" height="6" fill="#4a56f6"/><rect x="190" y="58" width="50" height="5" fill="rgba(245,243,239,.18)"/></g>
+                  <g className="rjpop" style={{'--d':'.9s'} as React.CSSProperties}><rect x="184" y="83" width="72" height="34" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="190" y="89" width="30" height="6" fill="#4a56f6"/><rect x="190" y="101" width="50" height="5" fill="rgba(245,243,239,.18)"/></g>
+                  <g className="rjpop" style={{'--d':'1.4s'} as React.CSSProperties}><rect x="184" y="126" width="72" height="34" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/><rect x="190" y="132" width="30" height="6" fill="#4a56f6"/><rect x="190" y="144" width="50" height="5" fill="rgba(245,243,239,.18)"/></g>
+                  <circle className="rjsw" cx="298" cy="58" r="9" fill="#4a56f6" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjsw" cx="324" cy="58" r="9" fill="#838bff" style={{'--d':'.2s'} as React.CSSProperties}/><circle className="rjsw" cx="350" cy="58" r="9" fill="#cfccc6" style={{'--d':'.4s'} as React.CSSProperties}/>
+                  <text x="288" y="122" fontFamily="Geist, sans-serif" fontSize="26" fontWeight="700" fill="rgba(245,243,239,.5)" className="rjblink">Aa</text>
+                  <circle className="rjfloat" cx="322" cy="150" r="4" style={{'--d':'.8s'} as React.CSSProperties}/>
                 </svg>
               </div>
               <div className="svc__in">
                 <p className="svc__n">— 02</p>
                 <h3 className="svc__h">Design system architecture</h3>
-                <p className="svc__b">White-label, multi-tenant, scalable. The kind of system that cuts client implementation from a drawn-out build to a fraction of the effort — proven across 500+ organizations.</p>
+                <p className="svc__b">White-label, multi-tenant, scalable. The kind of system that cuts client implementation from a drawn-out build to a fraction of the effort — <b>proven across 500+ organizations.</b></p>
               </div>
             </div>
 
             {/* Card 3 — UX Audit */}
             <div className="svc__c">
-              <div className="svc__anim" aria-hidden="true">
-                <svg viewBox="0 0 220 118" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="30" y="24" width="160" height="70" rx="0" fill="none" stroke="rgba(245,243,239,.1)" strokeWidth="1" />
-                  {[0,1,2,3].map((i) => (
-                    <rect key={i} x={44} y={34 + i * 14} width={100 - i * 20} height="8" rx="0" fill="rgba(245,243,239,.08)" className="rjblink" style={{ '--d': `${i * 0.4}s` } as React.CSSProperties} />
-                  ))}
-                  <circle cx="155" cy="54" r="18" fill="none" stroke="rgba(245,243,239,.18)" strokeWidth="1.5" className="rjmag" style={{ '--mx': '0px' } as React.CSSProperties} />
-                  <circle cx="155" cy="54" r="11" fill="none" stroke="rgba(74,86,246,.55)" strokeWidth="1.5" />
-                  <line x1="168" y1="67" x2="178" y2="77" stroke="rgba(245,243,239,.4)" strokeWidth="2.5" strokeLinecap="round" />
-                  <circle cx="155" cy="54" r="3" fill="#4a56f6" className="rjpop" style={{ '--d': '0.8s' } as React.CSSProperties} />
+              <div className="svc__anim rj rj--audit" aria-hidden="true">
+                <svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="32" y="28" width="178" height="134" fill="#1c1a16" stroke="rgba(245,243,239,.18)"/>
+                  <rect x="44" y="40" width="118" height="12" fill="rgba(245,243,239,.28)"/><rect x="44" y="60" width="80" height="8" fill="rgba(245,243,239,.16)"/><rect x="44" y="76" width="146" height="8" fill="rgba(245,243,239,.12)"/><rect x="44" y="100" width="58" height="30" fill="rgba(245,243,239,.1)"/>
+                  <g className="rjflag" style={{'--d':'.3s'} as React.CSSProperties}><line x1="124" y1="64" x2="124" y2="48" stroke="#4a56f6" strokeWidth="1.5"/><path d="M124 48 l14 5 l-14 5 z" fill="#4a56f6"/></g>
+                  <g className="rjflag" style={{'--d':'1s'} as React.CSSProperties}><line x1="172" y1="84" x2="172" y2="68" stroke="#4a56f6" strokeWidth="1.5"/><path d="M172 68 l14 5 l-14 5 z" fill="#4a56f6"/></g>
+                  <g className="rjflag" style={{'--d':'1.7s'} as React.CSSProperties}><line x1="80" y1="118" x2="80" y2="102" stroke="#4a56f6" strokeWidth="1.5"/><path d="M80 102 l14 5 l-14 5 z" fill="#4a56f6"/></g>
+                  <g className="rjmag" style={{'--mx':'118px'} as React.CSSProperties}><circle cx="66" cy="94" r="17" fill="none" stroke="#fff" strokeWidth="2.5"/><line x1="78" y1="106" x2="90" y2="118" stroke="#fff" strokeWidth="3"/></g>
+                  <rect x="242" y="44" width="14" height="14" fill="none" stroke="#4a56f6" strokeWidth="1.5"/><path className="rjcheck" pathLength={1} d="M245 51 l3 4 l6 -8"/><rect className="rjfill" x="264" y="48" width="92" height="7" style={{'--d':'.4s'} as React.CSSProperties}/>
+                  <rect x="242" y="76" width="14" height="14" fill="none" stroke="#4a56f6" strokeWidth="1.5"/><rect className="rjfill" x="264" y="80" width="70" height="7" style={{'--d':'.8s'} as React.CSSProperties}/>
+                  <rect x="242" y="108" width="14" height="14" fill="none" stroke="#4a56f6" strokeWidth="1.5"/><rect className="rjfill" x="264" y="112" width="84" height="7" style={{'--d':'1.2s'} as React.CSSProperties}/>
+                  <circle className="rjfloat" cx="300" cy="150" r="4" style={{'--d':'.6s'} as React.CSSProperties}/>
                 </svg>
               </div>
               <div className="svc__in">
                 <p className="svc__n">— 03</p>
                 <h3 className="svc__h">UX audit & strategy</h3>
-                <p className="svc__b">A deep dive into your current product. Concrete findings, prioritized roadmap, decisions you can act on. Best when you have a product live and need to know what to fix first.</p>
+                <p className="svc__b">A deep dive into your current product. Concrete findings, prioritized roadmap, decisions you can act on. <b>Best when</b> you have a product live and need to know what to fix first.</p>
               </div>
             </div>
 
             {/* Card 4 — Speaking */}
             <div className="svc__c">
-              <div className="svc__anim" aria-hidden="true">
-                <svg viewBox="0 0 220 118" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="80" y="30" width="60" height="34" fill="none" stroke="rgba(245,243,239,.15)" strokeWidth="1" />
-                  {[0,1,2,3,4,5,6,7,8,9].map((i) => (
-                    <rect key={i} x={85 + i * 5} y={50} width="3" height={10 + (i % 3) * 8} fill="#4a56f6" className="rjbar" style={{ '--d': `${i * 0.11}s`, transform: 'translateY(-50%)' } as React.CSSProperties} />
-                  ))}
-                  <line x1="40" y1="94" x2="180" y2="94" stroke="rgba(245,243,239,.08)" strokeWidth="1" />
-                  {[60,90,120,150].map((x, i) => (
-                    <circle key={i} cx={x} cy="94" r="3" fill="rgba(245,243,239,.2)" className="rjfloat" style={{ '--d': `${i * 0.5}s` } as React.CSSProperties} />
-                  ))}
+              <div className="svc__anim rj rj--speak" aria-hidden="true">
+                <svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="36" y="32" width="150" height="100" fill="#1c1a16" stroke="rgba(245,243,239,.2)"/>
+                  <rect x="48" y="44" width="88" height="12" fill="#4a56f6"/><rect x="48" y="64" width="120" height="7" fill="rgba(245,243,239,.18)"/><rect x="48" y="78" width="96" height="7" fill="rgba(245,243,239,.14)"/><rect x="48" y="98" width="58" height="22" fill="rgba(245,243,239,.1)"/>
+                  <circle className="rjping" style={{'--ox':'186px','--oy':'82px'} as React.CSSProperties} cx="186" cy="82" r="14"/><circle className="rjping rjping2" style={{'--ox':'186px','--oy':'82px'} as React.CSSProperties} cx="186" cy="82" r="14"/>
+                  <rect className="rjbar" x="214" y="64" width="9" height="36" style={{'--d':'0s'} as React.CSSProperties}/><rect className="rjbar" x="230" y="64" width="9" height="36" style={{'--d':'.12s'} as React.CSSProperties}/><rect className="rjbar" x="246" y="64" width="9" height="36" style={{'--d':'.05s'} as React.CSSProperties}/><rect className="rjbar" x="262" y="64" width="9" height="36" style={{'--d':'.18s'} as React.CSSProperties}/><rect className="rjbar" x="278" y="64" width="9" height="36" style={{'--d':'.08s'} as React.CSSProperties}/>
+                  <circle className="rjnode rjblink" cx="300" cy="148" r="9" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="328" cy="148" r="9" style={{'--d':'.3s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="356" cy="148" r="9" style={{'--d':'.6s'} as React.CSSProperties}/>
+                  <circle className="rjfloat" cx="250" cy="150" r="4" style={{'--d':'.7s'} as React.CSSProperties}/>
                 </svg>
               </div>
               <div className="svc__in">
                 <p className="svc__n">— 04</p>
                 <h3 className="svc__h">Speaking & workshops</h3>
-                <p className="svc__b">Enterprise UX, designing for high-stakes domains (healthcare, finance, talent), building design systems that scale. Conferences, internal team workshops, design-org coaching.</p>
+                <p className="svc__b">Enterprise UX, designing for high-stakes domains (healthcare, finance, talent), building design systems that scale. <b>Conferences,</b> internal team workshops, design-org coaching.</p>
               </div>
             </div>
           </div>
