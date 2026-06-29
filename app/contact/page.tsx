@@ -9,6 +9,8 @@ const PROJECT_TYPES = ['New product (0 → 1)', 'Redesign of an existing product
 export default function ContactPage() {
   const [budgets, setBudgets] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [fileName, setFileName] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
   const uploadFileRef = useRef<HTMLDivElement>(null);
@@ -117,9 +119,36 @@ export default function ContactPage() {
     setBudgets((prev) => prev.includes(b) ? prev.filter((x) => x !== b) : [...prev, b]);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    const form = formRef.current;
+    if (!form || submitting) return;
+
+    const fd = new FormData(form);
+    setSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fd.get('name'),
+          email: fd.get('email'),
+          company: fd.get('company'),
+          projectType: fd.get('projectType'),
+          budget: budgets.join(', ') || null,
+          projectDetails: fd.get('projectDetails'),
+          attachmentName: fileName || null,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to submit');
+      setSubmitted(true);
+    } catch {
+      setSubmitError('Something went wrong. Please try again or email me directly.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -189,23 +218,23 @@ export default function ContactPage() {
           <form ref={formRef} onSubmit={handleSubmit} className="form" noValidate>
             <div className="field">
               <label>Name <span className="req">*</span></label>
-              <input type="text" placeholder="Jane Doe" required />
+              <input type="text" name="name" placeholder="Jane Doe" required />
             </div>
 
             <div className="form__row">
               <div className="field">
                 <label>Email <span className="req">*</span></label>
-                <input type="email" placeholder="jane@company.com" required />
+                <input type="email" name="email" placeholder="jane@company.com" required />
               </div>
               <div className="field">
                 <label>Company <span className="optional">(optional)</span></label>
-                <input type="text" placeholder="Acme Inc." />
+                <input type="text" name="company" placeholder="Acme Inc." />
               </div>
             </div>
 
             <div className="field">
               <label>What can I help with? <span className="req">*</span></label>
-              <select defaultValue="">
+              <select name="projectType" defaultValue="">
                 <option value="" disabled>Select a project type…</option>
                 {PROJECT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
@@ -230,6 +259,7 @@ export default function ContactPage() {
             <div className="field">
               <label>Project details <span className="req">*</span></label>
               <textarea
+                name="projectDetails"
                 placeholder="What are you building, who is it for, and what does success look like? Timelines and links welcome."
                 required
               />
@@ -256,8 +286,12 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <button type="submit" className="submit submit--full">
-              Let&apos;s build something great <span className="a">→</span>
+            {submitError && (
+              <p className="form__error">{submitError}</p>
+            )}
+
+            <button type="submit" className="submit submit--full" disabled={submitting}>
+              {submitting ? 'Sending…' : <><span>Let&apos;s build something great</span> <span className="a">→</span></>}
             </button>
             <p className="form__note">By sending, you agree to be contacted about your inquiry. No spam, ever.</p>
           </form>

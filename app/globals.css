@@ -809,6 +809,7 @@ button { cursor: pointer; }
 .submit:hover .a { transform: translate(3px,-3px); }
 .submit--full { width: 100%; justify-content: center; margin-top: 14px; }
 .form__note { margin-top: 16px; font-size: 13px; color: var(--ink-faint); }
+.form__error { margin-top: 12px; font-size: 13px; color: #e05050; }
 .success { display: none; text-align: center; padding: 48px 20px; }
 .success.show { display: block; }
 .success__badge { position: relative; width: 92px; height: 92px; margin: 0 auto 28px; }
