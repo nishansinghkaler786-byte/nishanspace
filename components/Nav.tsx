@@ -58,7 +58,6 @@ export default function Nav() {
         </div>
 
         <div className="nv__right">
-          <Link href="/contact" className="nv__cta">Let&apos;s build</Link>
           <button
             className={`nv__burger${mobileOpen ? ' open' : ''}`}
             aria-label="Toggle menu"
@@ -67,6 +66,7 @@ export default function Nav() {
           >
             <span /><span /><span />
           </button>
+          <Link href="/contact" className="nv__cta">Let&apos;s build</Link>
         </div>
 
         {mobileOpen && (
@@ -75,7 +75,6 @@ export default function Nav() {
               { href: '/#work', n: '01', label: 'Work' },
               { href: '/#approach', n: '02', label: 'Approach' },
               { href: '/#reviews', n: '03', label: 'Reviews' },
-              { href: '/contact', n: '04', label: 'Contact' },
             ].map(({ href, n, label }) => (
               <Link key={href} href={href} onClick={() => setMobileOpen(false)}>
                 <span className="nvm__n">{n}</span>

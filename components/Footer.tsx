@@ -138,9 +138,7 @@ export default function Footer() {
               maskSize: '100% 100%',
               WebkitMaskRepeat: 'no-repeat',
               maskRepeat: 'no-repeat',
-              WebkitMaskMode: 'alpha',
-              maskMode: 'alpha',
-            }} />
+            } as React.CSSProperties} />
             {/* nishanspace text — separate text-only SVG, actual vector paths */}
             <div style={{
               flex: 1,
@@ -152,9 +150,7 @@ export default function Footer() {
               maskSize: '100% 100%',
               WebkitMaskRepeat: 'no-repeat',
               maskRepeat: 'no-repeat',
-              WebkitMaskMode: 'alpha',
-              maskMode: 'alpha',
-            }} />
+            } as React.CSSProperties} />
           </div>
         </div>
       </div>

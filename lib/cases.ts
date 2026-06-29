@@ -18,6 +18,9 @@ export interface CaseStudy {
   nextSlug: string;
   nextTitle: string;
   nextSub: string;
+  next2Slug: string;
+  next2Title: string;
+  next2Sub: string;
 }
 
 export const cases: CaseStudy[] = [
@@ -40,7 +43,10 @@ export const cases: CaseStudy[] = [
     coverAlt: 'Lumen app home screen showing portfolio overview',
     nextSlug: 'pocial',
     nextTitle: 'Pocial',
-    nextSub: 'AI MarTech SaaS',
+    nextSub: 'AI marketing automation · SaaS platform',
+    next2Slug: 'ebinaa',
+    next2Title: 'eBinaa',
+    next2Sub: 'Construction marketplace · web platform',
   },
   {
     slug: 'pocial',
@@ -61,7 +67,10 @@ export const cases: CaseStudy[] = [
     coverAlt: 'Pocial dashboard showing content calendar and AI suggestions',
     nextSlug: 'ebinaa',
     nextTitle: 'eBinaa',
-    nextSub: 'Oman PropTech Platform',
+    nextSub: 'Construction marketplace · web platform',
+    next2Slug: 'lumen',
+    next2Title: 'Lumen',
+    next2Sub: 'AI-guided crypto · consumer fintech',
   },
   {
     slug: 'ebinaa',
@@ -82,7 +91,10 @@ export const cases: CaseStudy[] = [
     coverAlt: 'eBinaa contractor portal overview',
     nextSlug: 'lumen',
     nextTitle: 'Lumen',
-    nextSub: 'Consumer Crypto iOS & Android',
+    nextSub: 'AI-guided crypto · consumer fintech',
+    next2Slug: 'pocial',
+    next2Title: 'Pocial',
+    next2Sub: 'AI marketing automation · SaaS platform',
   },
 ];
 

@@ -622,7 +622,7 @@ export default function HomePage() {
                   <rect x="160" y="98" width="80" height="10" fill="rgba(74,86,246,.2)"/><rect className="rjfill" x="160" y="98" width="80" height="10" style={{'--d':'.3s'} as React.CSSProperties}/>
                   <rect x="160" y="116" width="80" height="10" fill="rgba(74,86,246,.2)"/><rect className="rjfill" x="160" y="116" width="58" height="10" style={{'--d':'.7s'} as React.CSSProperties}/>
                   <circle className="rjnode rjblink" cx="60" cy="40" r="11" style={{'--d':'0s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="50" cy="150" r="11" style={{'--d':'.4s'} as React.CSSProperties}/><circle className="rjnode rjblink" cx="350" cy="44" r="11" style={{'--d':'.8s'} as React.CSSProperties}/>
-                  <circle cx="352" cy="150" r="15" fill="#0f0e0c" stroke="rgba(245,243,239,.2)"/>
+                  <circle cx="352" cy="150" r="15" fill="#0f0e0c" stroke="rgba(245,243,239,.2)"/><image href="/assets/icon.svg" x="341" y="139" width="22" height="22"/>
                   <circle className="rjpulse" style={{'--tx':'138px'} as React.CSSProperties} cx="60" cy="40" r="3.5"/><circle className="rjpulse" style={{'--tx':'-148px','--d':'.6s'} as React.CSSProperties} cx="352" cy="150" r="3.5"/>
                   <circle className="rjfloat" cx="108" cy="40" r="4" style={{'--d':'.6s'} as React.CSSProperties}/><circle className="rjfloat" cx="292" cy="150" r="4" style={{'--d':'1.3s'} as React.CSSProperties}/>
                 </svg>

@@ -23,6 +23,19 @@ export default function ContactPage() {
   }, []);
 
   useEffect(() => {
+    const rail = document.getElementById('lbRail');
+    const fill = document.getElementById('lbFill');
+    if (!rail || !fill) return;
+    function onScroll() {
+      rail!.style.height = document.documentElement.scrollHeight + 'px';
+      fill!.style.height = (window.scrollY + window.innerHeight * 0.5) + 'px';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
     const form = formRef.current;
     if (!form || submitted) return;
 
@@ -110,10 +123,15 @@ export default function ContactPage() {
   };
 
   return (
+    <div style={{ position: 'relative' }}>
+      <div id="lbRail" className="flowrail" aria-hidden="true">
+        <div className="flowrail__line" />
+        <div id="lbFill" className="flowrail__fill" />
+      </div>
     <div className="inner lb">
       {/* Left: intro */}
       <div className="lb__intro">
-        <Link href="/" className="lb__back">← Back</Link>
+        <Link href="/" className="lb__back"><svg width="13" height="11" viewBox="0 0 13 11" fill="none" aria-hidden="true" style={{display:'inline-block',verticalAlign:'middle',marginRight:6,flexShrink:0}}><path d="M12 5.5H1M1 5.5L5.5 1M1 5.5L5.5 10" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/></svg> Back</Link>
 
         <div className="ey rv" style={{ marginBottom: 24 }}>— Available · 2026</div>
 
@@ -142,26 +160,11 @@ export default function ContactPage() {
 
         <div className="aside rv" style={{ marginTop: 'clamp(28px,3vw,40px)', borderTop: '1px solid var(--line)', paddingTop: 24, transitionDelay: '0.2s' }}>
           <div className="aside__block">
-            <p className="aside__h">Direct email</p>
+            <p className="aside__h">— Direct</p>
             <p className="aside__big">
-              <a href="mailto:hello@nishan.space">hello@nishan.space</a>
+              <a href="mailto:nishanpace@gmail.com">nishanpace@gmail.com</a>
             </p>
-            <p className="aside__sub">Prefer a direct line? Works for me.</p>
-          </div>
-
-          <div className="aside__block">
-            <p className="aside__h">Availability</p>
-            <span className="aside__avail">— Available · 2026</span>
-          </div>
-
-          <div className="aside__block">
-            <p className="aside__h">Connect</p>
-            <div className="social">
-              <a href="https://www.linkedin.com/in/ux-specialist-nishan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://dribbble.com/nishan_UX_Design" target="_blank" rel="noopener noreferrer">Dribbble</a>
-<a href="https://www.instagram.com/nishanspace.coom?igsh=MWI1eWx5c29iZXdtcQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
-            </div>
+            <p className="aside__sub">Fastest way to reach me.</p>
           </div>
         </div>
       </div>
@@ -186,30 +189,30 @@ export default function ContactPage() {
           <form ref={formRef} onSubmit={handleSubmit} className="form" noValidate>
             <div className="field">
               <label>Name <span className="req">*</span></label>
-              <input type="text" placeholder="Your full name" required />
+              <input type="text" placeholder="Jane Doe" required />
             </div>
 
             <div className="form__row">
               <div className="field">
                 <label>Email <span className="req">*</span></label>
-                <input type="email" placeholder="you@company.com" required />
+                <input type="email" placeholder="jane@company.com" required />
               </div>
               <div className="field">
                 <label>Company <span className="optional">(optional)</span></label>
-                <input type="text" placeholder="Company name" />
+                <input type="text" placeholder="Acme Inc." />
               </div>
             </div>
 
             <div className="field">
-              <label>Project type</label>
+              <label>What can I help with? <span className="req">*</span></label>
               <select defaultValue="">
-                <option value="" disabled>Select project type</option>
+                <option value="" disabled>Select a project type…</option>
                 {PROJECT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
             </div>
 
             <div className="field">
-              <label>Budget range</label>
+              <label>Estimated budget <span className="optional">(optional)</span></label>
               <div className="chips">
                 {BUDGETS.map((b) => (
                   <button
@@ -225,15 +228,15 @@ export default function ContactPage() {
             </div>
 
             <div className="field">
-              <label>Tell me about your project <span className="req">*</span></label>
+              <label>Project details <span className="req">*</span></label>
               <textarea
-                placeholder="What are you trying to build or fix? What's the timeline? Any context that helps me understand the problem..."
+                placeholder="What are you building, who is it for, and what does success look like? Timelines and links welcome."
                 required
               />
             </div>
 
             <div className="field">
-              <label>Brief or supporting file <span className="optional">(optional)</span></label>
+              <label>Attach a brief or document <span className="optional">(optional)</span></label>
               <div className={`upload${fileName ? ' is-drag' : ''}`}>
                 <input
                   type="file"
@@ -260,6 +263,7 @@ export default function ContactPage() {
           </form>
         )}
       </div>
+    </div>
     </div>
   );
 }
