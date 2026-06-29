@@ -11,6 +11,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [fileName, setFileName] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
+  const uploadFileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ob = new IntersectionObserver(
@@ -20,6 +21,84 @@ export default function ContactPage() {
     document.querySelectorAll('.rv, .rv-s, .scl').forEach((el) => ob.observe(el));
     return () => ob.disconnect();
   }, []);
+
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form || submitted) return;
+
+    const spine = document.createElement('div');
+    spine.className = 'form__spine';
+    const fillEl = document.createElement('i');
+    spine.appendChild(fillEl);
+    form.appendChild(spine);
+
+    const fields = Array.from(form.querySelectorAll<HTMLElement>('.field'));
+
+    type Row = { top: number; fields: HTMLElement[]; y: number; node: HTMLSpanElement };
+    const rows: Row[] = [];
+    fields.forEach((f) => {
+      const t = f.offsetTop;
+      if (rows.length && Math.abs(t - rows[rows.length - 1].top) < 14) {
+        rows[rows.length - 1].fields.push(f);
+      } else {
+        rows.push({ top: t, fields: [f], y: 0, node: document.createElement('span') });
+      }
+    });
+    rows.forEach((r) => { r.node.className = 'form__node'; spine.appendChild(r.node); });
+
+    function isDone(f: HTMLElement): boolean {
+      const ctrl = f.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input[type=text],input[type=email],textarea,select');
+      if (ctrl) {
+        if (ctrl.tagName === 'SELECT') return (ctrl as HTMLSelectElement).selectedIndex > 0;
+        return !!(ctrl as HTMLInputElement).value.trim();
+      }
+      if (f.querySelector('.chips')) return !!f.querySelector('.chip.on');
+      if (f.querySelector('.upload')) return !!uploadFileRef.current?.classList.contains('show');
+      return false;
+    }
+
+    function layout() {
+      spine.style.height = form!.scrollHeight + 'px';
+      rows.forEach((r) => { r.y = r.fields[0].offsetTop + 18; r.node.style.top = r.y + 'px'; });
+    }
+
+    function update() {
+      let lastY: number | null = null;
+      rows.forEach((r) => {
+        const d = r.fields.some(isDone);
+        r.node.classList.toggle('on', d);
+        if (d) lastY = r.y;
+      });
+      if (lastY !== null && rows.length > 0) {
+        fillEl.style.top = rows[0].y + 'px';
+        fillEl.style.height = Math.max(0, lastY - rows[0].y) + 'px';
+      } else {
+        fillEl.style.height = '0';
+      }
+    }
+
+    function refresh() { layout(); update(); }
+    refresh();
+
+    form.addEventListener('input', update);
+    form.addEventListener('change', () => setTimeout(refresh, 30));
+
+    fields.forEach((f) => {
+      const row = rows.find((r) => r.fields.includes(f));
+      f.addEventListener('focusin', () => { if (row) row.node.classList.add('live'); });
+      f.addEventListener('focusout', () => { if (row) row.node.classList.remove('live'); });
+    });
+
+    window.addEventListener('resize', refresh);
+    if (document.fonts?.ready) document.fonts.ready.then(refresh);
+    const t = setTimeout(refresh, 400);
+
+    return () => {
+      window.removeEventListener('resize', refresh);
+      clearTimeout(t);
+      spine.remove();
+    };
+  }, [submitted]);
 
   const toggleBudget = (b: string) => {
     setBudgets((prev) => prev.includes(b) ? prev.filter((x) => x !== b) : [...prev, b]);
@@ -34,7 +113,9 @@ export default function ContactPage() {
     <div className="inner lb">
       {/* Left: intro */}
       <div className="lb__intro">
-        <Link href="/" className="lb__back">← Back home</Link>
+        <Link href="/" className="lb__back">← Back</Link>
+
+        <div className="ey rv" style={{ marginBottom: 24 }}>— Available · 2026</div>
 
         <h1 className="hero__h rv" style={{ fontSize: 'clamp(34px,4.4vw,64px)', lineHeight: 1.1, transitionDelay: '0.05s' }}>
           Let&apos;s build something <span className="ax">worth using.</span>
@@ -103,10 +184,6 @@ export default function ContactPage() {
           </div>
         ) : (
           <form ref={formRef} onSubmit={handleSubmit} className="form" noValidate>
-            <svg className="form__spine" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
-              <line x1="1" y1="0" x2="1" y2="100" stroke="var(--line)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
-            </svg>
-
             <div className="field">
               <label>Name <span className="req">*</span></label>
               <input type="text" placeholder="Your full name" required />
@@ -169,7 +246,7 @@ export default function ContactPage() {
                 </p>
                 <p className="upload__hint">PDF, DOC, PPT, FIG or image · up to 25MB</p>
                 {fileName && (
-                  <div className="upload__file show">
+                  <div ref={uploadFileRef} className="upload__file show">
                     ✓ {fileName}
                   </div>
                 )}
