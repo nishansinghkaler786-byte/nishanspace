@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { sql, ensureTable } from '@/lib/db';
+import { getDb, ensureTable } from '@/lib/db';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,6 +15,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    const sql = getDb();
     await ensureTable();
 
     await sql`
