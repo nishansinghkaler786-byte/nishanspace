@@ -694,7 +694,7 @@ button { cursor: pointer; }
 .lia__grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 16px; margin-top: 16px; }
 @media(max-width: 1100px) { .lia__grid, .lia__branch { grid-template-columns: repeat(3,1fr); } }
 @media(max-width: 680px) { .lia__grid, .lia__branch { grid-template-columns: repeat(2,1fr); } }
-@media(max-width: 1099px) { .lia__branch, .lia__stem { display: none; } .lia__grid { margin-top: 0; } }
+@media(max-width: 1099px) { .lia__branch, .lia__stem { display: none; } .lia__root { margin-bottom: 24px; } .lia__grid { margin-top: 0; } }
 .lia__col { display: flex; flex-direction: column; gap: 8px; }
 .lia__head { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line-strong); background: var(--bg-2); padding: 14px 16px; }
 .lia__b { font-family: var(--f-mono); font-size: 10px; font-weight: 600; color: #fff; background: #4a56f6; width: 19px; height: 19px; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
