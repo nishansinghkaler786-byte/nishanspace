@@ -587,7 +587,7 @@ export default function HomePage() {
         </p>
 
         <div className="hero__act rv" style={{ transitionDelay: '0.3s' }}>
-          <Link href="/contact" className="pill">
+          <Link href="/lets-build" className="pill">
             Build together <span className="a"><Arr /></span>
           </Link>
           <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer" className="pill pill--ghost">
@@ -935,7 +935,7 @@ export default function HomePage() {
           Quality matters.<br /><em style={{ fontStyle: 'italic' }}>Let&apos;s talk.</em>
         </h2>
         <div className="cta__act rv" style={{ transitionDelay: '0.15s' }}>
-          <Link href="/contact" className="pill">
+          <Link href="/lets-build" className="pill">
             Build together <span className="a"><Arr /></span>
           </Link>
           <a href="/assets/Nishan-Resume.pdf" target="_blank" rel="noopener noreferrer" className="pill pill--ghost">

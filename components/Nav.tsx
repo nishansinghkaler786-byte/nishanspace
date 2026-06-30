@@ -66,7 +66,7 @@ export default function Nav() {
           >
             <span /><span /><span />
           </button>
-          <Link href="/contact" className="nv__cta">Let&apos;s build</Link>
+          <Link href="/lets-build" className="nv__cta">Let&apos;s build</Link>
         </div>
 
         {mobileOpen && (
