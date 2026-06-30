@@ -27,28 +27,35 @@ export async function POST(req: NextRequest) {
     `;
 
     if (process.env.RESEND_API_KEY) {
-      await resend.emails.send({
-        from: 'nishanspace <onboarding@resend.dev>',
-        to: 'nishansinghkaler786@gmail.com',
-        subject: `New inquiry from ${name}`,
-        html: `
-          <h2>New contact form submission</h2>
-          <table style="border-collapse:collapse;width:100%;font-family:sans-serif;font-size:15px;">
-            <tr><td style="padding:8px 12px;color:#888;width:140px;">Name</td><td style="padding:8px 12px;"><strong>${name}</strong></td></tr>
-            <tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#888;">Email</td><td style="padding:8px 12px;"><a href="mailto:${email}">${email}</a></td></tr>
-            <tr><td style="padding:8px 12px;color:#888;">Company</td><td style="padding:8px 12px;">${company || '—'}</td></tr>
-            <tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#888;">Project type</td><td style="padding:8px 12px;">${projectType || '—'}</td></tr>
-            <tr><td style="padding:8px 12px;color:#888;">Budget</td><td style="padding:8px 12px;">${budget || '—'}</td></tr>
-            <tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#888;">Attachment</td><td style="padding:8px 12px;">${attachmentName || '—'}</td></tr>
-            <tr><td style="padding:8px 12px;color:#888;vertical-align:top;">Details</td><td style="padding:8px 12px;white-space:pre-wrap;">${projectDetails}</td></tr>
-          </table>
-          <p style="margin-top:24px;font-size:13px;color:#aaa;">Sent from nishanspace.com contact form</p>
-        `,
-        attachments: fileData && attachmentName ? [{
-          filename: attachmentName,
-          content: Buffer.from(fileData, 'base64'),
-        }] : undefined,
-      });
+      try {
+        const emailRes = await resend.emails.send({
+          from: 'nishanspace <onboarding@resend.dev>',
+          to: 'nishanpace@gmail.com',
+          subject: `New inquiry from ${name}`,
+          html: `
+            <h2>New contact form submission</h2>
+            <table style="border-collapse:collapse;width:100%;font-family:sans-serif;font-size:15px;">
+              <tr><td style="padding:8px 12px;color:#888;width:140px;">Name</td><td style="padding:8px 12px;"><strong>${name}</strong></td></tr>
+              <tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#888;">Email</td><td style="padding:8px 12px;"><a href="mailto:${email}">${email}</a></td></tr>
+              <tr><td style="padding:8px 12px;color:#888;">Company</td><td style="padding:8px 12px;">${company || '—'}</td></tr>
+              <tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#888;">Project type</td><td style="padding:8px 12px;">${projectType || '—'}</td></tr>
+              <tr><td style="padding:8px 12px;color:#888;">Budget</td><td style="padding:8px 12px;">${budget || '—'}</td></tr>
+              <tr style="background:#f9f9f9"><td style="padding:8px 12px;color:#888;">Attachment</td><td style="padding:8px 12px;">${attachmentName || '—'}</td></tr>
+              <tr><td style="padding:8px 12px;color:#888;vertical-align:top;">Details</td><td style="padding:8px 12px;white-space:pre-wrap;">${projectDetails}</td></tr>
+            </table>
+            <p style="margin-top:24px;font-size:13px;color:#aaa;">Sent from nishanspace.com contact form</p>
+          `,
+          attachments: fileData && attachmentName ? [{
+            filename: attachmentName,
+            content: fileData,
+          }] : undefined,
+        });
+        if (emailRes.error) {
+          console.error('Resend error:', emailRes.error);
+        }
+      } catch (emailErr) {
+        console.error('Email send failed:', emailErr);
+      }
     }
 
     return NextResponse.json({ success: true });
