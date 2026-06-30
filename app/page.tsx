@@ -595,10 +595,10 @@ export default function HomePage() {
           </a>
         </div>
 
+        <p className="hero__scroll">↓ scroll</p>
+
         <AiWidget />
         <StatsSection />
-
-        <p className="hero__scroll">↓ scroll</p>
       </section>
 
       {/* ── SERVICES ──────────────────────────────────── */}
