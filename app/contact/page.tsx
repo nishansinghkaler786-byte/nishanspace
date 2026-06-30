@@ -12,6 +12,7 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [fileName, setFileName] = useState('');
+  const [fileData, setFileData] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
   const uploadFileRef = useRef<HTMLDivElement>(null);
 
@@ -140,6 +141,7 @@ export default function ContactPage() {
           budget: budgets.join(', ') || null,
           projectDetails: fd.get('projectDetails'),
           attachmentName: fileName || null,
+          fileData: fileData || null,
         }),
       });
       if (!res.ok) throw new Error('Failed to submit');
@@ -271,7 +273,17 @@ export default function ContactPage() {
                 <input
                   type="file"
                   accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg,.fig"
-                  onChange={(e) => setFileName(e.target.files?.[0]?.name || '')}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    setFileName(file.name);
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                      const result = ev.target?.result as string;
+                      setFileData(result.split(',')[1]);
+                    };
+                    reader.readAsDataURL(file);
+                  }}
                 />
                 <div className="upload__icon">↑</div>
                 <p className="upload__text">

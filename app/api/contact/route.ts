@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, company, projectType, budget, projectDetails, attachmentName } =
+    const { name, email, company, projectType, budget, projectDetails, attachmentName, fileData } =
       await req.json();
 
     if (!name || !email || !projectDetails) {
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
         from: 'nishanspace <onboarding@resend.dev>',
-        to: 'nishanpace@gmail.com',
+        to: 'nishansinghkaler786@gmail.com',
         subject: `New inquiry from ${name}`,
         html: `
           <h2>New contact form submission</h2>
@@ -44,6 +44,10 @@ export async function POST(req: NextRequest) {
           </table>
           <p style="margin-top:24px;font-size:13px;color:#aaa;">Sent from nishanspace.com contact form</p>
         `,
+        attachments: fileData && attachmentName ? [{
+          filename: attachmentName,
+          content: Buffer.from(fileData, 'base64'),
+        }] : undefined,
       });
     }
 
