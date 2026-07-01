@@ -1298,7 +1298,7 @@ function PocialPage({ c }: { c: CaseStudy }) {
       </section>
 
       {/* Low-fi Wireframes */}
-      <section className="csec">
+      <section className="csec csec--wide">
         <div className="cwrap">
           <div className="csplit">
             <aside className="csplit__aside rv">— 12 / Low-fi wireframes</aside>
@@ -1362,8 +1362,8 @@ function PocialPage({ c }: { c: CaseStudy }) {
                       <div className="gb"></div>
                     </div>
                   </div>
+                  <p className="cwires__cap">The full homepage IA in grayscale: hero sign-up, problem → solution tabs, role-based value cards, and the four-tier plan grid.</p>
                 </div>
-                <p className="cwires__cap">The full homepage IA in grayscale: hero sign-up, problem → solution tabs, role-based value cards, and the four-tier plan grid.</p>
                 {/* Platform dashboard */}
                 <div className="cplatform">
                   <span className="cwire__tag">Platform dashboard — desktop &amp; mobile</span>

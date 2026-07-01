@@ -1016,8 +1016,9 @@ button { cursor: pointer; }
 /* ============================================================
    Case study — wireframe boxes
    ============================================================ */
-.cwires { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 34px; }
-@media(max-width: 760px) { .cwires { grid-template-columns: 1fr; } }
+.cwires { column-count: 2; column-gap: 22px; margin-top: 34px; }
+.cwires > * { break-inside: avoid; margin: 0 0 30px; }
+@media(max-width: 820px) { .cwires { column-count: 1; } }
 .cwire { border: 1px solid var(--line); background: var(--bg-3); padding: 18px; display: flex; flex-direction: column; gap: 10px; }
 .cwire__tag { font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); margin-bottom: 4px; }
 .cwire__h { font-size: 13px; color: var(--ink-soft); font-weight: 500; margin-bottom: 6px; }
@@ -1510,8 +1511,9 @@ button { cursor: pointer; }
    Pocial — wireframe section (chome + cplatform)
    ============================================================ */
 .cwires__cap{font-family:var(--f-mono);font-size:11px;color:var(--ink-faint);margin-top:10px;margin-bottom:24px;line-height:1.5;grid-column:1/-1;}
-.cwires .chome,.cwires .cplatform{grid-column:1/-1;}
-.chome,.cplatform{background:var(--bg-3);border:1px solid var(--line);}
+.cwires .chome > .cwires__cap,.cwires .cplatform > .cwires__cap{padding:0 14px;}
+.chome,.cplatform{background:var(--bg-3);border:1px solid var(--line);overflow:hidden;}
+.cplatform{container-type:inline-size;}
 .chome .cwire__tag,.cplatform .cwire__tag{display:block;padding:9px 14px;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--line);}
 .chome__frame{border:1px solid var(--line);background:var(--bg);border-radius:6px;overflow:hidden;margin:14px;}
 .chw-g1{background:#2c2a24;border-radius:3px;}
@@ -1568,7 +1570,7 @@ button { cursor: pointer; }
 @media(max-width:760px){.chw-cards5{grid-template-columns:repeat(2,1fr);}.chw-nav .links{display:none;}}
 /* platform pair */
 .cpw-pair{display:grid;grid-template-columns:1.85fr .9fr;gap:18px;align-items:start;}
-@media(max-width:820px){.cpw-pair{grid-template-columns:1fr;max-width:340px;margin:0 auto;}}
+@container (max-width:440px){.cpw-pair{grid-template-columns:1fr;}}
 .cpw-svg{display:block;width:100%;height:auto;}
 .cpw-grid{background:repeating-linear-gradient(to top,transparent 0,transparent 24px,var(--line) 24px,var(--line) 25px);}
 .cpw-desk{border:1px solid var(--line);background:var(--bg);border-radius:6px;overflow:hidden;}
